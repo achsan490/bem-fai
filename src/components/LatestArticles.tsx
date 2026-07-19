@@ -3,12 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Tag, ArrowUpRight, BookOpen, AlertCircle } from "lucide-react";
+import { Calendar, Tag, ArrowUpRight, BookOpen, AlertCircle, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { db } from "../lib/supabase";
 import { Article } from "../types/database.types";
 
-export default function LatestArticles() {
+interface Props {
+  previewMode?: boolean;
+}
+
+export default function LatestArticles({ previewMode = false }: Props) {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +22,7 @@ export default function LatestArticles() {
       try {
         setLoading(true);
         const data = await db.getArticles();
-        setArticles(data);
+        setArticles(previewMode ? data.slice(0, 3) : data);
       } catch (err: any) {
         console.error("Error fetching articles:", err);
         setError("Gagal memuat artikel.");
@@ -185,6 +189,24 @@ export default function LatestArticles() {
               );
             })}
           </div>
+        )}
+
+        {/* Preview mode — link to /news */}
+        {previewMode && !loading && !error && articles.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mt-10"
+          >
+            <Link
+              href="/news"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-primary/30 text-primary text-sm font-semibold hover:bg-primary/10 transition-all duration-200"
+            >
+              Lihat Semua Berita & Artikel
+              <ArrowRight size={14} />
+            </Link>
+          </motion.div>
         )}
       </div>
     </section>

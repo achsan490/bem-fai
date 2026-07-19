@@ -109,88 +109,91 @@ function ParallaxCard({
   };
 
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden border border-white/10 bg-slate-900 shadow-2xl transition-all duration-300 hover:border-primary/30"
-    >
-      {/* 3D Depth Image Wrap */}
-      <motion.div style={{ translateZ: translateZImage }} className="absolute inset-0 w-full h-full">
-        <Image
-          src={imageSrc}
-          alt={alt}
-          fill
-          className="object-cover opacity-85 hover:scale-105 transition-transform duration-700"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
+    <div className="flex flex-col gap-4">
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+        }}
+        className="relative aspect-[4/3] w-full transition-all duration-300"
+      >
+        {/* Glow behind the building */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(16,185,129,0.08),transparent_70%)] pointer-events-none rounded-2xl" />
+
+        {/* 3D Depth Image Wrap */}
+        <motion.div style={{ translateZ: translateZImage }} className="absolute inset-0 w-full h-full">
+          <Image
+            src={imageSrc}
+            alt={alt}
+            fill
+            className="object-contain object-bottom hover:scale-105 transition-transform duration-700"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
+        </motion.div>
+
+        {/* Hotspots */}
+        <div className="absolute inset-0 w-full h-full z-20" style={{ transformStyle: "preserve-3d" }}>
+          {hotspots.map((spot) => (
+            <div
+              key={spot.id}
+              className="absolute"
+              style={{
+                top: spot.top,
+                left: spot.left,
+                transform: "translate(-50%, -50%) translateZ(40px)", // Float above the image in 3D
+              }}
+            >
+              {/* Glowing hotspot dot */}
+              <button
+                onClick={() => setActiveHotspot(activeHotspot === spot.id ? null : spot.id)}
+                onMouseEnter={() => setActiveHotspot(spot.id)}
+                className="relative w-7 h-7 flex items-center justify-center rounded-full bg-primary/20 border border-primary text-white cursor-pointer hover:bg-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.5)] group"
+              >
+                {/* Hotspot Pulse effect */}
+                <span className="absolute -inset-1 rounded-full bg-primary/40 animate-ping opacity-75" />
+                <Info size={12} className="text-white group-hover:scale-110 transition-transform" />
+              </button>
+
+              {/* Glassmorphic Tooltip */}
+              <AnimatePresence>
+                {activeHotspot === spot.id && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2 w-64 glass-emerald p-4 rounded-xl shadow-xl z-30 pointer-events-auto text-left"
+                  >
+                    <h5 className="font-display font-semibold text-sm text-primary flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      {spot.title}
+                    </h5>
+                    <p className="text-xs text-gray-300 mt-1.5 leading-relaxed font-sans">
+                      {spot.description}
+                    </p>
+                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 border-r border-b border-primary/20 bg-[#180208]/90" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
       </motion.div>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent pointer-events-none" />
-
-      {/* Campus Info Header overlay */}
-      <div className="absolute top-6 left-6 z-10 pointer-events-none">
-        <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center gap-1">
+      {/* Campus Info Header below the card */}
+      <div className="text-center md:text-left mt-2">
+        <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center justify-center md:justify-start gap-1">
           <MapPin size={10} />
           {subtitle}
         </span>
-        <h4 className="font-display font-bold text-lg text-white mt-1">{title}</h4>
+        <h4 className="font-display font-bold text-xl text-white mt-1">{title}</h4>
       </div>
-
-      {/* Hotspots */}
-      <div className="absolute inset-0 w-full h-full z-20" style={{ transformStyle: "preserve-3d" }}>
-        {hotspots.map((spot) => (
-          <div
-            key={spot.id}
-            className="absolute"
-            style={{
-              top: spot.top,
-              left: spot.left,
-              transform: "translate(-50%, -50%) translateZ(40px)", // Float above the image in 3D
-            }}
-          >
-            {/* Glowing hotspot dot */}
-            <button
-              onClick={() => setActiveHotspot(activeHotspot === spot.id ? null : spot.id)}
-              onMouseEnter={() => setActiveHotspot(spot.id)}
-              className="relative w-7 h-7 flex items-center justify-center rounded-full bg-primary/20 border border-primary text-white cursor-pointer hover:bg-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.5)] group"
-            >
-              {/* Hotspot Pulse effect */}
-              <span className="absolute -inset-1 rounded-full bg-primary/40 animate-ping opacity-75" />
-              <Info size={12} className="text-white group-hover:scale-110 transition-transform" />
-            </button>
-
-            {/* Glassmorphic Tooltip */}
-            <AnimatePresence>
-              {activeHotspot === spot.id && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute bottom-10 left-1/2 -translate-x-1/2 w-64 glass-emerald p-4 rounded-xl shadow-xl z-30 pointer-events-auto text-left"
-                >
-                  <h5 className="font-display font-semibold text-sm text-primary flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {spot.title}
-                  </h5>
-                  <p className="text-xs text-gray-300 mt-1.5 leading-relaxed font-sans">
-                    {spot.description}
-                  </p>
-                  <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 border-r border-b border-primary/20 bg-[#180208]/90" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
-      </div>
-    </motion.div>
+    </div>
   );
 }
 
