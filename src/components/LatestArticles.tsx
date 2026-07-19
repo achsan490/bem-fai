@@ -37,15 +37,15 @@ export default function LatestArticles({ previewMode = false }: Props) {
   const getBentoClasses = (index: number) => {
     switch (index % 4) {
       case 0:
-        return "md:col-span-2 md:row-span-1 min-h-[280px] flex flex-col justify-between";
+        return "md:col-span-2 md:row-span-1 md:min-h-[280px] min-h-[200px] flex flex-col justify-between";
       case 1:
-        return "md:col-span-1 md:row-span-2 min-h-[420px] md:min-h-full flex flex-col justify-between";
+        return "md:col-span-1 md:row-span-2 md:min-h-full min-h-[200px] flex flex-col justify-between";
       case 2:
-        return "md:col-span-1 md:row-span-1 min-h-[240px] flex flex-col justify-between";
+        return "md:col-span-1 md:row-span-1 md:min-h-[240px] min-h-[200px] flex flex-col justify-between";
       case 3:
-        return "md:col-span-1 md:row-span-1 min-h-[240px] flex flex-col justify-between";
+        return "md:col-span-1 md:row-span-1 md:min-h-[240px] min-h-[200px] flex flex-col justify-between";
       default:
-        return "md:col-span-1 md:row-span-1 flex flex-col justify-between";
+        return "md:col-span-1 md:row-span-1 min-h-[200px] flex flex-col justify-between";
     }
   };
 
@@ -120,7 +120,7 @@ export default function LatestArticles({ previewMode = false }: Props) {
           </div>
         ) : (
           /* Bento Grid Layout */
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px] md:auto-rows-[280px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[280px]">
             {articles.map((article, index) => {
               const bentoClass = getBentoClasses(index);
               return (
