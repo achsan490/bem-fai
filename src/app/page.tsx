@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#180208]">
+    <div className="min-h-screen flex flex-col bg-[#F9F8FD]">
       <Navbar />
       <main className="flex-grow">
         <Hero />

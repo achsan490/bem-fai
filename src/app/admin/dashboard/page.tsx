@@ -662,7 +662,7 @@ export default function AdminDashboard() {
 
   if (checkingAuth) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#100105]">
+      <div className="min-h-screen flex items-center justify-center bg-[#F9F8FD]">
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
@@ -679,7 +679,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#070103]">
+    <div className="min-h-screen flex flex-col bg-[#F9F8FD] admin-dashboard">
       {/* Top Banner Navigation */}
       <header className="py-4 px-6 bg-[#100105]/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto flex items-center justify-between">

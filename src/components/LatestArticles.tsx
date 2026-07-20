@@ -33,22 +33,6 @@ export default function LatestArticles({ previewMode = false }: Props) {
     fetchArticles();
   }, []);
 
-  // Determine Bento grid sizing patterns for 3 columns on desktop
-  const getBentoClasses = (index: number) => {
-    switch (index % 4) {
-      case 0:
-        return "md:col-span-2 md:row-span-1 md:min-h-[280px] min-h-[200px] flex flex-col justify-between";
-      case 1:
-        return "md:col-span-1 md:row-span-2 md:min-h-full min-h-[200px] flex flex-col justify-between";
-      case 2:
-        return "md:col-span-1 md:row-span-1 md:min-h-[240px] min-h-[200px] flex flex-col justify-between";
-      case 3:
-        return "md:col-span-1 md:row-span-1 md:min-h-[240px] min-h-[200px] flex flex-col justify-between";
-      default:
-        return "md:col-span-1 md:row-span-1 min-h-[200px] flex flex-col justify-between";
-    }
-  };
-
   const formatDate = (isoString: string) => {
     const date = new Date(isoString);
     return date.toLocaleDateString("id-ID", {
@@ -59,14 +43,14 @@ export default function LatestArticles({ previewMode = false }: Props) {
   };
 
   // Safe snippet extractor
-  const getSnippet = (content: string, length = 120) => {
+  const getSnippet = (content: string, length = 100) => {
     const plainText = content.replace(/[#*`_\[\]]/g, ""); // Strip markdown tags
     if (plainText.length <= length) return plainText;
     return plainText.substring(0, length) + "...";
   };
 
   return (
-    <section id="artikel" className="py-24 bg-[#180208] border-t border-white/5 relative">
+    <section id="artikel" className="py-24 bg-[#F5F4FA] border-t border-slate-100 relative">
       {/* Background radial highlight */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -74,14 +58,14 @@ export default function LatestArticles({ previewMode = false }: Props) {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
-            <span className="text-xs uppercase font-bold tracking-widest text-gold flex items-center gap-1.5 mb-2">
-              <BookOpen size={12} className="text-gold" />
+            <span className="text-xs uppercase font-bold tracking-widest text-primary flex items-center gap-1.5 mb-2 font-mono">
+              <BookOpen size={12} className="text-primary" />
               Kabar & Jurnal Kampus
             </span>
-            <h3 className="font-display font-bold text-3xl md:text-4xl text-white">
-              Artikel & <span className="text-primary neon-text-maroon">Kajian Akademik</span>
+            <h3 className="font-display font-bold text-3xl md:text-4xl text-slate-800">
+              Artikel & <span className="text-primary font-extrabold">Kajian Akademik</span>
             </h3>
-            <p className="text-gray-400 font-sans text-sm md:text-base mt-3 leading-relaxed">
+            <p className="text-slate-600 font-sans text-sm md:text-base mt-3 leading-relaxed">
               Ikuti tulisan terkini dari dosen, pengurus BEM, dan kolega mahasiswa mengenai integrasi sains keislaman, wawasan kemahasiswaan, dan publikasi kajian ilmiah UNWAHA.
             </p>
           </div>
@@ -89,40 +73,42 @@ export default function LatestArticles({ previewMode = false }: Props) {
 
         {/* Dynamic State Rendering */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[400px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-[400px]">
             {[1, 2, 3].map((n) => (
               <div
                 key={n}
-                className="glass p-6 rounded-2xl animate-pulse flex flex-col justify-between"
+                className="bg-white border border-slate-100 rounded-2xl animate-pulse flex flex-col justify-between overflow-hidden"
               >
-                <div className="space-y-4">
-                  <div className="h-4 bg-white/5 rounded-md w-1/4" />
-                  <div className="h-6 bg-white/5 rounded-md w-3/4" />
-                  <div className="h-20 bg-white/5 rounded-md" />
+                <div className="w-full h-48 bg-slate-100 animate-pulse" />
+                <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="h-4 bg-slate-100 rounded-md w-1/4" />
+                    <div className="h-6 bg-slate-100 rounded-md w-3/4" />
+                    <div className="h-16 bg-slate-100 rounded-md" />
+                  </div>
+                  <div className="h-3 bg-slate-100 rounded-md w-1/3" />
                 </div>
-                <div className="h-3 bg-white/5 rounded-md w-1/3" />
               </div>
             ))}
           </div>
         ) : error ? (
-          <div className="glass p-12 rounded-2xl text-center border-red-500/20 max-w-lg mx-auto flex flex-col items-center gap-4">
+          <div className="bg-white p-12 rounded-2xl text-center border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.015)] max-w-lg mx-auto flex flex-col items-center gap-4">
             <AlertCircle size={40} className="text-red-400" />
-            <h4 className="font-display font-semibold text-lg text-white">Gagal Memuat Data</h4>
-            <p className="text-sm text-gray-400 font-sans">{error}</p>
+            <h4 className="font-display font-semibold text-lg text-slate-800">Gagal Memuat Data</h4>
+            <p className="text-sm text-slate-500 font-sans">{error}</p>
           </div>
         ) : articles.length === 0 ? (
-          <div className="glass p-16 rounded-2xl text-center max-w-xl mx-auto flex flex-col items-center gap-4">
+          <div className="bg-white p-16 rounded-2xl text-center max-w-xl mx-auto flex flex-col items-center gap-4 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.015)]">
             <BookOpen size={48} className="text-primary/40 animate-pulse" />
-            <h4 className="font-display font-semibold text-lg text-white">Belum Ada Artikel</h4>
-            <p className="text-sm text-gray-400 font-sans text-center">
+            <h4 className="font-display font-semibold text-lg text-slate-800">Belum Ada Artikel</h4>
+            <p className="text-sm text-slate-500 font-sans text-center">
               Belum ada artikel yang diterbitkan saat ini. Hubungi pengurus BEM FAI UNWAHA atau masuk ke Portal Administrasi di kaki halaman untuk mengelola artikel.
             </p>
           </div>
         ) : (
-          /* Bento Grid Layout */
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[280px]">
+          /* Card Grid Layout */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articles.map((article, index) => {
-              const bentoClass = getBentoClasses(index);
               return (
                 <motion.article
                   key={article.id}
@@ -131,59 +117,63 @@ export default function LatestArticles({ previewMode = false }: Props) {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: (index % 3) * 0.1 }}
                   whileHover={{
-                    boxShadow: "0 0 30px rgba(185, 28, 28, 0.08)",
-                    borderColor: "rgba(185, 28, 28, 0.3)",
+                    boxShadow: "0 10px 30px rgba(127, 84, 164, 0.06)",
+                    borderColor: "rgba(127, 84, 164, 0.2)",
+                    y: -4
                   }}
-                  className={`glass p-6 rounded-2xl border border-white/5 bg-[#180208]/40 backdrop-blur-xl transition-all duration-300 relative group overflow-hidden ${bentoClass}`}
+                  className="bg-white rounded-2xl border border-slate-100 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.015)] group"
                 >
-                  {/* Futuristic cover photo background with gradient overlay */}
-                  {article.image_url && (
-                    <div className="absolute inset-0 w-full h-full opacity-20 group-hover:opacity-35 transition-all duration-700 pointer-events-none scale-100 group-hover:scale-105">
+                  {/* Article Image Container */}
+                  <div className="relative w-full h-48 overflow-hidden bg-slate-50">
+                    {article.image_url ? (
                       <Image
                         src={article.image_url}
-                        alt=""
+                        alt={article.title}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#180208] via-[#180208]/90 to-[#180208]/40" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-slate-100 text-slate-400">
+                        <BookOpen size={32} />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      {/* Metadata Row */}
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-primary border border-primary/25 bg-primary/5">
+                          <Tag size={10} />
+                          {article.category}
+                        </span>
+                        <span className="flex items-center gap-1 text-[11px] text-slate-400 font-sans">
+                          <Calendar size={11} />
+                          {formatDate(article.created_at)}
+                        </span>
+                      </div>
+
+                      {/* Title & Excerpt */}
+                      <h4 className="font-display font-bold text-base md:text-lg text-slate-800 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
+                        {article.title}
+                      </h4>
+                      <p className="text-xs text-slate-500 font-sans leading-relaxed mt-2.5 line-clamp-3">
+                        {getSnippet(article.content, 120)}
+                      </p>
                     </div>
-                  )}
 
-                  {/* Subtle hover background highlight gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                  {/* Top metadata row */}
-                  <div className="flex items-center justify-between z-10">
-                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-primary border border-primary/20 bg-primary/5">
-                      <Tag size={10} />
-                      {article.category}
-                    </span>
-                    <span className="flex items-center gap-1.5 text-xs text-gray-400 font-sans">
-                      <Calendar size={12} />
-                      {formatDate(article.created_at)}
-                    </span>
-                  </div>
-
-                  {/* Center Content Section */}
-                  <div className="mt-4 flex-1 flex flex-col justify-center z-10">
-                    <h4 className="font-display font-bold text-lg md:text-xl text-white group-hover:text-primary transition-colors duration-300 line-clamp-2">
-                      {article.title}
-                    </h4>
-                    <p className="text-sm text-gray-400 font-sans leading-relaxed mt-3 line-clamp-3 md:line-clamp-4">
-                      {getSnippet(article.content, index % 4 === 1 ? 250 : 120)}
-                    </p>
-                  </div>
-
-                  {/* Bottom Action Row */}
-                  <div className="mt-6 flex items-center justify-between border-t border-white/5 pt-4 z-10">
-                    <Link
-                      href={`/article/${article.id}`}
-                      className="text-xs font-semibold tracking-wider uppercase text-gray-300 hover:text-white flex items-center gap-1 transition-colors group-hover:gap-2 duration-300"
-                    >
-                      Selengkapnya
-                      <ArrowUpRight size={14} className="text-primary" />
-                    </Link>
+                    {/* Action Row */}
+                    <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                      <Link
+                        href={`/article/${article.id}`}
+                        className="text-[11px] font-bold tracking-wider uppercase text-slate-600 hover:text-primary flex items-center gap-1 transition-colors group-hover:gap-2 duration-300"
+                      >
+                        Selengkapnya
+                        <ArrowUpRight size={14} className="text-primary" />
+                      </Link>
+                    </div>
                   </div>
                 </motion.article>
               );
@@ -201,7 +191,7 @@ export default function LatestArticles({ previewMode = false }: Props) {
           >
             <Link
               href="/news"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-primary/30 text-primary text-sm font-semibold hover:bg-primary/10 transition-all duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-primary/20 text-primary text-sm font-semibold hover:bg-primary/5 transition-all duration-200"
             >
               Lihat Semua Berita & Artikel
               <ArrowRight size={14} />

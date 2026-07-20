@@ -49,23 +49,23 @@ export default function Hero() {
   return (
     <section
       id="beranda"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#180208]"
+      className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#F9F8FD]"
     >
-      {/* Background Neon Glows - Multi-layered for premium feel */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-primary/15 rounded-full blur-[110px] pointer-events-none animate-pulse-slow" />
+      {/* Background Soft Glows */}
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-primary/5 rounded-full blur-[110px] pointer-events-none animate-pulse-slow" />
       <div className="absolute bottom-1/3 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-rose-950/20 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[180px] pointer-events-none" />
 
-      {/* Grid Pattern Overlay with customized opacity and glow lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
-      <div className="absolute left-0 right-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent pointer-events-none" />
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(127,84,164,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(127,84,164,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute left-0 right-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/10 to-transparent pointer-events-none" />
 
-      {/* Floating high-tech circles/particles (Micro-animations) */}
+      {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-primary/10 border border-primary/25 backdrop-blur-sm"
+            className="absolute rounded-full bg-primary/5 border border-primary/10 backdrop-blur-sm"
             style={{
               width: `${(i + 1) * 15}px`,
               height: `${(i + 1) * 15}px`,
@@ -89,91 +89,87 @@ export default function Hero() {
       <div className="max-w-5xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
         {/* Animated Badge */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="mb-8 flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-xs font-semibold text-primary uppercase tracking-widest cursor-default shadow-[0_0_15px_rgba(185,28,28,0.1)]"
+          className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-semibold text-primary uppercase tracking-widest cursor-default shadow-[0_4px_15px_rgba(127,84,164,0.05)] mb-6"
         >
-          <Sparkles size={12} className="text-gold animate-pulse" />
-          <span>Kabinet Perunggu UNWAHA Jombang</span>
+          <Sparkles size={12} className="text-amber-600 animate-pulse" />
+          <span>Kabinet Perunggu — BEM FAI 2026</span>
         </motion.div>
 
-        {/* Central Logo with Neon Glow */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative w-40 h-40 md:w-48 md:h-48 mb-8 flex items-center justify-center rounded-3xl p-3 border border-primary/20 bg-background/30 backdrop-blur-xl shadow-[0_0_50px_rgba(185,28,28,0.15)] group hover:border-primary/45 hover:shadow-[0_0_60px_rgba(185,28,28,0.35)] transition-all duration-500"
-        >
-          {/* External decorative futuristic lines */}
-          <div className="absolute -inset-2 border border-dashed border-white/10 rounded-[2.5rem] pointer-events-none group-hover:border-primary/25 transition-colors duration-500 animate-[spin_40s_linear_infinite]" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 w-12 h-2 bg-primary rounded-full" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1 w-12 h-2 bg-gold rounded-full" />
-
-          <Image
-            src="/assets/logo.jpg"
-            alt="Logo BEM FAI UNWAHA"
-            width={160}
-            height={160}
-            className="object-contain filter drop-shadow-[0_0_10px_rgba(185,28,28,0.4)]"
-            priority
-          />
-        </motion.div>
-
-        {/* Hero Title & Slogans with Typing Effect */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="space-y-4"
-        >
-          <h2 className="font-display font-extrabold text-4xl sm:text-6xl text-white leading-none tracking-tight">
-            Kabinet <span className="text-primary neon-text-maroon">Perunggu</span> <br className="sm:hidden" />
-            <span className="text-gold neon-text-gold font-sans font-medium">BEM FAI</span>
-          </h2>
+        {/* Hero Title & Subtitles */}
+        <div className="space-y-4 w-full flex flex-col items-center">
+          <p className="text-xs md:text-sm text-slate-500 uppercase tracking-widest font-semibold font-mono">
+            Laman Resmi Badan Eksekutif Mahasiswa
+          </p>
+          <h1 className="font-display font-extrabold text-4xl sm:text-6xl text-slate-800 leading-tight tracking-tight">
+            Fakultas Agama Islam
+          </h1>
+          <p className="text-lg md:text-xl text-slate-600 font-sans tracking-wide">
+            Universitas KH. A. Wahab Hasbullah Jombang
+          </p>
 
           {/* Typewriter Text Container */}
-          <div className="h-12 flex items-center justify-center">
-            <p className="text-lg md:text-2xl text-gray-300 font-sans tracking-wide">
+          <div className="h-8 flex items-center justify-center pt-2">
+            <p className="text-sm md:text-base text-slate-700 font-sans tracking-wider font-semibold">
               {displayText}
-              <span className="inline-block w-[3px] h-5 ml-1 bg-primary animate-pulse" />
+              <span className="inline-block w-[2px] h-4 ml-1 bg-primary animate-pulse" />
             </p>
           </div>
 
-          <p className="max-w-3xl mx-auto text-sm md:text-base text-gray-400 font-sans leading-relaxed pt-2">
+          <p className="max-w-3xl text-sm md:text-base text-slate-600 font-sans leading-relaxed pt-2">
             <strong>PERUNGGU (Peradaban Unggul)</strong> adalah simbol gerakan mahasiswa yang bertumbuh melalui proses, ketekunan, dan kolaborasi untuk menciptakan perubahan yang bermakna. Berlandaskan kepedulian, pemikiran kritis, dan semangat inovasi. Kabinet Perunggu hadir sebagai wadah lahirnya generasi yang progresif, dan berdampak bagi kampus maupun masyarakat. Bukan tentang menjadi yang paling tinggi, melainkan tentang menjadi yang paling bermanfaat dalam membangun peradaban yang unggul.
           </p>
-        </motion.div>
+        </div>
 
         {/* CTA Actions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 mt-10 w-full sm:w-auto"
-        >
-          <Link href="#kampus" className="w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-6 justify-center">
+          <Link href="#proker" className="w-full sm:w-auto">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-sm font-semibold tracking-wider uppercase text-white bg-primary hover:bg-[#991b1b] transition-all duration-300 shadow-[0_0_20px_rgba(185,28,28,0.3)] hover:shadow-[0_0_30px_rgba(185,28,28,0.5)] border border-primary/20 cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-semibold tracking-wider uppercase text-white bg-primary hover:bg-[#6c4391] transition-all duration-300 shadow-[0_4px_14px_rgba(127,84,164,0.25)] border border-primary/20 cursor-pointer"
             >
-              <Sparkles size={16} />
-              <span>Jelajahi Fasilitas</span>
-              <ArrowRight size={16} />
+              <Sparkles size={14} />
+              <span>Program Kerja</span>
+              <ArrowRight size={14} />
             </motion.button>
           </Link>
 
           <Link href="#artikel" className="w-full sm:w-auto">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-sm font-semibold tracking-wider uppercase text-gray-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:text-white transition-all duration-300 cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-semibold tracking-wider uppercase text-slate-700 border border-primary/20 bg-white hover:bg-primary/5 hover:text-primary transition-all duration-300 cursor-pointer"
             >
-              <BookOpen size={16} />
+              <BookOpen size={14} />
               <span>Artikel Terbaru</span>
             </motion.button>
           </Link>
+        </div>
+
+        {/* Large Centered Building Photo (Flat & Big) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative w-full max-w-5xl h-[300px] sm:h-[450px] md:h-[500px] mt-12 flex items-center justify-center"
+        >
+          {/* Subtle background glow */}
+          <div className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+
+          <Image
+            src="/assets/gedung1.png"
+            alt="Gedung FAI UNWAHA"
+            fill
+            className="object-contain"
+            style={{
+              filter: "drop-shadow(1px 0px 0px rgba(127, 84, 164, 0.35)) drop-shadow(-1px 0px 0px rgba(127, 84, 164, 0.35)) drop-shadow(0px 1px 0px rgba(127, 84, 164, 0.35)) drop-shadow(0px -1px 0px rgba(127, 84, 164, 0.35)) drop-shadow(0 15px 30px rgba(127, 84, 164, 0.08))"
+            }}
+            priority
+            sizes="(max-width: 1200px) 100vw, 1200px"
+          />
         </motion.div>
       </div>
     </section>
