@@ -47,7 +47,7 @@ const DEFAULT_ARTICLES: Article[] = [
     title: "Peluncuran Portal Utama BEM FAI UNWAHA: Satu Data untuk Semua Layanan",
     category: "Kegiatan BEM",
     content: "BEM FAI UNWAHA resmi merilis platform digital terpadu untuk memudahkan pelayanan mahasiswa. Portal ini mengintegrasikan pengajuan surat menyurat, pendaftaran beasiswa internal, dan repositori karya ilmiah mahasiswa. Rilisnya platform ini adalah perwujudan visi \"Islamic Tech Campus\" yang mengedepankan efisiensi birokrasi berlandaskan etika profesionalisme.",
-    image_url: "/assets/logo.jpg",
+    image_url: "/assets/logo.png",
     created_at: new Date("2026-07-14T09:15:00Z").toISOString(),
   },
   {
@@ -135,7 +135,7 @@ const DEFAULT_SPONSORS: Sponsor[] = [
   {
     id: "s1",
     name: "UNWAHA Jombang",
-    logo_url: "/assets/logo.jpg",
+    logo_url: "/assets/logo.png",
     website_url: "https://unwaha.ac.id",
     sort_order: 1,
     created_at: new Date().toISOString(),

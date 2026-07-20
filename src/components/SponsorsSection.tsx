@@ -52,10 +52,10 @@ export default function SponsorsSection() {
           {sponsors.map((sponsor, i) => (
             <motion.div
               key={sponsor.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
+              initial={{ scale: 0.75 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: false, margin: "-50px" }}
+              transition={{ type: "spring", stiffness: 120, damping: 12, delay: i * 0.1 }}
             >
               {sponsor.website_url ? (
                 <a

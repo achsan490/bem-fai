@@ -39,12 +39,12 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         {/* Logo and Brand */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-10 h-10 overflow-hidden rounded-lg border border-primary/10 bg-white flex items-center justify-center p-1 transition-transform group-hover:scale-105">
             <Image
-              src="/assets/logo.jpg"
+              src="/assets/logo.png"
               alt="BEM FAI UNWAHA Logo"
               width={40}
               height={40}
@@ -86,10 +86,10 @@ export default function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-slate-600 hover:text-primary transition-colors cursor-pointer"
+            className="p-2.5 rounded-xl text-slate-600 hover:text-primary hover:bg-primary/5 transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>

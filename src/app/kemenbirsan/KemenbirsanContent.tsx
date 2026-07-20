@@ -18,17 +18,46 @@ function getRoleIcon(role: string) {
   return ROLE_ICON[role] ?? ROLE_ICON["default"];
 }
 
+const cardVariants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: (index: number) => ({
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 25,
+      damping: 15,
+      delay: index * 0.5,
+      delayChildren: 1.0,
+      staggerChildren: 0.4
+    }
+  })
+};
+
+const childVariants = {
+  hidden: { y: 25, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.6,
+      ease: "easeOut" as const
+    }
+  }
+};
+
 function MemberCard({ member, index }: { member: KemenbirsanMember; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.12 }}
-      className="bg-white rounded-3xl border border-slate-100 hover:border-primary/20 transition-all duration-300 group overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_25px_rgba(127,84,164,0.06)]"
+      variants={cardVariants}
+      custom={index}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, margin: "-100px" }}
+      className="bg-[#EDE8F8] rounded-3xl border border-primary/20 hover:border-primary/35 transition-all duration-300 group overflow-hidden shadow-[0_10px_25px_rgba(127,84,164,0.10)] hover:shadow-[0_16px_35px_rgba(127,84,164,0.18)]"
     >
       {/* Photo */}
-      <div className="relative w-full aspect-[4/5] bg-slate-50 flex items-center justify-center overflow-hidden">
+      <motion.div variants={childVariants} className="relative w-full aspect-[4/5] bg-slate-50 flex items-center justify-center overflow-hidden">
         {member.photo_url ? (
           <img
             src={member.photo_url}
@@ -52,17 +81,17 @@ function MemberCard({ member, index }: { member: KemenbirsanMember; index: numbe
             {member.role}
           </span>
         </div>
-      </div>
+      </motion.div>
 
       {/* Content */}
       <div className="p-6 space-y-3">
-        <h3 className="font-display font-bold text-xl text-slate-800 group-hover:text-primary transition-colors duration-300 leading-tight">
+        <motion.h3 variants={childVariants} className="font-display font-bold text-xl text-slate-800 group-hover:text-primary transition-colors duration-300 leading-tight">
           {member.name}
-        </h3>
+        </motion.h3>
         {member.description && (
-          <p className="text-sm text-slate-500 font-sans leading-relaxed">
+          <motion.p variants={childVariants} className="text-sm text-slate-500 font-sans leading-relaxed">
             {member.description}
-          </p>
+          </motion.p>
         )}
       </div>
     </motion.div>

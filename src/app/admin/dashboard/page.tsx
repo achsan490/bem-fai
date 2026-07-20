@@ -675,7 +675,7 @@ export default function AdminDashboard() {
   const PRESET_COVERS = [
     { url: "/assets/gedung1.png", label: "Gedung A" },
     { url: "/assets/gedung2.png", label: "Gedung B" },
-    { url: "/assets/logo.jpg", label: "Logo BEM" },
+    { url: "/assets/logo.png", label: "Logo BEM" },
   ];
 
   return (
@@ -691,7 +691,7 @@ export default function AdminDashboard() {
             <div className="h-6 w-px bg-white/10 hidden sm:block mr-2" />
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg overflow-hidden border border-primary/20 bg-[#180208] flex items-center justify-center p-1">
-                <Image src="/assets/logo.jpg" alt="Logo BEM FAI" width={30} height={30} className="object-contain" />
+                <Image src="/assets/logo.png" alt="Logo BEM FAI" width={30} height={30} className="object-contain" />
               </div>
               <div>
                 <h1 className="font-display font-bold text-sm text-white">Dashboard Portal</h1>

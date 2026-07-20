@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   Calendar,
@@ -9,6 +9,7 @@ import {
   Heart,
   Trophy,
   Megaphone,
+  ChevronLeft,
   ChevronRight,
   ArrowRight,
   Activity,
@@ -68,9 +69,66 @@ const getStatusBadge = (status: Program["status"]) => {
   }
 };
 
+const cardVariants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: (index: number) => ({
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 25,
+      damping: 15,
+      delay: index * 0.5,
+      delayChildren: 1.0,
+      staggerChildren: 0.4
+    }
+  })
+};
+
+const childVariants = {
+  hidden: { y: 25, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 1.6,
+      ease: "easeOut" as const
+    }
+  }
+};
+
 export default function ProgramSection({ previewMode = false }: Props) {
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+    const { scrollLeft } = containerRef.current;
+    const children = containerRef.current.children;
+    if (children.length === 0) return;
+    const cardWidth = (children[0] as HTMLElement).offsetWidth + 24; // 24px is gap-6
+    const index = Math.round(scrollLeft / cardWidth);
+    setActiveIndex(index);
+  };
+
+  const scroll = (direction: "left" | "right") => {
+    if (!containerRef.current) return;
+    const children = containerRef.current.children;
+    if (children.length === 0) return;
+    const cardWidth = (children[0] as HTMLElement).offsetWidth + 24;
+    const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
+    containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
+  const scrollTo = (index: number) => {
+    if (!containerRef.current) return;
+    const children = containerRef.current.children;
+    if (children.length === 0) return;
+    const cardWidth = (children[0] as HTMLElement).offsetWidth + 24;
+    containerRef.current.scrollTo({ left: index * cardWidth, behavior: "smooth" });
+  };
 
   useEffect(() => {
     async function loadPrograms() {
@@ -138,53 +196,101 @@ export default function ProgramSection({ previewMode = false }: Props) {
           </motion.p>
         </div>
 
-        {/* Programs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {programs.map((program, index) => (
-            <motion.div
-              key={program.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{
-                boxShadow: "0 10px 30px rgba(127, 84, 164, 0.06)",
-                borderColor: "rgba(127, 84, 164, 0.2)",
-                y: -4
-              }}
-              className="bg-white p-6 rounded-2xl border border-slate-100 transition-all duration-300 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.015)]"
+        {/* Programs Carousel */}
+        <div className="relative group/carousel">
+          {/* Navigation Arrows */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-20 flex justify-between pointer-events-none px-2 md:-mx-8">
+            <button
+              onClick={() => scroll("left")}
+              className={`pointer-events-auto w-10 h-10 rounded-full border border-slate-100 bg-white text-slate-600 shadow-md flex items-center justify-center hover:bg-slate-50 hover:text-primary transition-all duration-200 cursor-pointer ${
+                activeIndex === 0 ? "opacity-30 cursor-not-allowed" : "opacity-100 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
+              }`}
+              disabled={activeIndex === 0}
+              aria-label="Previous programs"
             >
-              {/* Header row: Division icon + status badge */}
-              <div className="flex items-center justify-between gap-4 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center">
-                  {getDivisionIcon(program.division)}
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className={`pointer-events-auto w-10 h-10 rounded-full border border-slate-100 bg-white text-slate-600 shadow-md flex items-center justify-center hover:bg-slate-50 hover:text-primary transition-all duration-200 cursor-pointer ${
+                activeIndex >= programs.length - 1 ? "opacity-30 cursor-not-allowed" : "opacity-100 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
+              }`}
+              disabled={activeIndex >= programs.length - 1}
+              aria-label="Next programs"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          {/* Carousel Slider Track */}
+          <div
+            ref={containerRef}
+            onScroll={handleScroll}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none pb-6 pt-2 px-1"
+          >
+            {programs.map((program, index) => (
+              <motion.div
+                key={program.id}
+                variants={cardVariants}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, margin: "-100px" }}
+                whileHover={{
+                  boxShadow: "0 16px 35px rgba(127, 84, 164, 0.18)",
+                  borderColor: "rgba(127, 84, 164, 0.35)",
+                  y: -6
+                }}
+                className="snap-start shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] bg-[#EDE8F8] p-6 rounded-2xl border border-primary/20 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(127,84,164,0.10)]"
+              >
+                {/* Header row: Division icon + status badge */}
+                <motion.div variants={childVariants} className="flex items-center justify-between gap-4 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center">
+                    {getDivisionIcon(program.division)}
+                  </div>
+                  {getStatusBadge(program.status)}
+                </motion.div>
+
+                {/* Main Content */}
+                <div className="flex-1 flex flex-col justify-start">
+                  <motion.span variants={childVariants} className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase mb-1.5">
+                    {program.division}
+                  </motion.span>
+                  <motion.h4 variants={childVariants} className="font-display font-bold text-base text-slate-800 leading-snug hover:text-primary transition-colors mb-2.5">
+                    {program.name}
+                  </motion.h4>
+                  <motion.p variants={childVariants} className="text-xs text-slate-600 font-sans leading-relaxed">
+                    {program.description}
+                  </motion.p>
                 </div>
-                {getStatusBadge(program.status)}
-              </div>
 
-              {/* Main Content */}
-              <div className="flex-1 flex flex-col justify-start">
-                <span className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase mb-1.5">
-                  {program.division}
-                </span>
-                <h4 className="font-display font-bold text-base text-slate-800 leading-snug hover:text-primary transition-colors mb-2.5">
-                  {program.name}
-                </h4>
-                <p className="text-xs text-slate-600 font-sans leading-relaxed">
-                  {program.description}
-                </p>
-              </div>
+                {/* Footer timeline row */}
+                <motion.div variants={childVariants} className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar size={12} className="text-slate-400" />
+                    Target: {program.target_timeline}
+                  </span>
+                  <span className="text-primary font-bold">BEM FAI</span>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
 
-              {/* Footer timeline row */}
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-mono">
-                <span className="flex items-center gap-1.5">
-                  <Calendar size={12} className="text-slate-400" />
-                  Target: {program.target_timeline}
-                </span>
-                <span className="text-primary font-bold">BEM FAI</span>
-              </div>
-            </motion.div>
-          ))}
+          {/* Morphing Dots Indicators */}
+          <div className="flex justify-center items-center gap-2 mt-4">
+            {programs.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollTo(i)}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  activeIndex === i
+                    ? "w-8 bg-primary"
+                    : "w-2.5 bg-primary/20 hover:bg-primary/40"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Preview Mode — link to full proker section */}

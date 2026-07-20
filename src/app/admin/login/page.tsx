@@ -77,7 +77,7 @@ export default function AdminLoginPage() {
           <div className="flex flex-col items-center text-center mb-8">
             <div className="w-16 h-16 rounded-2xl border border-slate-100 bg-slate-50 flex items-center justify-center p-2 mb-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
               <Image
-                src="/assets/logo.jpg"
+                src="/assets/logo.png"
                 alt="Logo BEM FAI"
                 width={50}
                 height={50}

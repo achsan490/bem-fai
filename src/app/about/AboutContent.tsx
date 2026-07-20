@@ -17,11 +17,11 @@ interface ContentMap {
 }
 
 const FADE_UP = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 40 },
   visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay },
+    transition: { duration: 3.5, delay, ease: "easeOut" as const },
   }),
 };
 
@@ -116,7 +116,7 @@ export default function AboutContent() {
               >
                 <div className="relative w-56 h-56 rounded-3xl overflow-hidden border border-primary/10 bg-white p-4 shadow-[0_8px_30px_rgba(127,84,164,0.06)]">
                   <Image
-                    src="/assets/logo.jpg"
+                    src="/assets/logo.png"
                     alt="Logo BEM FAI UNWAHA"
                     fill
                     className="object-contain p-4"
@@ -171,11 +171,11 @@ export default function AboutContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Visi */}
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-[#F9F8FD] p-8 rounded-2xl border border-slate-100 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_10px_25px_rgba(127,84,164,0.04)] group"
+                initial={{ scale: 0.9 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: false, margin: "-100px" }}
+                transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                className="bg-[#EDE8F8] p-8 rounded-2xl border border-primary/20 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(127,84,164,0.10)] hover:shadow-[0_16px_35px_rgba(127,84,164,0.18)] group"
               >
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mb-5">
@@ -196,11 +196,11 @@ export default function AboutContent() {
 
               {/* Misi */}
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-[#F9F8FD] p-8 rounded-2xl border border-slate-100 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_10px_25px_rgba(127,84,164,0.04)] group"
+                initial={{ scale: 0.9 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: false, margin: "-100px" }}
+                transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.15 }}
+                className="bg-[#EDE8F8] p-8 rounded-2xl border border-primary/20 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(127,84,164,0.10)] hover:shadow-[0_16px_35px_rgba(127,84,164,0.18)] group"
               >
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mb-5">
@@ -235,11 +235,11 @@ export default function AboutContent() {
         <section className="py-20 border-t border-slate-100">
           <div className="max-w-5xl mx-auto px-6">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-white p-10 rounded-3xl border border-primary/10 bg-gradient-to-br from-primary/5 to-transparent shadow-[0_8px_30px_rgba(127,84,164,0.02)]"
+              initial={{ scale: 0.9 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: false, margin: "-100px" }}
+              transition={{ type: "spring", stiffness: 100, damping: 15 }}
+              className="bg-[#EDE8F8] p-10 rounded-3xl border border-primary/20 shadow-[0_10px_25px_rgba(127,84,164,0.10)] bg-gradient-to-br from-primary/10 to-transparent"
             >
               <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center gap-1.5 mb-4 font-mono">
                 <Sparkles size={10} />
@@ -292,8 +292,8 @@ export default function AboutContent() {
                     position: "relative",
                   }}
                   initial={{
-                    x: Math.sin(idx) * 20,
-                    y: Math.cos(idx) * 20,
+                    x: Math.round(Math.sin(idx) * 20),
+                    y: Math.round(Math.cos(idx) * 20),
                   }}
                 >
                   {item.label}
