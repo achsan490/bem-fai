@@ -19,28 +19,28 @@ function getRoleIcon(role: string) {
 }
 
 const cardVariants = {
-  hidden: { scale: 0.9, opacity: 0 },
+  hidden: { scale: 0.92, opacity: 0 },
   visible: (index: number) => ({
     scale: 1,
     opacity: 1,
     transition: {
       type: "spring" as const,
-      stiffness: 25,
-      damping: 15,
-      delay: index * 0.5,
-      delayChildren: 1.0,
-      staggerChildren: 0.4
+      stiffness: 80,
+      damping: 18,
+      delay: index * 0.08,
+      delayChildren: 0.15,
+      staggerChildren: 0.07
     }
   })
 };
 
 const childVariants = {
-  hidden: { y: 25, opacity: 0 },
+  hidden: { y: 12, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 1.6,
+      duration: 0.45,
       ease: "easeOut" as const
     }
   }

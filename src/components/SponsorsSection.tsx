@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/image";
 import { motion } from "framer-motion";
 import { ExternalLink, ChevronRight } from "lucide-react";
 import { db } from "../lib/supabase";
 import { Sponsor } from "../types/database.types";
+
 
 export default function SponsorsSection() {
   const [sponsors, setSponsors] = useState<Sponsor[]>([]);

@@ -15,6 +15,33 @@ export default function Footer() {
           <p className="text-xs text-slate-400 font-sans leading-relaxed max-w-sm">
             Badan Eksekutif Mahasiswa Fakultas Agama Islam Universitas KH. A. Wahab Hasbullah. Wadah kolaborasi kepemimpinan kemahasiswaan berbasis moral islami dan kesiapan teknologi era global.
           </p>
+          {/* Social Media Icons */}
+          <div className="flex items-center gap-3 pt-1">
+            <a
+              href="https://www.instagram.com/bemfaiunwaha"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/40 hover:bg-primary/10 transition-all duration-200"
+              aria-label="Instagram BEM FAI UNWAHA"
+            >
+              {/* Instagram SVG */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a
+              href="https://www.youtube.com/@bemfaiunwaha"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/40 hover:bg-primary/10 transition-all duration-200"
+              aria-label="YouTube BEM FAI UNWAHA"
+            >
+              {/* YouTube SVG */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
         {/* Navigation */}
@@ -44,11 +71,23 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Mail size={12} className="text-primary shrink-0" />
-              <span>bem@fai.unwaha.ac.id</span>
+              <a
+                href="mailto:bem@fai.unwaha.ac.id"
+                className="hover:text-primary transition-colors"
+              >
+                bem@fai.unwaha.ac.id
+              </a>
             </li>
             <li className="flex items-center gap-2">
               <Globe size={12} className="text-primary shrink-0" />
-              <span>fai.unwaha.ac.id</span>
+              <a
+                href="https://fai.unwaha.ac.id"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                fai.unwaha.ac.id
+              </a>
             </li>
           </ul>
         </div>

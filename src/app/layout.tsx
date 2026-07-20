@@ -14,9 +14,32 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bemfaiunwaha.ac.id"),
   title: "BEM FAI UNWAHA - Badan Eksekutif Mahasiswa Fakultas Agama Islam Universitas KH. A. Wahab Hasbullah",
   description: "Portal Resmi BEM Fakultas Agama Islam Universitas KH. A. Wahab Hasbullah (UNWAHA) Jombang. Wadah kolaborasi, kreasi, dan pengabdian mahasiswa berbasis nilai keislaman dan teknologi masa depan.",
   keywords: ["BEM FAI UNWAHA", "BEM FAI UNWAHA Jombang", "Fakultas Agama Islam UNWAHA", "UNWAHA", "Universitas KH. A. Wahab Hasbullah", "Futuristic Islamic", "Portal BEM"],
+  openGraph: {
+    title: "BEM FAI UNWAHA — Kabinet Perunggu 2026",
+    description: "Portal Resmi BEM Fakultas Agama Islam UNWAHA Jombang. Sinergi, Prestasi, dan Pengabdian.",
+    url: "https://bemfaiunwaha.ac.id",
+    siteName: "BEM FAI UNWAHA",
+    images: [
+      {
+        url: "/assets/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Logo BEM FAI UNWAHA",
+      },
+    ],
+    locale: "id_ID",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "BEM FAI UNWAHA — Kabinet Perunggu 2026",
+    description: "Portal Resmi BEM Fakultas Agama Islam UNWAHA Jombang.",
+    images: ["/assets/logo.png"],
+  },
 };
 
 export default function RootLayout({
