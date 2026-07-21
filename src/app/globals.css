@@ -18,11 +18,16 @@
   --foreground: #1E1B24;
 }
 
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  overflow-x: hidden;
 }
 
 @utility glass {

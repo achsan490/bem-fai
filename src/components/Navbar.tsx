@@ -33,16 +33,16 @@ export default function Navbar() {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "py-3 bg-white/90 backdrop-blur-md border-b border-primary/10 shadow-sm" : "py-5 bg-transparent"
+        isScrolled ? "py-3 bg-white/90 backdrop-blur-md border-b border-primary/10 shadow-sm" : "py-4 sm:py-5 bg-transparent"
       }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between min-w-0 w-full">
         {/* Logo and Brand */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 overflow-hidden rounded-lg border border-primary/10 bg-white flex items-center justify-center p-1 transition-transform group-hover:scale-105">
+        <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink">
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 overflow-hidden rounded-lg border border-primary/10 bg-white flex items-center justify-center p-1 transition-transform group-hover:scale-105 shrink-0">
             <Image
               src="/assets/logo.png"
               alt="BEM FAI UNWAHA Logo"
@@ -52,11 +52,11 @@ export default function Navbar() {
               priority
             />
           </div>
-          <div>
-            <p className="font-display font-bold text-base md:text-lg leading-tight tracking-wider text-slate-800 flex items-center gap-1.5">
+          <div className="min-w-0">
+            <p className="font-display font-bold text-sm sm:text-base md:text-lg leading-tight tracking-wider text-slate-800 flex items-center gap-1.5 truncate">
               BEM <span className="text-primary font-extrabold">FAI UNWAHA</span>
             </p>
-            <p className="text-[9px] md:text-[10px] text-slate-500 tracking-wider uppercase font-sans font-medium">
+            <p className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-500 tracking-wider uppercase font-sans font-medium truncate">
               Univ. KH. A. Wahab Hasbullah
             </p>
           </div>
@@ -83,10 +83,10 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden shrink-0 ml-2">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2.5 rounded-xl text-slate-600 hover:text-primary hover:bg-primary/5 transition-colors cursor-pointer"
+            className="p-2 rounded-xl text-slate-600 hover:text-primary hover:bg-primary/5 transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
@@ -12,6 +12,12 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bemfaiunwaha.ac.id"),
@@ -50,9 +56,9 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden w-full max-w-full">
         <NextTopLoader color="#7F54A4" showSpinner={false} height={3} />
         {children}
       </body>
