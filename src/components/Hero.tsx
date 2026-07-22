@@ -52,20 +52,20 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-[#F9F8FD]"
     >
       {/* Background Soft Glows */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-primary/5 rounded-full blur-[110px] pointer-events-none animate-pulse-slow" />
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-gradient-to-tr from-[#800020]/15 via-[#A0203F]/10 to-transparent rounded-full blur-[110px] pointer-events-none animate-pulse-slow" />
       <div className="absolute bottom-1/3 right-1/4 translate-x-1/2 translate-y-1/2 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-b from-[#800020]/10 via-[#A0203F]/5 to-transparent rounded-full blur-[180px] pointer-events-none" />
 
       {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(127,84,164,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(127,84,164,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
-      <div className="absolute left-0 right-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,0,32,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,0,32,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute left-0 right-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#800020]/30 to-transparent pointer-events-none" />
 
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-primary/5 border border-primary/10 backdrop-blur-sm"
+            className="absolute rounded-full bg-gradient-to-br from-[#800020]/10 to-[#A0203F]/5 border border-primary/15 backdrop-blur-sm"
             style={{
               width: `${(i + 1) * 15}px`,
               height: `${(i + 1) * 15}px`,
@@ -92,7 +92,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-xs font-semibold text-primary uppercase tracking-widest cursor-default shadow-[0_4px_15px_rgba(127,84,164,0.05)] mb-6"
+          className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-gradient-to-r from-[#800020]/10 via-[#A0203F]/5 to-[#800020]/10 text-xs font-semibold text-primary uppercase tracking-widest cursor-default shadow-[0_4px_15px_rgba(128,0,32,0.08)] mb-6"
         >
           <Sparkles size={12} className="text-amber-600 animate-pulse" />
           <span>Kabinet Perunggu — BEM FAI 2026</span>
@@ -100,11 +100,11 @@ export default function Hero() {
 
         {/* Hero Title & Subtitles */}
         <div className="space-y-4 w-full flex flex-col items-center">
-          <p className="text-xs md:text-sm text-slate-500 uppercase tracking-widest font-semibold font-mono">
+          <p className="text-xs md:text-sm text-primary/80 uppercase tracking-widest font-semibold font-mono">
             Laman Resmi Badan Eksekutif Mahasiswa
           </p>
           <h1 className="font-display font-extrabold text-4xl sm:text-6xl text-slate-800 leading-tight tracking-tight">
-            Fakultas Agama Islam
+            Fakultas Agama Islam <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent block sm:inline">UNWAHA</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 font-sans tracking-wide">
             Universitas KH. A. Wahab Hasbullah Jombang
@@ -114,12 +114,12 @@ export default function Hero() {
           <div className="h-8 flex items-center justify-center pt-2">
             <p className="text-sm md:text-base text-slate-700 font-sans tracking-wider font-semibold">
               {displayText}
-              <span className="inline-block w-[2px] h-4 ml-1 bg-primary animate-pulse" />
+              <span className="inline-block w-[2px] h-4 ml-1 bg-gradient-to-b from-[#800020] to-[#A0203F] animate-pulse" />
             </p>
           </div>
 
           <p className="max-w-3xl text-sm md:text-base text-slate-600 font-sans leading-relaxed pt-2">
-            <strong>PERUNGGU (Peradaban Unggul)</strong> adalah simbol gerakan mahasiswa yang bertumbuh melalui proses, ketekunan, dan kolaborasi untuk menciptakan perubahan yang bermakna. Berlandaskan kepedulian, pemikiran kritis, dan semangat inovasi. Kabinet Perunggu hadir sebagai wadah lahirnya generasi yang progresif, dan berdampak bagi kampus maupun masyarakat. Bukan tentang menjadi yang paling tinggi, melainkan tentang menjadi yang paling bermanfaat dalam membangun peradaban yang unggul.
+            <strong className="bg-gradient-to-r from-[#800020] to-[#A0203F] bg-clip-text text-transparent font-bold">PERUNGGU (Peradaban Unggul)</strong> adalah simbol gerakan mahasiswa yang bertumbuh melalui proses, ketekunan, dan kolaborasi untuk menciptakan perubahan yang bermakna. Berlandaskan kepedulian, pemikiran kritis, dan semangat inovasi. Kabinet Perunggu hadir sebagai wadah lahirnya generasi yang progresif, dan berdampak bagi kampus maupun masyarakat. Bukan tentang menjadi yang paling tinggi, melainkan tentang menjadi yang paling bermanfaat dalam membangun peradaban yang unggul.
           </p>
         </div>
 
@@ -127,9 +127,9 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-6 justify-center">
           <Link href="#proker" className="w-full sm:w-auto">
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-semibold tracking-wider uppercase text-white bg-primary hover:bg-[#6c4391] transition-all duration-300 shadow-[0_4px_14px_rgba(127,84,164,0.25)] border border-primary/20 cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-semibold tracking-wider uppercase text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all duration-300 shadow-[0_6px_20px_rgba(128,0,32,0.35)] border border-[#A0203F]/30 cursor-pointer"
             >
               <Sparkles size={14} />
               <span>Program Kerja</span>
@@ -141,7 +141,7 @@ export default function Hero() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-semibold tracking-wider uppercase text-slate-700 border border-primary/20 bg-white hover:bg-primary/5 hover:text-primary transition-all duration-300 cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-semibold tracking-wider uppercase text-[#800020] border border-[#800020]/25 bg-white hover:bg-gradient-to-r hover:from-[#800020]/10 hover:to-[#A0203F]/5 transition-all duration-300 shadow-sm cursor-pointer"
             >
               <BookOpen size={14} />
               <span>Artikel Terbaru</span>
@@ -165,7 +165,7 @@ export default function Hero() {
             fill
             className="object-contain"
             style={{
-              filter: "drop-shadow(1px 0px 0px rgba(127, 84, 164, 0.35)) drop-shadow(-1px 0px 0px rgba(127, 84, 164, 0.35)) drop-shadow(0px 1px 0px rgba(127, 84, 164, 0.35)) drop-shadow(0px -1px 0px rgba(127, 84, 164, 0.35)) drop-shadow(0 15px 30px rgba(127, 84, 164, 0.08))"
+              filter: "drop-shadow(1px 0px 0px rgba(128, 0, 32, 0.35)) drop-shadow(-1px 0px 0px rgba(128, 0, 32, 0.35)) drop-shadow(0px 1px 0px rgba(128, 0, 32, 0.35)) drop-shadow(0px -1px 0px rgba(128, 0, 32, 0.35)) drop-shadow(0 15px 30px rgba(128, 0, 32, 0.08))"
             }}
             priority
             sizes="(max-width: 1200px) 100vw, 1200px"
@@ -175,4 +175,5 @@ export default function Hero() {
     </section>
   );
 }
+
 

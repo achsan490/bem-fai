@@ -3,14 +3,16 @@ import { Mail, MapPin, Globe, Lock } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#191621] border-t border-primary/10 py-12 relative overflow-hidden">
-      <div className="absolute top-0 left-1/4 -translate-x-1/2 w-[200px] h-[200px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+    <footer className="bg-[#191621] border-t border-primary/20 py-12 relative overflow-hidden">
+      {/* Top Accent Bar */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#800020] via-[#A0203F] to-transparent" />
+      <div className="absolute top-0 left-1/4 -translate-x-1/2 w-[300px] h-[200px] bg-gradient-to-br from-[#800020]/15 to-transparent rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
         {/* Brand */}
         <div className="space-y-4">
           <p className="font-display font-bold text-lg leading-tight tracking-wider text-white">
-            BEM <span className="text-primary font-extrabold">FAI UNWAHA</span>
+            BEM <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#A0203F] bg-clip-text text-transparent font-extrabold">FAI UNWAHA</span>
           </p>
           <p className="text-xs text-slate-400 font-sans leading-relaxed max-w-sm">
             Badan Eksekutif Mahasiswa Fakultas Agama Islam Universitas KH. A. Wahab Hasbullah. Wadah kolaborasi kepemimpinan kemahasiswaan berbasis moral islami dan kesiapan teknologi era global.
@@ -94,7 +96,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10 text-[10px] text-slate-500 tracking-wider">
-        <p>© 2026 BEM FAI UNWAHA Jombang. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p>Â© 2026 BEM FAI UNWAHA Jombang. Hak Cipta Dilindungi Undang-Undang.</p>
         <p className="font-sans flex items-center gap-1.5">
           Designed for <span className="text-primary font-bold">UNWAHA Islamic Tech Campus</span>
         </p>
@@ -102,3 +104,4 @@ export default function Footer() {
     </footer>
   );
 }
+

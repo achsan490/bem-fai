@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -84,7 +84,7 @@ export default function ArticleDetailPage() {
             </p>
             <button
               onClick={() => router.push("/")}
-              className="mt-2 px-6 py-2.5 rounded-xl text-xs font-semibold text-white bg-primary hover:bg-[#6c4391] transition-colors cursor-pointer"
+              className="mt-2 px-6 py-2.5 rounded-xl text-xs font-semibold text-white bg-primary hover:bg-[#600018] transition-colors cursor-pointer"
             >
               Kembali ke Beranda
             </button>

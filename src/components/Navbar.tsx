@@ -39,6 +39,9 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {/* Top Accent Gradient Bar */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#500014] via-[#800020] via-[#A0203F] to-[#800020]" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between min-w-0 w-full">
         {/* Logo and Brand */}
         <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink">
@@ -127,3 +130,4 @@ export default function Navbar() {
     </motion.header>
   );
 }
+

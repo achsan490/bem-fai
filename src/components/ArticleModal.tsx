@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { AlertTriangle, Trash2, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -101,3 +101,4 @@ export default function ConfirmDeleteModal({
     </AnimatePresence>
   );
 }
+

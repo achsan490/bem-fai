@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   description: "Portal Resmi BEM Fakultas Agama Islam Universitas KH. A. Wahab Hasbullah (UNWAHA) Jombang. Wadah kolaborasi, kreasi, dan pengabdian mahasiswa berbasis nilai keislaman dan teknologi masa depan.",
   keywords: ["BEM FAI UNWAHA", "BEM FAI UNWAHA Jombang", "Fakultas Agama Islam UNWAHA", "UNWAHA", "Universitas KH. A. Wahab Hasbullah", "Futuristic Islamic", "Portal BEM"],
   openGraph: {
-    title: "BEM FAI UNWAHA — Kabinet Perunggu 2026",
+    title: "BEM FAI UNWAHA â€” Kabinet Perunggu 2026",
     description: "Portal Resmi BEM Fakultas Agama Islam UNWAHA Jombang. Sinergi, Prestasi, dan Pengabdian.",
     url: "https://bemfaiunwaha.ac.id",
     siteName: "BEM FAI UNWAHA",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "BEM FAI UNWAHA — Kabinet Perunggu 2026",
+    title: "BEM FAI UNWAHA â€” Kabinet Perunggu 2026",
     description: "Portal Resmi BEM Fakultas Agama Islam UNWAHA Jombang.",
     images: ["/assets/logo.png"],
   },
@@ -59,10 +59,11 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased overflow-x-hidden`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden w-full max-w-full">
-        <NextTopLoader color="#7F54A4" showSpinner={false} height={3} />
+        <NextTopLoader color="#800020" showSpinner={false} height={3} />
         {children}
       </body>
     </html>
   );
 }
+
 

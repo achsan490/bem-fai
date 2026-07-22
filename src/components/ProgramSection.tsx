@@ -183,7 +183,7 @@ export default function ProgramSection({ previewMode = false }: Props) {
             transition={{ duration: 0.6 }}
             className="font-display font-bold text-3xl md:text-4xl text-slate-800"
           >
-            Aksi Nyata BEM <span className="text-primary font-extrabold">FAI UNWAHA</span>
+            Aksi Nyata BEM <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent font-extrabold">FAI UNWAHA</span>
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -237,11 +237,11 @@ export default function ProgramSection({ previewMode = false }: Props) {
                 whileInView="visible"
                 viewport={{ once: false, margin: "-100px" }}
                 whileHover={{
-                  boxShadow: "0 16px 35px rgba(127, 84, 164, 0.18)",
-                  borderColor: "rgba(127, 84, 164, 0.35)",
+                  boxShadow: "0 16px 35px rgba(128, 0, 32, 0.18)",
+                  borderColor: "rgba(128, 0, 32, 0.35)",
                   y: -6
                 }}
-                className="snap-start shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] bg-[#EDE8F8] p-6 rounded-2xl border border-primary/20 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(127,84,164,0.10)]"
+                className="snap-start shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] bg-[#F8E8EB] p-6 rounded-2xl border border-primary/20 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(128,0,32,0.10)]"
               >
                 {/* Header row: Division icon + status badge */}
                 <motion.div variants={childVariants} className="flex items-center justify-between gap-4 mb-5">
@@ -293,7 +293,7 @@ export default function ProgramSection({ previewMode = false }: Props) {
           </div>
         </div>
 
-        {/* Preview Mode — link to full proker section */}
+        {/* Preview Mode â€” link to full proker section */}
         {previewMode && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -314,3 +314,4 @@ export default function ProgramSection({ previewMode = false }: Props) {
     </section>
   );
 }
+

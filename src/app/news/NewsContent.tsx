@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -15,7 +15,7 @@ const formatDate = (iso: string) =>
 
 const getSnippet = (text: string, maxLen = 160) => {
   const plain = text.replace(/[#*`_[\]]/g, "");
-  return plain.length <= maxLen ? plain : plain.substring(0, maxLen) + "…";
+  return plain.length <= maxLen ? plain : plain.substring(0, maxLen) + "â€¦";
 };
 
 export default function NewsContent() {
@@ -47,7 +47,7 @@ export default function NewsContent() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* ── Hero ─────────────────────────────────────────────── */}
+        {/* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="pt-32 pb-16 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
           <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[140px] pointer-events-none" />
@@ -106,7 +106,7 @@ export default function NewsContent() {
           </div>
         </section>
 
-        {/* ── Articles Content ──────────────────────────────────── */}
+        {/* â”€â”€ Articles Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="py-10 pb-24 border-t border-slate-100">
           <div className="max-w-7xl mx-auto px-6">
             {/* Category Filter Pills */}
@@ -174,7 +174,7 @@ export default function NewsContent() {
                       initial={{ opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: i * 0.06 }}
-                      className="bg-white rounded-2xl border border-slate-100 hover:border-primary/20 transition-all duration-300 group overflow-hidden flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_25px_rgba(127,84,164,0.06)]"
+                      className="bg-white rounded-2xl border border-slate-100 hover:border-primary/20 transition-all duration-300 group overflow-hidden flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_25px_rgba(128,0,32,0.06)]"
                     >
                       {/* Cover image */}
                       <div className="relative h-48 bg-slate-50 overflow-hidden">
@@ -242,3 +242,4 @@ export default function NewsContent() {
     </div>
   );
 }
+

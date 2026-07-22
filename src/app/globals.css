@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #F9F8FD;
-  --color-foreground: #1E1B24;
-  --color-primary: #7F54A4;
-  --color-primary-glow: #A973D4;
+  --color-background: #FDF8F8;
+  --color-foreground: #1E1014;
+  --color-primary: #800020;
+  --color-primary-glow: #A0203F;
   --color-gold: #d97706; /* Bronze/Gold */
   --color-gold-glow: #f59e0b;
   --font-sans: var(--font-inter), sans-serif;
@@ -14,8 +14,8 @@
 }
 
 :root {
-  --background: #F9F8FD;
-  --foreground: #1E1B24;
+  --background: #FDF8F8;
+  --foreground: #1E1014;
 }
 
 html,
@@ -34,23 +34,23 @@ body {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(127, 84, 164, 0.08);
+  border: 1px solid rgba(128, 0, 32, 0.08);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
 }
 
 @utility glass-maroon {
-  background: rgba(127, 84, 164, 0.04);
+  background: rgba(128, 0, 32, 0.04);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(127, 84, 164, 0.15);
+  border: 1px solid rgba(128, 0, 32, 0.15);
 }
 
 @utility neon-border {
-  box-shadow: 0 4px 20px rgba(127, 84, 164, 0.06);
+  box-shadow: 0 4px 20px rgba(128, 0, 32, 0.06);
 }
 
 @utility neon-text-maroon {
-  text-shadow: 0 0 8px rgba(127, 84, 164, 0.2);
+  text-shadow: 0 0 8px rgba(128, 0, 32, 0.2);
 }
 
 @utility neon-text-gold {
@@ -58,7 +58,56 @@ body {
 }
 
 @utility neon-glow-maroon {
-  filter: drop-shadow(0 0 6px rgba(127, 84, 164, 0.25));
+  filter: drop-shadow(0 0 6px rgba(128, 0, 32, 0.25));
+}
+
+@utility bg-gradient-maroon {
+  background: linear-gradient(135deg, #800020 0%, #A0203F 50%, #500014 100%);
+}
+
+@utility bg-gradient-maroon-soft {
+  background: linear-gradient(135deg, rgba(128, 0, 32, 0.08) 0%, rgba(160, 32, 63, 0.04) 50%, rgba(128, 0, 32, 0.02) 100%);
+}
+
+@utility text-gradient-maroon {
+  background: linear-gradient(135deg, #800020 0%, #B8284F 50%, #600018 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-gradient-maroon-gold {
+  background: linear-gradient(135deg, #800020 0%, #C4385C 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility btn-gradient-maroon {
+  background: linear-gradient(135deg, #800020 0%, #A0203F 50%, #600018 100%);
+  box-shadow: 0 6px 20px rgba(128, 0, 32, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, #600018 0%, #800020 50%, #A0203F 100%);
+    box-shadow: 0 8px 25px rgba(128, 0, 32, 0.4);
+  }
+}
+
+@utility card-premium-maroon {
+  background: #FFFFFF;
+  border: 1px solid rgba(128, 0, 32, 0.15);
+  box-shadow: 0 10px 30px -5px rgba(128, 0, 32, 0.06);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #800020, #A0203F, #D97706);
+  }
 }
 
 /* Custom Scrollbar */
@@ -66,14 +115,14 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F9F8FD;
+  background: #FDF8F8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E4E0ED;
+  background: #E8D0D5;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7F54A4;
+  background: #800020;
 }
 
 /* Smooth Scrolling */
@@ -83,13 +132,13 @@ html {
 
 /* Scoped CSS Overrides for Admin Dashboard (Light Mode) */
 .admin-dashboard {
-  background-color: #F9F8FD !important;
-  color: #1E1B24 !important;
+  background-color: #FDF8F8 !important;
+  color: #1E1014 !important;
 }
 
 .admin-dashboard header {
   background-color: rgba(255, 255, 255, 0.9) !important;
-  border-color: #F1F0F5 !important;
+  border-color: #F5F0F1 !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
@@ -97,15 +146,15 @@ html {
 .admin-dashboard h2, 
 .admin-dashboard h3, 
 .admin-dashboard h4 {
-  color: #1E1B24 !important;
+  color: #1E1014 !important;
 }
 
 .admin-dashboard p {
-  color: #5C5768 !important;
+  color: #5C3740 !important;
 }
 
 .admin-dashboard label {
-  color: #5C5768 !important;
+  color: #5C3740 !important;
 }
 
 /* Stat cards & general cards override */
@@ -113,63 +162,63 @@ html {
 .admin-dashboard div.glass {
   background-color: #FFFFFF !important;
   background-image: none !important;
-  border: 1px solid #EAE6F3 !important;
-  box-shadow: 0 4px 20px rgba(127, 84, 164, 0.03) !important;
-  color: #1E1B24 !important;
+  border: 1px solid #F3E6E8 !important;
+  box-shadow: 0 4px 20px rgba(128, 0, 32, 0.03) !important;
+  color: #1E1014 !important;
   backdrop-filter: none !important;
 }
 
 .admin-dashboard .glass p {
-  color: #5C5768 !important;
+  color: #5C3740 !important;
 }
 
 .admin-dashboard .glass h3 {
-  color: #1E1B24 !important;
+  color: #1E1014 !important;
 }
 
 /* Tab selector navigation */
 .admin-dashboard button.border-primary.text-white {
-  color: #7F54A4 !important;
-  border-color: #7F54A4 !important;
+  color: #800020 !important;
+  border-color: #800020 !important;
 }
 
 .admin-dashboard button.text-gray-500 {
-  color: #7D788A !important;
+  color: #7D5860 !important;
 }
 
 .admin-dashboard button.text-gray-500:hover {
-  color: #7F54A4 !important;
+  color: #800020 !important;
 }
 
 /* Tables styling */
 .admin-dashboard table {
-  color: #2D2738 !important;
+  color: #2D1820 !important;
 }
 
 .admin-dashboard table tr {
-  border-bottom: 1px solid #EAE6F3 !important;
+  border-bottom: 1px solid #F3E6E8 !important;
 }
 
 .admin-dashboard table tr.bg-\[\#180208\]\/40,
 .admin-dashboard tr.bg-\[\#180208\]\/40 {
-  background-color: #F5F3FA !important;
+  background-color: #FBF5F6 !important;
 }
 
 .admin-dashboard table thead tr {
-  background-color: #F5F3FA !important;
-  border-bottom: 2px solid #E0DBEC !important;
+  background-color: #FBF5F6 !important;
+  border-bottom: 2px solid #ECDDE0 !important;
 }
 
 .admin-dashboard table th {
-  color: #5C5768 !important;
+  color: #5C3740 !important;
 }
 
 .admin-dashboard table tbody tr:hover {
-  background-color: #FBFBFE !important;
+  background-color: #FEFBFB !important;
 }
 
 .admin-dashboard table td span.text-white {
-  color: #1E1B24 !important;
+  color: #1E1014 !important;
 }
 
 .admin-dashboard table td span.text-gray-450,
@@ -190,8 +239,8 @@ html {
 .admin-dashboard textarea:focus,
 .admin-dashboard select:focus {
   background-color: #FFFFFF !important;
-  border-color: #7F54A4 !important;
-  box-shadow: 0 0 0 2px rgba(127, 84, 164, 0.1) !important;
+  border-color: #800020 !important;
+  box-shadow: 0 0 0 2px rgba(128, 0, 32, 0.1) !important;
   outline: none !important;
 }
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="absolute bottom-1/3 right-1/4 translate-x-1/2 translate-y-1/2 w-[300px] h-[300px] bg-gold/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(127,84,164,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(127,84,164,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,0,32,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,0,32,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -73,7 +73,7 @@ export default function NotFound() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold tracking-wide shadow-[0_4px_14px_rgba(127,84,164,0.25)] hover:bg-[#6c4391] transition-all duration-300 cursor-pointer"
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white text-sm font-semibold tracking-wide shadow-[0_4px_14px_rgba(128,0,32,0.25)] hover:bg-[#600018] transition-all duration-300 cursor-pointer"
             >
               <Home size={16} />
               Kembali ke Beranda
@@ -95,9 +95,10 @@ export default function NotFound() {
           transition={{ delay: 0.7 }}
           className="mt-12 text-[10px] text-slate-400 font-mono tracking-widest uppercase"
         >
-          BEM FAI UNWAHA — Kabinet Perunggu
+          BEM FAI UNWAHA â€” Kabinet Perunggu
         </motion.p>
       </motion.div>
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -54,7 +54,7 @@ function MemberCard({ member, index }: { member: KemenbirsanMember; index: numbe
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, margin: "-100px" }}
-      className="bg-[#EDE8F8] rounded-3xl border border-primary/20 hover:border-primary/35 transition-all duration-300 group overflow-hidden shadow-[0_10px_25px_rgba(127,84,164,0.10)] hover:shadow-[0_16px_35px_rgba(127,84,164,0.18)]"
+      className="bg-[#F8E8EB] rounded-3xl border border-primary/20 hover:border-primary/35 transition-all duration-300 group overflow-hidden shadow-[0_10px_25px_rgba(128,0,32,0.10)] hover:shadow-[0_16px_35px_rgba(128,0,32,0.18)]"
     >
       {/* Photo */}
       <motion.div variants={childVariants} className="relative w-full aspect-[4/5] bg-slate-50 flex items-center justify-center overflow-hidden">
@@ -114,7 +114,7 @@ export default function KemenbirsanContent() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* ── Hero ─────────────────────────────────────────────── */}
+        {/* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="pt-32 pb-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
           <div className="absolute top-20 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
@@ -147,7 +147,7 @@ export default function KemenbirsanContent() {
           </div>
         </section>
 
-        {/* ── Member Cards ─────────────────────────────────────── */}
+        {/* â”€â”€ Member Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="py-16 border-t border-slate-100">
           <div className="max-w-7xl mx-auto px-6">
             {loading ? (
@@ -185,13 +185,13 @@ export default function KemenbirsanContent() {
           </div>
         </section>
 
-        {/* ── Decorative Divider ───────────────────────────────── */}
+        {/* â”€â”€ Decorative Divider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <div className="py-16 border-t border-slate-100 bg-white">
           <div className="max-w-3xl mx-auto px-6 text-center">
             <p className="text-slate-600 font-sans text-sm italic leading-relaxed">
               &ldquo;Kepemimpinan yang baik berakar pada akhlak mulia, ilmu yang bermanfaat, dan tekad untuk mengabdi kepada umat.&rdquo;
             </p>
-            <p className="text-primary font-bold text-xs font-mono mt-3 tracking-widest uppercase">— BEM FAI UNWAHA</p>
+            <p className="text-primary font-bold text-xs font-mono mt-3 tracking-widest uppercase">â€” BEM FAI UNWAHA</p>
           </div>
         </div>
       </main>
@@ -200,3 +200,4 @@ export default function KemenbirsanContent() {
     </div>
   );
 }
+

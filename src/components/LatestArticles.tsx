@@ -91,7 +91,7 @@ export default function LatestArticles({ previewMode = false }: Props) {
               Kabar & Jurnal Kampus
             </span>
             <h3 className="font-display font-bold text-3xl md:text-4xl text-slate-800">
-              Artikel & <span className="text-primary font-extrabold">Kajian Akademik</span>
+              Artikel & <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent font-extrabold">Kajian Akademik</span>
             </h3>
             <p className="text-slate-600 font-sans text-sm md:text-base mt-3 leading-relaxed">
               Ikuti tulisan terkini dari dosen, pengurus BEM, dan kolega mahasiswa mengenai integrasi sains keislaman, wawasan kemahasiswaan, dan publikasi kajian ilmiah UNWAHA.
@@ -146,11 +146,11 @@ export default function LatestArticles({ previewMode = false }: Props) {
                   whileInView="visible"
                   viewport={{ once: false, margin: "-100px" }}
                   whileHover={{
-                    boxShadow: "0 10px 30px rgba(127, 84, 164, 0.06)",
-                    borderColor: "rgba(127, 84, 164, 0.2)",
+                    boxShadow: "0 10px 30px rgba(128, 0, 32, 0.06)",
+                    borderColor: "rgba(128, 0, 32, 0.2)",
                     y: -4
                   }}
-                  className="bg-[#EDE8F8] rounded-2xl border border-primary/20 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-[0_10px_25px_rgba(127,84,164,0.10)] group"
+                  className="bg-[#F8E8EB] rounded-2xl border border-primary/20 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-[0_10px_25px_rgba(128,0,32,0.10)] group"
                 >
                   {/* Article Image Container */}
                   <motion.div variants={childVariants} className="relative w-full h-48 overflow-hidden bg-slate-50">
@@ -210,7 +210,7 @@ export default function LatestArticles({ previewMode = false }: Props) {
           </div>
         )}
 
-        {/* Preview mode — link to /news */}
+        {/* Preview mode â€” link to /news */}
         {previewMode && !loading && !error && articles.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -231,3 +231,4 @@ export default function LatestArticles({ previewMode = false }: Props) {
     </section>
   );
 }
+

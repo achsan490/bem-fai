@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Admin Portal - BEM FAI",
@@ -16,3 +16,4 @@ export default function AdminLayout({
     </div>
   );
 }
+

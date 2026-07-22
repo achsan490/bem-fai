@@ -51,13 +51,14 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative p-6 bg-[#F9F8FD] overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center relative p-6 bg-[#FDF8F8] overflow-hidden">
       {/* Background ambient glowing nodes */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-gradient-to-tr from-[#800020]/15 via-[#A0203F]/10 to-transparent rounded-full blur-[90px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] bg-gradient-to-br from-[#800020]/10 to-transparent rounded-full blur-[100px] pointer-events-none" />
 
       {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(127,84,164,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(127,84,164,0.015)_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,0,32,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,0,32,0.02)_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#500014] via-[#800020] via-[#A0203F] to-[#800020]" />
 
       <div className="w-full max-w-md relative z-10">
         {/* Back Link */}
@@ -71,11 +72,13 @@ export default function AdminLoginPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white p-8 rounded-3xl border border-slate-100 shadow-xl relative"
+          className="bg-white p-8 rounded-3xl border border-primary/15 shadow-[0_15px_35px_rgba(128,0,32,0.08)] relative overflow-hidden"
         >
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018]" />
+
           {/* Header */}
           <div className="flex flex-col items-center text-center mb-8">
-            <div className="w-16 h-16 rounded-2xl border border-slate-100 bg-slate-50 flex items-center justify-center p-2 mb-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+            <div className="w-16 h-16 rounded-2xl border border-primary/20 bg-primary/5 flex items-center justify-center p-2 mb-4 shadow-[0_4px_12px_rgba(128,0,32,0.06)]">
               <Image
                 src="/assets/logo.png"
                 alt="Logo BEM FAI"
@@ -85,7 +88,7 @@ export default function AdminLoginPage() {
               />
             </div>
             <h2 className="font-display font-bold text-2xl text-slate-800">
-              Admin <span className="text-primary font-bold">Portal</span>
+              Admin <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent font-bold">Portal</span>
             </h2>
             <p className="text-xs text-slate-500 font-sans mt-2 tracking-wide">
               Masuk untuk mengelola publikasi artikel & kegiatan BEM FAI
@@ -95,7 +98,7 @@ export default function AdminLoginPage() {
           {/* Database Mode Status Badge */}
           <div className="mb-6 flex justify-center">
             {isSupabaseConfigured ? (
-              <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold text-primary border border-primary/20 bg-primary/5 uppercase tracking-wider">
+              <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold text-primary border border-primary/20 bg-gradient-to-r from-[#800020]/10 to-[#A0203F]/5 uppercase tracking-wider">
                 <ShieldCheck size={12} />
                 Live Supabase DB
               </span>
@@ -138,7 +141,7 @@ export default function AdminLoginPage() {
                   placeholder="name@fai.unwaha.ac.id"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary focus:outline-none transition-all duration-300 text-sm font-sans text-slate-800 focus:ring-1 focus:ring-primary/20"
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary focus:outline-none transition-all duration-300 text-sm font-sans text-slate-800 focus:ring-2 focus:ring-primary/20"
                   required
                 />
               </div>
@@ -156,7 +159,7 @@ export default function AdminLoginPage() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary focus:outline-none transition-all duration-300 text-sm font-sans text-slate-800 focus:ring-1 focus:ring-primary/20"
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary focus:outline-none transition-all duration-300 text-sm font-sans text-slate-800 focus:ring-2 focus:ring-primary/20"
                   required
                 />
               </div>
@@ -167,7 +170,7 @@ export default function AdminLoginPage() {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={loading}
-              className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-primary hover:bg-[#6c4391] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg shadow-primary/15 hover:shadow-primary/25"
+              className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_6px_20px_rgba(128,0,32,0.3)] hover:shadow-[0_8px_25px_rgba(128,0,32,0.4)]"
             >
               {loading ? (
                 <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -184,3 +187,4 @@ export default function AdminLoginPage() {
     </div>
   );
 }
+

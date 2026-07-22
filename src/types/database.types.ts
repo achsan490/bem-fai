@@ -1,4 +1,4 @@
-// ─── Articles ────────────────────────────────────────────────────────────────
+﻿// â”€â”€â”€ Articles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface Article {
   id: string;
   title: string;
@@ -11,7 +11,7 @@ export interface Article {
 export type DbArticleInsert = Omit<Article, 'id' | 'created_at'>;
 export type DbArticleUpdate = Partial<DbArticleInsert>;
 
-// ─── Programs (Proker) ───────────────────────────────────────────────────────
+// â”€â”€â”€ Programs (Proker) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface Program {
   id: string;
   name: string;
@@ -25,14 +25,14 @@ export interface Program {
 export type DbProgramInsert = Omit<Program, 'id' | 'created_at'>;
 export type DbProgramUpdate = Partial<DbProgramInsert>;
 
-// ─── Site Content (About Page) ───────────────────────────────────────────────
+// â”€â”€â”€ Site Content (About Page) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface SiteContent {
   key: string;   // 'visi' | 'misi' | 'deskripsi' | 'filosofi_logo'
   value: string;
   updated_at: string;
 }
 
-// ─── Sponsors ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Sponsors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface Sponsor {
   id: string;
   name: string;
@@ -45,7 +45,7 @@ export interface Sponsor {
 export type DbSponsorInsert = Omit<Sponsor, 'id' | 'created_at'>;
 export type DbSponsorUpdate = Partial<DbSponsorInsert>;
 
-// ─── Kemenbirsan Members ─────────────────────────────────────────────────────
+// â”€â”€â”€ Kemenbirsan Members â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export interface KemenbirsanMember {
   id: string;
   name: string;
@@ -58,3 +58,4 @@ export interface KemenbirsanMember {
 
 export type DbMemberInsert = Omit<KemenbirsanMember, 'id' | 'created_at'>;
 export type DbMemberUpdate = Partial<DbMemberInsert>;
+

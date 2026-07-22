@@ -78,12 +78,12 @@ export default function AdminDashboard() {
   const [isAddingCategory, setIsAddingCategory] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
 
-  // ── Site Content (About Page) ─────────────────────────────────
+  // â”€â”€ Site Content (About Page) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const [aboutContent, setAboutContent] = useState({ visi: "", misi: "", deskripsi: "", filosofi_logo: "" });
   const [loadingAbout, setLoadingAbout] = useState(true);
   const [savingAbout, setSavingAbout] = useState(false);
 
-  // ── Sponsors ──────────────────────────────────────────────────
+  // â”€â”€ Sponsors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const [sponsors, setSponsors] = useState<Sponsor[]>([]);
   const [loadingSponsors, setLoadingSponsors] = useState(true);
   const [sponsorName, setSponsorName] = useState("");
@@ -92,7 +92,7 @@ export default function AdminDashboard() {
   const [sponsorSortOrder, setSponsorSortOrder] = useState(0);
   const [editingSponsor, setEditingSponsor] = useState<Sponsor | null>(null);
 
-  // ── Kemenbirsan Members ───────────────────────────────────────
+  // â”€â”€ Kemenbirsan Members â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const [members, setMembers] = useState<KemenbirsanMember[]>([]);
   const [loadingMembers, setLoadingMembers] = useState(true);
   const [memberName, setMemberName] = useState("");
@@ -230,7 +230,7 @@ export default function AdminDashboard() {
     }
   }
 
-  // ── About Content Handlers ────────────────────────────────────
+  // â”€â”€ About Content Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const handleSaveAbout = async () => {
     try {
       setSavingAbout(true);
@@ -249,7 +249,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // ── Sponsor Handlers ──────────────────────────────────────────
+  // â”€â”€ Sponsor Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const resetSponsorForm = () => { setSponsorName(""); setSponsorLogo(""); setSponsorWebsite(""); setSponsorSortOrder(0); setEditingSponsor(null); };
 
   const handleSponsorSubmit = async (e: React.FormEvent) => {
@@ -283,7 +283,7 @@ export default function AdminDashboard() {
     catch (err: any) { setFormError(err?.message || "Gagal menghapus sponsor."); }
   };
 
-  // ── Kemenbirsan Member Handlers ───────────────────────────────
+  // â”€â”€ Kemenbirsan Member Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const resetMemberForm = () => { setMemberName(""); setMemberRole("Presiden BEM"); setMemberPhoto(""); setMemberDesc(""); setMemberSortOrder(0); setEditingMember(null); };
 
   const handleMemberSubmit = async (e: React.FormEvent) => {
@@ -662,7 +662,7 @@ export default function AdminDashboard() {
 
   if (checkingAuth) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F9F8FD]">
+      <div className="min-h-screen flex items-center justify-center bg-[#FDF8F8]">
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
@@ -679,9 +679,10 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9F8FD] admin-dashboard">
+    <div className="min-h-screen flex flex-col bg-[#FDF8F8] admin-dashboard">
       {/* Top Banner Navigation */}
-      <header className="py-4 px-6 bg-[#100105]/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-40">
+      <header className="py-4 px-6 bg-[#100105]/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-40 relative">
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#500014] via-[#800020] via-[#A0203F] to-[#800020]" />
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2 group text-gray-400 hover:text-white transition-colors cursor-pointer text-xs font-semibold mr-4">
@@ -694,7 +695,7 @@ export default function AdminDashboard() {
                 <Image src="/assets/logo.png" alt="Logo BEM FAI" width={30} height={30} className="object-contain" />
               </div>
               <div>
-                <h1 className="font-display font-bold text-sm text-white">Dashboard Portal</h1>
+                <h1 className="font-display font-bold text-sm text-white">Dashboard <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#A0203F] bg-clip-text text-transparent">Portal</span></h1>
                 <p className="text-[9px] text-primary tracking-widest uppercase font-bold">BEM FAI 2026</p>
               </div>
             </div>
@@ -726,50 +727,55 @@ export default function AdminDashboard() {
         {/* Page title and description */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h2 className="font-display font-bold text-2xl text-white">Kelola Publikasi</h2>
-            <p className="text-xs text-gray-400 mt-1">Kelola artikel ilmiah, kegiatan, dan opini mahasiswa Fakultas Agama Islam</p>
+            <h2 className="font-display font-bold text-2xl text-slate-800">
+              Kelola <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent">Publikasi & Konten</span>
+            </h2>
+            <p className="text-xs text-slate-500 mt-1">Kelola artikel ilmiah, kegiatan, profil BEM, dan mitra sponsor Fakultas Agama Islam</p>
           </div>
         </div>
 
         {/* Dashboard Statistics Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {/* Stat 1: Total Articles */}
-          <div className="glass p-5 rounded-2xl border border-white/5 bg-[#180208]/20 flex items-center justify-between">
+          <div className="bg-white p-5 rounded-2xl border border-primary/15 shadow-[0_8px_25px_rgba(128,0,32,0.05)] relative overflow-hidden flex items-center justify-between group hover:border-primary/30 transition-all duration-300">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#800020] to-[#A0203F]" />
             <div className="space-y-1">
-              <p className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Total Artikel</p>
-              <h3 className="text-3xl font-display font-bold text-white">{articles.length}</h3>
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Total Artikel</p>
+              <h3 className="text-3xl font-display font-bold text-slate-800">{articles.length}</h3>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shadow-[0_0_15px_rgba(185,28,28,0.15)]">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#800020]/10 to-[#A0203F]/5 border border-primary/20 flex items-center justify-center text-[#800020] shadow-sm group-hover:scale-105 transition-transform">
               <FileText size={20} />
             </div>
           </div>
 
           {/* Stat 2: Categories */}
-          <div className="glass p-5 rounded-2xl border border-white/5 bg-[#180208]/20 flex items-center justify-between">
+          <div className="bg-white p-5 rounded-2xl border border-amber-500/15 shadow-[0_8px_25px_rgba(217,119,6,0.05)] relative overflow-hidden flex items-center justify-between group hover:border-amber-500/30 transition-all duration-300">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#d97706] to-[#f59e0b]" />
             <div className="space-y-1">
-              <p className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Kategori Terbit</p>
-              <h3 className="text-3xl font-display font-bold text-white">
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Kategori Terbit</p>
+              <h3 className="text-3xl font-display font-bold text-slate-800">
                 {new Set(articles.map(a => a.category)).size}
               </h3>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center text-gold shadow-[0_0_15px_rgba(217,119,6,0.15)]">
+            <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shadow-sm group-hover:scale-105 transition-transform">
               <Tag size={20} />
             </div>
           </div>
 
           {/* Stat 3: Sandbox/Live State */}
-          <div className="glass p-5 rounded-2xl border border-white/5 bg-[#180208]/20 flex items-center justify-between">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-[0_8px_25px_rgba(0,0,0,0.03)] relative overflow-hidden flex items-center justify-between group hover:border-primary/20 transition-all duration-300">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#800020] via-[#d97706] to-[#10b981]" />
             <div className="space-y-1">
-              <p className="text-[10px] uppercase font-bold tracking-wider text-gray-400">Basis Data</p>
-              <h3 className="text-sm font-sans font-bold text-white flex items-center gap-1.5 mt-2">
-                <span className={`w-2 h-2 rounded-full ${isSupabaseConfigured ? "bg-emerald-500 animate-pulse" : "bg-gold"}`} />
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Basis Data</p>
+              <h3 className="text-sm font-sans font-bold text-slate-800 flex items-center gap-1.5 mt-2">
+                <span className={`w-2 h-2 rounded-full ${isSupabaseConfigured ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`} />
                 {isSupabaseConfigured ? "Supabase Cloud" : "Offline Sandbox"}
               </h3>
             </div>
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center border shadow-sm ${
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center border shadow-sm group-hover:scale-105 transition-transform ${
               isSupabaseConfigured 
-                ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.1)]" 
-                : "bg-gold/10 border-gold/20 text-gold shadow-[0_0_15px_rgba(217,119,6,0.1)]"
+                ? "bg-emerald-50 border-emerald-200 text-emerald-600" 
+                : "bg-amber-50 border-amber-200 text-amber-600"
             }`}>
               <Database size={20} />
             </div>
@@ -777,16 +783,16 @@ export default function AdminDashboard() {
         </div>
 
         {/* Tab Selection Navigation */}
-        <div className="flex border-b border-white/5 gap-2">
+        <div className="flex border-b border-slate-200 gap-2 overflow-x-auto pb-1">
           <button
             onClick={() => {
               setActiveTab("articles");
               setFormError(null);
             }}
-            className={`px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all border-b-2 cursor-pointer ${
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "articles"
-                ? "border-primary text-white"
-                : "border-transparent text-gray-500 hover:text-white"
+                ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
+                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
             }`}
           >
             Artikel & Berita
@@ -796,40 +802,40 @@ export default function AdminDashboard() {
               setActiveTab("programs");
               setFormError(null);
             }}
-            className={`px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all border-b-2 cursor-pointer ${
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "programs"
-                ? "border-primary text-white"
-                : "border-transparent text-gray-500 hover:text-white"
+                ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
+                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
             }`}
           >
             Program Kerja
           </button>
           <button
             onClick={() => { setActiveTab("about"); setFormError(null); }}
-            className={`px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all border-b-2 cursor-pointer ${
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "about"
-                ? "border-primary text-white"
-                : "border-transparent text-gray-500 hover:text-white"
+                ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
+                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
             }`}
           >
             Tentang Kami
           </button>
           <button
             onClick={() => { setActiveTab("kemenbirsan"); setFormError(null); }}
-            className={`px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all border-b-2 cursor-pointer ${
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "kemenbirsan"
-                ? "border-primary text-white"
-                : "border-transparent text-gray-500 hover:text-white"
+                ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
+                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
             }`}
           >
             Kemenbirsan
           </button>
           <button
             onClick={() => { setActiveTab("sponsors"); setFormError(null); }}
-            className={`px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all border-b-2 cursor-pointer ${
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "sponsors"
-                ? "border-primary text-white"
-                : "border-transparent text-gray-500 hover:text-white"
+                ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
+                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
             }`}
           >
             Sponsor
@@ -1155,17 +1161,17 @@ export default function AdminDashboard() {
 
                   {/* Submit button */}
                   <motion.button
-                    whileHover={{ scale: 1.02, boxShadow: "0 0 15px rgba(185, 28, 28, 0.3)" }}
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-primary hover:bg-primary-glow transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_10px_rgba(185, 28, 28, 0.2)]"
+                    className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_6px_20px_rgba(128,0,32,0.3)] hover:shadow-[0_8px_25px_rgba(128,0,32,0.4)]"
                   >
                     {submitting ? (
                       <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     ) : (
                       <>
-                        <Plus size={12} />
+                        <Plus size={14} />
                         <span>{isEditMode ? "Simpan Perubahan" : "Terbitkan Sekarang"}</span>
                       </>
                     )}
@@ -1426,17 +1432,17 @@ export default function AdminDashboard() {
 
                   {/* Submit button */}
                   <motion.button
-                    whileHover={{ scale: 1.02, boxShadow: "0 0 15px rgba(185, 28, 28, 0.3)" }}
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-primary hover:bg-primary-glow transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0 0 10px_rgba(185, 28, 28, 0.2)]"
+                    className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_6px_20px_rgba(128,0,32,0.3)] hover:shadow-[0_8px_25px_rgba(128,0,32,0.4)]"
                   >
                     {submitting ? (
                       <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     ) : (
                       <>
-                        <Plus size={12} />
+                        <Plus size={14} />
                         <span>{isEditProgramMode ? "Simpan Perubahan" : "Terbitkan Sekarang"}</span>
                       </>
                     )}
@@ -1477,7 +1483,7 @@ export default function AdminDashboard() {
                 <button
                   onClick={handleSaveAbout}
                   disabled={savingAbout}
-                  className="flex items-center gap-2 px-8 py-3 rounded-xl bg-primary text-white text-xs font-bold uppercase tracking-wider hover:bg-primary-glow transition-all cursor-pointer disabled:opacity-60"
+                  className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer disabled:opacity-60 shadow-[0_6px_20px_rgba(128,0,32,0.3)] hover:shadow-[0_8px_25px_rgba(128,0,32,0.4)]"
                 >
                   {savingAbout ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <CheckCircle2 size={14} />}
                   Simpan Semua Perubahan
@@ -1487,7 +1493,7 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* ── TAB: Kemenbirsan ── */}
+        {/* â”€â”€ TAB: Kemenbirsan â”€â”€ */}
         {activeTab === "kemenbirsan" && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             {/* List */}
@@ -1577,7 +1583,7 @@ export default function AdminDashboard() {
                     <input type="number" value={memberSortOrder} onChange={(e) => setMemberSortOrder(parseInt(e.target.value) || 0)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary/40 transition-all" />
                   </div>
                   <div className="flex gap-2">
-                    <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-xl bg-primary text-white text-xs font-bold uppercase tracking-wider hover:bg-primary-glow transition-all cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2">
+                    <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(128,0,32,0.25)]">
                       {submitting ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Plus size={12} />}
                       {editingMember ? "Simpan" : "Tambah"}
                     </button>
@@ -1669,7 +1675,7 @@ export default function AdminDashboard() {
                     <input type="number" value={sponsorSortOrder} onChange={(e) => setSponsorSortOrder(parseInt(e.target.value) || 0)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary/40 transition-all" />
                   </div>
                   <div className="flex gap-2">
-                    <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-xl bg-primary text-white text-xs font-bold uppercase tracking-wider hover:bg-primary-glow transition-all cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2">
+                    <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(128,0,32,0.25)]">
                       {submitting ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Plus size={12} />}
                       {editingSponsor ? "Simpan" : "Tambah"}
                     </button>
@@ -1710,3 +1716,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+

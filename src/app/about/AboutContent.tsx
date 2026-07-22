@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
@@ -27,15 +27,15 @@ const FADE_UP = {
 
 // Sandbox seed elements
 const SANDBOX_ITEMS = [
-  { id: 1, label: "👑 Presiden BEM", color: "bg-amber-100 text-amber-800 border-amber-300" },
-  { id: 2, label: "✨ Wakil Presiden BEM", color: "bg-indigo-100 text-indigo-800 border-indigo-300" },
-  { id: 3, label: "📝 Birokrasi & Administrasi", color: "bg-purple-100 text-purple-800 border-purple-300" },
-  { id: 4, label: "📚 Kajian Keagamaan & Syariah", color: "bg-orange-100 text-orange-800 border-orange-300" },
-  { id: 5, label: "🤝 Pengabdian Masyarakat", color: "bg-rose-100 text-rose-800 border-rose-300" },
-  { id: 6, label: "🏆 Minat & Bakat (Olahraga)", color: "bg-blue-100 text-blue-800 border-blue-300" },
-  { id: 7, label: "📢 Komunikasi & Media Publikasi", color: "bg-emerald-100 text-emerald-800 border-emerald-300" },
-  { id: 8, label: "🚀 Visi Progresif & Islami", color: "bg-teal-100 text-teal-800 border-teal-300" },
-  { id: 9, label: "💼 Sinergi Alumni", color: "bg-cyan-100 text-cyan-800 border-cyan-300" },
+  { id: 1, label: "ðŸ‘‘ Presiden BEM", color: "bg-amber-100 text-amber-800 border-amber-300" },
+  { id: 2, label: "âœ¨ Wakil Presiden BEM", color: "bg-indigo-100 text-indigo-800 border-indigo-300" },
+  { id: 3, label: "ðŸ“ Birokrasi & Administrasi", color: "bg-purple-100 text-purple-800 border-purple-300" },
+  { id: 4, label: "ðŸ“š Kajian Keagamaan & Syariah", color: "bg-orange-100 text-orange-800 border-orange-300" },
+  { id: 5, label: "ðŸ¤ Pengabdian Masyarakat", color: "bg-rose-100 text-rose-800 border-rose-300" },
+  { id: 6, label: "ðŸ† Minat & Bakat (Olahraga)", color: "bg-blue-100 text-blue-800 border-blue-300" },
+  { id: 7, label: "ðŸ“¢ Komunikasi & Media Publikasi", color: "bg-emerald-100 text-emerald-800 border-emerald-300" },
+  { id: 8, label: "ðŸš€ Visi Progresif & Islami", color: "bg-teal-100 text-teal-800 border-teal-300" },
+  { id: 9, label: "ðŸ’¼ Sinergi Alumni", color: "bg-cyan-100 text-cyan-800 border-cyan-300" },
 ];
 
 export default function AboutContent() {
@@ -66,7 +66,7 @@ export default function AboutContent() {
       <Navbar />
 
       <main className="flex-grow">
-        {/* ── Page Hero ─────────────────────────────────────────── */}
+        {/* â”€â”€ Page Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="pt-32 pb-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
           <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
@@ -102,7 +102,7 @@ export default function AboutContent() {
           </div>
         </section>
 
-        {/* ── Deskripsi Fakultas ────────────────────────────────── */}
+        {/* â”€â”€ Deskripsi Fakultas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="py-16 border-t border-slate-100">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -114,7 +114,7 @@ export default function AboutContent() {
                 transition={{ duration: 0.7 }}
                 className="flex items-center justify-center"
               >
-                <div className="relative w-56 h-56 rounded-3xl overflow-hidden border border-primary/10 bg-white p-4 shadow-[0_8px_30px_rgba(127,84,164,0.06)]">
+                <div className="relative w-56 h-56 rounded-3xl overflow-hidden border border-primary/10 bg-white p-4 shadow-[0_8px_30px_rgba(128,0,32,0.06)]">
                   <Image
                     src="/assets/logo.png"
                     alt="Logo BEM FAI UNWAHA"
@@ -155,7 +155,7 @@ export default function AboutContent() {
           </div>
         </section>
 
-        {/* ── Visi & Misi ──────────────────────────────────────── */}
+        {/* â”€â”€ Visi & Misi â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="py-20 bg-white border-t border-slate-100">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-14">
@@ -175,7 +175,7 @@ export default function AboutContent() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: false, margin: "-100px" }}
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                className="bg-[#EDE8F8] p-8 rounded-2xl border border-primary/20 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(127,84,164,0.10)] hover:shadow-[0_16px_35px_rgba(127,84,164,0.18)] group"
+                className="bg-[#F8E8EB] p-8 rounded-2xl border border-primary/20 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(128,0,32,0.10)] hover:shadow-[0_16px_35px_rgba(128,0,32,0.18)] group"
               >
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mb-5">
@@ -200,7 +200,7 @@ export default function AboutContent() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: false, margin: "-100px" }}
                 transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.15 }}
-                className="bg-[#EDE8F8] p-8 rounded-2xl border border-primary/20 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(127,84,164,0.10)] hover:shadow-[0_16px_35px_rgba(127,84,164,0.18)] group"
+                className="bg-[#F8E8EB] p-8 rounded-2xl border border-primary/20 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(128,0,32,0.10)] hover:shadow-[0_16px_35px_rgba(128,0,32,0.18)] group"
               >
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mb-5">
@@ -218,7 +218,7 @@ export default function AboutContent() {
                       {content.misi.split("\n").filter(Boolean).map((line, i) => (
                         <li key={i} className="flex items-start gap-2 text-slate-600 font-sans text-sm leading-relaxed">
                           <span className="text-primary font-bold mt-0.5 shrink-0">
-                            {line.match(/^\d+\./) ? "" : "✦"}
+                            {line.match(/^\d+\./) ? "" : "âœ¦"}
                           </span>
                           <span>{line.replace(/^\d+\.\s*/, "")}</span>
                         </li>
@@ -231,7 +231,7 @@ export default function AboutContent() {
           </div>
         </section>
 
-        {/* ── Filosofi Logo ─────────────────────────────────────── */}
+        {/* â”€â”€ Filosofi Logo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="py-20 border-t border-slate-100">
           <div className="max-w-5xl mx-auto px-6">
             <motion.div
@@ -239,7 +239,7 @@ export default function AboutContent() {
               whileInView={{ scale: 1 }}
               viewport={{ once: false, margin: "-100px" }}
               transition={{ type: "spring", stiffness: 100, damping: 15 }}
-              className="bg-[#EDE8F8] p-10 rounded-3xl border border-primary/20 shadow-[0_10px_25px_rgba(127,84,164,0.10)] bg-gradient-to-br from-primary/10 to-transparent"
+              className="bg-[#F8E8EB] p-10 rounded-3xl border border-primary/20 shadow-[0_10px_25px_rgba(128,0,32,0.10)] bg-gradient-to-br from-primary/10 to-transparent"
             >
               <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center gap-1.5 mb-4 font-mono">
                 <Sparkles size={10} />
@@ -261,7 +261,7 @@ export default function AboutContent() {
           </div>
         </section>
 
-        {/* ── Interactive Sandbox Area ─────────────────────────── */}
+        {/* â”€â”€ Interactive Sandbox Area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <section className="py-20 bg-white border-t border-slate-100">
           <div className="max-w-5xl mx-auto px-6">
             <div className="text-center mb-10">
@@ -306,7 +306,7 @@ export default function AboutContent() {
           </div>
         </section>
 
-        {/* ── Proker Section ────────────────────────────────────── */}
+        {/* â”€â”€ Proker Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <ProgramSection />
       </main>
 
@@ -314,3 +314,4 @@ export default function AboutContent() {
     </div>
   );
 }
+

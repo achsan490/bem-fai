@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+﻿import { createClient } from "@supabase/supabase-js";
 import {
   Article, DbArticleInsert, DbArticleUpdate,
   Program, DbProgramInsert, DbProgramUpdate,
@@ -16,7 +16,7 @@ export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
-// ─── LocalStorage Keys ────────────────────────────────────────────────────────
+// â”€â”€â”€ LocalStorage Keys â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const LOCAL_STORAGE_KEY    = "bem_fai_articles";
 const PROGRAM_STORAGE_KEY  = "bem_fai_programs";
 const CONTENT_STORAGE_KEY  = "bem_fai_site_content";
@@ -24,7 +24,7 @@ const SPONSOR_STORAGE_KEY  = "bem_fai_sponsors";
 const MEMBER_STORAGE_KEY   = "bem_fai_kemenbirsan";
 const AUTH_SESSION_KEY     = "bem_fai_session";
 
-// ─── Default / Seed Data ──────────────────────────────────────────────────────
+// â”€â”€â”€ Default / Seed Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DEFAULT_ARTICLES: Article[] = [
   {
     id: "1",
@@ -121,7 +121,7 @@ const DEFAULT_SITE_CONTENT: SiteContent[] = [
   },
   {
     key: "deskripsi",
-    value: "Fakultas Agama Islam (FAI) Universitas KH. A. Wahab Hasbullah (UNWAHA) Jombang merupakan salah satu fakultas unggulan yang mengintegrasikan ilmu keislaman klasik dengan pengetahuan modern. Berlokasi di Tambakberas, Jombang — pesantren terbesar di Indonesia — FAI UNWAHA mengemban misi mencetak generasi ulama yang cakap di bidang teknologi dan akademik. BEM FAI adalah wadah mahasiswa untuk berkreasi, berorganisasi, dan mengabdi kepada masyarakat.",
+    value: "Fakultas Agama Islam (FAI) Universitas KH. A. Wahab Hasbullah (UNWAHA) Jombang merupakan salah satu fakultas unggulan yang mengintegrasikan ilmu keislaman klasik dengan pengetahuan modern. Berlokasi di Tambakberas, Jombang â€” pesantren terbesar di Indonesia â€” FAI UNWAHA mengemban misi mencetak generasi ulama yang cakap di bidang teknologi dan akademik. BEM FAI adalah wadah mahasiswa untuk berkreasi, berorganisasi, dan mengabdi kepada masyarakat.",
     updated_at: new Date().toISOString(),
   },
   {
@@ -179,7 +179,7 @@ const DEFAULT_MEMBERS: KemenbirsanMember[] = [
   },
 ];
 
-// ─── Local Storage Initializer ────────────────────────────────────────────────
+// â”€â”€â”€ Local Storage Initializer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const initializeLocalStorage = () => {
   if (typeof window === "undefined") return;
   if (!localStorage.getItem(LOCAL_STORAGE_KEY))
@@ -194,10 +194,10 @@ const initializeLocalStorage = () => {
     localStorage.setItem(MEMBER_STORAGE_KEY, JSON.stringify(DEFAULT_MEMBERS));
 };
 
-// ─── DB Object ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ DB Object â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const db = {
 
-  // ── Articles ──────────────────────────────────────────────────────────────
+  // â”€â”€ Articles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async getArticles(): Promise<Article[]> {
     if (isSupabaseConfigured && supabase) {
       const { data, error } = await supabase
@@ -263,7 +263,7 @@ export const db = {
     }
   },
 
-  // ── Programs (Proker) ─────────────────────────────────────────────────────
+  // â”€â”€ Programs (Proker) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async getPrograms(): Promise<Program[]> {
     if (isSupabaseConfigured && supabase) {
       const { data, error } = await supabase.from("programs").select("*").order("created_at", { ascending: true });
@@ -328,7 +328,7 @@ export const db = {
     }
   },
 
-  // ── Site Content (About Page) ─────────────────────────────────────────────
+  // â”€â”€ Site Content (About Page) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async getSiteContent(): Promise<SiteContent[]> {
     if (isSupabaseConfigured && supabase) {
       const { data, error } = await supabase.from("site_content").select("*");
@@ -368,7 +368,7 @@ export const db = {
     }
   },
 
-  // ── Sponsors ──────────────────────────────────────────────────────────────
+  // â”€â”€ Sponsors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async getSponsors(): Promise<Sponsor[]> {
     if (isSupabaseConfigured && supabase) {
       const { data, error } = await supabase.from("sponsors").select("*").order("sort_order", { ascending: true });
@@ -433,7 +433,7 @@ export const db = {
     }
   },
 
-  // ── Kemenbirsan Members ───────────────────────────────────────────────────
+  // â”€â”€ Kemenbirsan Members â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async getMembers(): Promise<KemenbirsanMember[]> {
     if (isSupabaseConfigured && supabase) {
       const { data, error } = await supabase.from("kemenbirsan_members").select("*").order("sort_order", { ascending: true });
@@ -498,7 +498,7 @@ export const db = {
     }
   },
 
-  // ── Auth ──────────────────────────────────────────────────────────────────
+  // â”€â”€ Auth â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async login(email: string, password: string): Promise<{ success: boolean; error?: string }> {
     if (isSupabaseConfigured && supabase) {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -534,3 +534,4 @@ export const db = {
     }
   },
 };
+

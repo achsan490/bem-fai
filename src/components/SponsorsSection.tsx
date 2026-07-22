@@ -43,7 +43,7 @@ export default function SponsorsSection() {
             transition={{ duration: 0.5 }}
             className="font-display font-bold text-2xl md:text-3xl text-slate-800"
           >
-            Mitra &amp; <span className="text-primary font-extrabold">Sponsor</span>
+            Mitra &amp; <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent font-extrabold">Sponsor</span>
           </motion.h3>
         </div>
 
@@ -62,7 +62,7 @@ export default function SponsorsSection() {
                   href={sponsor.website_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col items-center gap-3 px-8 py-5 bg-white rounded-2xl border border-slate-100 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(127,84,164,0.06)] min-w-[160px] shadow-[0_4px_20px_rgba(0,0,0,0.015)]"
+                  className="group flex flex-col items-center gap-3 px-8 py-5 bg-white rounded-2xl border border-slate-100 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(128,0,32,0.06)] min-w-[160px] shadow-[0_4px_20px_rgba(0,0,0,0.015)]"
                 >
                   <SponsorLogo sponsor={sponsor} />
                   <span className="text-xs text-slate-500 font-semibold text-center group-hover:text-primary transition-colors flex items-center gap-1">
@@ -98,7 +98,7 @@ function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
       </div>
     );
   }
-  // Placeholder — initials in a styled circle
+  // Placeholder â€” initials in a styled circle
   const initials = sponsor.name
     .split(" ")
     .slice(0, 2)
@@ -111,3 +111,4 @@ function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
     </div>
   );
 }
+
