@@ -159,9 +159,9 @@ export default function ProgramSection({ previewMode = false }: Props) {
   if (programs.length === 0) return null;
 
   return (
-    <section id="proker" className="py-24 bg-white border-t border-slate-100 relative overflow-hidden">
-      {/* Background radial highlights */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+    <section id="proker" className="py-24 bg-transparent border-t border-white/10 relative overflow-hidden">
+      {/* Background Smooth Ambient Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-[#2B050D]/90 via-[#2B050D]/40 to-transparent rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -171,9 +171,9 @@ export default function ProgramSection({ previewMode = false }: Props) {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center justify-center gap-1.5 mb-2 font-mono"
+            className="text-xs uppercase font-bold tracking-widest text-amber-400 flex items-center justify-center gap-1.5 mb-2.5 font-mono"
           >
-            <ChevronRight size={10} className="text-primary" />
+            <ChevronRight size={12} className="text-amber-400" />
             Program Kerja Unggulan
           </motion.span>
           <motion.h3
@@ -181,29 +181,29 @@ export default function ProgramSection({ previewMode = false }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-display font-bold text-3xl md:text-4xl text-slate-800"
+            className="font-display font-extrabold text-3xl md:text-5xl text-white tracking-tight leading-tight"
           >
-            Aksi Nyata BEM <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent font-extrabold">FAI UNWAHA</span>
+            Aksi Nyata BEM <span className="text-amber-400 font-black">FAI UNWAHA</span>
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-slate-600 font-sans text-sm md:text-base mt-4 leading-relaxed"
+            className="text-slate-200 font-sans text-sm md:text-base mt-4 leading-relaxed max-w-2xl mx-auto"
           >
-            Komitmen kami untuk mewujudkan sinergi akademik, kepemimpinan progresif, serta pengabdian sosial mahasiswa yang inklusif dan berkelanjutan.
+            Rangkaian inisiatif dan program strategis yang dirancang untuk memberdayakan mahasiswa FAI UNWAHA, menciptakan kontribusi sosial, dan memperkuat kepemimpinan Qur'ani.
           </motion.p>
         </div>
 
-        {/* Programs Carousel */}
+        {/* Carousel Slider */}
         <div className="relative group/carousel">
           {/* Navigation Arrows */}
           <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-20 flex justify-between pointer-events-none px-2 md:-mx-8">
             <button
               onClick={() => scroll("left")}
-              className={`pointer-events-auto w-10 h-10 rounded-full border border-slate-100 bg-white text-slate-600 shadow-md flex items-center justify-center hover:bg-slate-50 hover:text-primary transition-all duration-200 cursor-pointer ${
-                activeIndex === 0 ? "opacity-30 cursor-not-allowed" : "opacity-100 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
+              className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-[#250309]/90 text-white shadow-md flex items-center justify-center hover:bg-[#3E0610] hover:text-amber-400 transition-all duration-200 cursor-pointer ${
+                activeIndex === 0 ? "opacity-30 cursor-not-allowed" : "opacity-100 shadow-lg"
               }`}
               disabled={activeIndex === 0}
               aria-label="Previous programs"
@@ -212,8 +212,8 @@ export default function ProgramSection({ previewMode = false }: Props) {
             </button>
             <button
               onClick={() => scroll("right")}
-              className={`pointer-events-auto w-10 h-10 rounded-full border border-slate-100 bg-white text-slate-600 shadow-md flex items-center justify-center hover:bg-slate-50 hover:text-primary transition-all duration-200 cursor-pointer ${
-                activeIndex >= programs.length - 1 ? "opacity-30 cursor-not-allowed" : "opacity-100 shadow-[0_4px_12px_rgba(0,0,0,0.05)]"
+              className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-[#250309]/90 text-white shadow-md flex items-center justify-center hover:bg-[#3E0610] hover:text-amber-400 transition-all duration-200 cursor-pointer ${
+                activeIndex >= programs.length - 1 ? "opacity-30 cursor-not-allowed" : "opacity-100 shadow-lg"
               }`}
               disabled={activeIndex >= programs.length - 1}
               aria-label="Next programs"
@@ -237,15 +237,15 @@ export default function ProgramSection({ previewMode = false }: Props) {
                 whileInView="visible"
                 viewport={{ once: false, margin: "-100px" }}
                 whileHover={{
-                  boxShadow: "0 16px 35px rgba(128, 0, 32, 0.18)",
-                  borderColor: "rgba(128, 0, 32, 0.35)",
+                  boxShadow: "0 16px 35px rgba(0, 0, 0, 0.4)",
+                  borderColor: "rgba(255, 255, 255, 0.3)",
                   y: -6
                 }}
-                className="snap-start shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] bg-[#F8E8EB] p-6 rounded-2xl border border-primary/20 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(128,0,32,0.10)]"
+                className="snap-start shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] bg-[#26040A]/85 backdrop-blur-md p-6 rounded-2xl border border-white/15 transition-all duration-300 flex flex-col justify-between shadow-xl"
               >
                 {/* Header row: Division icon + status badge */}
                 <motion.div variants={childVariants} className="flex items-center justify-between gap-4 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center">
                     {getDivisionIcon(program.division)}
                   </div>
                   {getStatusBadge(program.status)}
@@ -253,24 +253,24 @@ export default function ProgramSection({ previewMode = false }: Props) {
 
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col justify-start">
-                  <motion.span variants={childVariants} className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase mb-1.5">
+                  <motion.span variants={childVariants} className="text-[10px] text-amber-300 font-semibold tracking-wider uppercase mb-1.5">
                     {program.division}
                   </motion.span>
-                  <motion.h4 variants={childVariants} className="font-display font-bold text-base text-slate-800 leading-snug hover:text-primary transition-colors mb-2.5">
+                  <motion.h4 variants={childVariants} className="font-display font-bold text-base text-white leading-snug hover:text-amber-400 transition-colors mb-2.5">
                     {program.name}
                   </motion.h4>
-                  <motion.p variants={childVariants} className="text-xs text-slate-600 font-sans leading-relaxed">
+                  <motion.p variants={childVariants} className="text-xs text-slate-300 font-sans leading-relaxed">
                     {program.description}
                   </motion.p>
                 </div>
 
                 {/* Footer timeline row */}
-                <motion.div variants={childVariants} className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                <motion.div variants={childVariants} className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400 font-mono">
                   <span className="flex items-center gap-1.5">
                     <Calendar size={12} className="text-slate-400" />
                     Target: {program.target_timeline}
                   </span>
-                  <span className="text-primary font-bold">BEM FAI</span>
+                  <span className="text-amber-400 font-bold">BEM FAI</span>
                 </motion.div>
               </motion.div>
             ))}

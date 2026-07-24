@@ -78,22 +78,22 @@ export default function LatestArticles({ previewMode = false }: Props) {
   };
 
   return (
-    <section id="artikel" className="py-24 bg-[#F5F4FA] border-t border-slate-100 relative">
-      {/* Background radial highlight */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+    <section id="artikel" className="py-24 bg-transparent border-t border-white/10 relative overflow-hidden">
+      {/* Background Smooth Ambient Glow */}
+      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[750px] h-[350px] bg-gradient-to-b from-[#2B050D]/90 via-[#2B050D]/40 to-transparent rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
-            <span className="text-xs uppercase font-bold tracking-widest text-primary flex items-center gap-1.5 mb-2 font-mono">
-              <BookOpen size={12} className="text-primary" />
+            <span className="text-xs uppercase font-bold tracking-widest text-amber-400 flex items-center gap-1.5 mb-2 font-mono">
+              <BookOpen size={12} className="text-amber-400" />
               Kabar & Jurnal Kampus
             </span>
-            <h3 className="font-display font-bold text-3xl md:text-4xl text-slate-800">
-              Artikel & <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent font-extrabold">Kajian Akademik</span>
+            <h3 className="font-display font-extrabold text-3xl md:text-4xl text-white tracking-tight leading-tight">
+              Artikel & <span className="text-amber-400 font-black">Kajian Akademik</span>
             </h3>
-            <p className="text-slate-600 font-sans text-sm md:text-base mt-3 leading-relaxed">
+            <p className="text-slate-200 font-sans text-sm md:text-base mt-3 leading-relaxed">
               Ikuti tulisan terkini dari dosen, pengurus BEM, dan kolega mahasiswa mengenai integrasi sains keislaman, wawasan kemahasiswaan, dan publikasi kajian ilmiah UNWAHA.
             </p>
           </div>
@@ -105,31 +105,31 @@ export default function LatestArticles({ previewMode = false }: Props) {
             {[1, 2, 3].map((n) => (
               <div
                 key={n}
-                className="bg-white border border-slate-100 rounded-2xl animate-pulse flex flex-col justify-between overflow-hidden"
+                className="bg-[#26040A]/85 border border-white/10 rounded-2xl animate-pulse flex flex-col justify-between overflow-hidden"
               >
-                <div className="w-full h-48 bg-slate-100 animate-pulse" />
+                <div className="w-full h-48 bg-white/10 animate-pulse" />
                 <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                   <div className="space-y-3">
-                    <div className="h-4 bg-slate-100 rounded-md w-1/4" />
-                    <div className="h-6 bg-slate-100 rounded-md w-3/4" />
-                    <div className="h-16 bg-slate-100 rounded-md" />
+                    <div className="h-4 bg-white/10 rounded-md w-1/4" />
+                    <div className="h-6 bg-white/10 rounded-md w-3/4" />
+                    <div className="h-16 bg-white/10 rounded-md" />
                   </div>
-                  <div className="h-3 bg-slate-100 rounded-md w-1/3" />
+                  <div className="h-3 bg-white/10 rounded-md w-1/3" />
                 </div>
               </div>
             ))}
           </div>
         ) : error ? (
-          <div className="bg-white p-12 rounded-2xl text-center border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.015)] max-w-lg mx-auto flex flex-col items-center gap-4">
+          <div className="bg-[#26040A]/90 p-12 rounded-2xl text-center border border-white/10 shadow-xl max-w-lg mx-auto flex flex-col items-center gap-4">
             <AlertCircle size={40} className="text-red-400" />
-            <h4 className="font-display font-semibold text-lg text-slate-800">Gagal Memuat Data</h4>
-            <p className="text-sm text-slate-500 font-sans">{error}</p>
+            <h4 className="font-display font-semibold text-lg text-white">Gagal Memuat Data</h4>
+            <p className="text-sm text-slate-300 font-sans">{error}</p>
           </div>
         ) : articles.length === 0 ? (
-          <div className="bg-white p-16 rounded-2xl text-center max-w-xl mx-auto flex flex-col items-center gap-4 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.015)]">
-            <BookOpen size={48} className="text-primary/40 animate-pulse" />
-            <h4 className="font-display font-semibold text-lg text-slate-800">Belum Ada Artikel</h4>
-            <p className="text-sm text-slate-500 font-sans text-center">
+          <div className="bg-[#26040A]/90 p-16 rounded-2xl text-center max-w-xl mx-auto flex flex-col items-center gap-4 border border-white/10 shadow-xl">
+            <BookOpen size={48} className="text-amber-400/60 animate-pulse" />
+            <h4 className="font-display font-semibold text-lg text-white">Belum Ada Artikel</h4>
+            <p className="text-sm text-slate-300 font-sans text-center">
               Belum ada artikel yang diterbitkan saat ini. Hubungi pengurus BEM FAI UNWAHA atau masuk ke Portal Administrasi di kaki halaman untuk mengelola artikel.
             </p>
           </div>
@@ -146,14 +146,14 @@ export default function LatestArticles({ previewMode = false }: Props) {
                   whileInView="visible"
                   viewport={{ once: false, margin: "-100px" }}
                   whileHover={{
-                    boxShadow: "0 10px 30px rgba(128, 0, 32, 0.06)",
-                    borderColor: "rgba(128, 0, 32, 0.2)",
+                    boxShadow: "0 15px 35px rgba(0, 0, 0, 0.4)",
+                    borderColor: "rgba(255, 255, 255, 0.3)",
                     y: -4
                   }}
-                  className="bg-[#F8E8EB] rounded-2xl border border-primary/20 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-[0_10px_25px_rgba(128,0,32,0.10)] group"
+                  className="bg-[#26040A]/85 rounded-2xl border border-white/15 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl group"
                 >
                   {/* Article Image Container */}
-                  <motion.div variants={childVariants} className="relative w-full h-48 overflow-hidden bg-slate-50">
+                  <motion.div variants={childVariants} className="relative w-full h-48 overflow-hidden bg-black/40">
                     {article.image_url ? (
                       <Image
                         src={article.image_url}
@@ -163,7 +163,7 @@ export default function LatestArticles({ previewMode = false }: Props) {
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-slate-100 text-slate-400">
+                      <div className="w-full h-full flex items-center justify-center bg-white/5 text-amber-400/60">
                         <BookOpen size={32} />
                       </div>
                     )}
@@ -174,7 +174,7 @@ export default function LatestArticles({ previewMode = false }: Props) {
                     <div>
                       {/* Metadata Row */}
                       <motion.div variants={childVariants} className="flex items-center justify-between mb-4">
-                        <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-primary border border-primary/25 bg-primary/5">
+                        <span className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-amber-300 border border-amber-400/30 bg-amber-400/10">
                           <Tag size={10} />
                           {article.category}
                         </span>
@@ -185,22 +185,22 @@ export default function LatestArticles({ previewMode = false }: Props) {
                       </motion.div>
 
                       {/* Title & Excerpt */}
-                      <motion.h4 variants={childVariants} className="font-display font-bold text-base md:text-lg text-slate-800 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
+                      <motion.h4 variants={childVariants} className="font-display font-bold text-base md:text-lg text-white group-hover:text-amber-400 transition-colors duration-300 line-clamp-2 leading-snug">
                         {article.title}
                       </motion.h4>
-                      <motion.p variants={childVariants} className="text-xs text-slate-500 font-sans leading-relaxed mt-2.5 line-clamp-3">
+                      <motion.p variants={childVariants} className="text-xs text-slate-300 font-sans leading-relaxed mt-2.5 line-clamp-3">
                         {getSnippet(article.content, 120)}
                       </motion.p>
                     </div>
 
                     {/* Action Row */}
-                    <motion.div variants={childVariants} className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                    <motion.div variants={childVariants} className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
                       <Link
                         href={`/article/${article.id}`}
-                        className="text-[11px] font-bold tracking-wider uppercase text-slate-600 hover:text-primary flex items-center gap-1 transition-colors group-hover:gap-2 duration-300"
+                        className="text-[11px] font-bold tracking-wider uppercase text-slate-300 hover:text-amber-400 flex items-center gap-1 transition-colors group-hover:gap-2 duration-300"
                       >
                         Selengkapnya
-                        <ArrowUpRight size={14} className="text-primary" />
+                        <ArrowUpRight size={14} className="text-amber-400" />
                       </Link>
                     </motion.div>
                   </div>
@@ -210,20 +210,20 @@ export default function LatestArticles({ previewMode = false }: Props) {
           </div>
         )}
 
-        {/* Preview mode â€” link to /news */}
+        {/* Preview mode — link to /news */}
         {previewMode && !loading && !error && articles.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mt-10"
+            className="text-center mt-12"
           >
             <Link
               href="/news"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-primary/20 text-primary text-sm font-semibold hover:bg-primary/5 transition-all duration-200"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl border border-amber-400/40 text-amber-300 bg-black/50 hover:bg-black/70 hover:text-amber-200 text-xs font-extrabold uppercase tracking-wider transition-all duration-200 shadow-xl backdrop-blur-md"
             >
               Lihat Semua Berita & Artikel
-              <ArrowRight size={14} />
+              <ArrowRight size={14} className="text-amber-400" />
             </Link>
           </motion.div>
         )}

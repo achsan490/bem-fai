@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -174,10 +174,10 @@ export default function NewsContent() {
                       initial={{ opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: i * 0.06 }}
-                      className="bg-white rounded-2xl border border-slate-100 hover:border-primary/20 transition-all duration-300 group overflow-hidden flex flex-col shadow-[0_8px_30px_rgba(0,0,0,0.015)] hover:shadow-[0_10px_25px_rgba(128,0,32,0.06)]"
+                      className="bg-[#26040A]/85 backdrop-blur-md rounded-2xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 group overflow-hidden flex flex-col shadow-xl"
                     >
                       {/* Cover image */}
-                      <div className="relative h-48 bg-slate-50 overflow-hidden">
+                      <div className="relative h-48 bg-black/40 overflow-hidden">
                         {article.image_url ? (
                           <Image
                             src={article.image_url}
@@ -187,18 +187,18 @@ export default function NewsContent() {
                             sizes="(max-width: 768px) 100vw, 33vw"
                           />
                         ) : (
-                          <div className="flex items-center justify-center h-full">
-                            <BookOpen size={40} className="text-primary/20" />
+                          <div className="flex items-center justify-center h-full text-amber-400/60">
+                            <BookOpen size={40} />
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
                       </div>
 
                       {/* Content */}
                       <div className="p-6 flex flex-col flex-grow">
                         {/* Meta row */}
                         <div className="flex items-center justify-between mb-3">
-                          <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-primary border border-primary/25 bg-primary/5">
+                          <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-amber-300 border border-amber-400/30 bg-amber-400/10">
                             <Tag size={9} />
                             {article.category}
                           </span>
@@ -209,12 +209,12 @@ export default function NewsContent() {
                         </div>
 
                         {/* Title */}
-                        <h2 className="font-display font-bold text-slate-800 text-base leading-tight mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                        <h2 className="font-display font-bold text-white text-base leading-tight mb-3 group-hover:text-amber-400 transition-colors duration-300 line-clamp-2">
                           {article.title}
                         </h2>
 
                         {/* Snippet */}
-                        <p className="text-xs text-slate-500 font-sans leading-relaxed flex-grow line-clamp-3">
+                        <p className="text-xs text-slate-300 font-sans leading-relaxed flex-grow line-clamp-3">
                           {getSnippet(article.content)}
                         </p>
 

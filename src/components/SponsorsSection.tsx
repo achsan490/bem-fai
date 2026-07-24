@@ -21,8 +21,8 @@ export default function SponsorsSection() {
   if (loading || sponsors.length === 0) return null;
 
   return (
-    <section className="py-20 bg-[#F9F8FD] border-t border-slate-100 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent pointer-events-none" />
+    <section className="py-20 bg-transparent border-t border-white/10 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-500/[0.03] to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
@@ -31,7 +31,7 @@ export default function SponsorsSection() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center justify-center gap-1.5 mb-2 font-mono"
+            className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center justify-center gap-1.5 mb-2 font-mono"
           >
             <ChevronRight size={10} />
             Didukung Oleh
@@ -41,9 +41,9 @@ export default function SponsorsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="font-display font-bold text-2xl md:text-3xl text-slate-800"
+            className="font-display font-bold text-2xl md:text-3xl text-white"
           >
-            Mitra &amp; <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent font-extrabold">Sponsor</span>
+            Mitra &amp; <span className="text-amber-400 font-extrabold">Sponsor</span>
           </motion.h3>
         </div>
 
@@ -62,18 +62,18 @@ export default function SponsorsSection() {
                   href={sponsor.website_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col items-center gap-3 px-8 py-5 bg-white rounded-2xl border border-slate-100 hover:border-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(128,0,32,0.06)] min-w-[160px] shadow-[0_4px_20px_rgba(0,0,0,0.015)]"
+                  className="group flex flex-col items-center gap-3 px-8 py-5 bg-[#26040A]/80 backdrop-blur-md rounded-2xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl min-w-[160px]"
                 >
                   <SponsorLogo sponsor={sponsor} />
-                  <span className="text-xs text-slate-500 font-semibold text-center group-hover:text-primary transition-colors flex items-center gap-1">
+                  <span className="text-xs text-slate-200 font-semibold text-center group-hover:text-amber-400 transition-colors flex items-center gap-1">
                     {sponsor.name}
-                    <ExternalLink size={9} className="opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+                    <ExternalLink size={9} className="opacity-0 group-hover:opacity-100 transition-opacity text-amber-400" />
                   </span>
                 </a>
               ) : (
-                <div className="flex flex-col items-center gap-3 px-8 py-5 bg-white rounded-2xl border border-slate-100 min-w-[160px] shadow-[0_4px_20px_rgba(0,0,0,0.015)]">
+                <div className="flex flex-col items-center gap-3 px-8 py-5 bg-[#26040A]/80 backdrop-blur-md rounded-2xl border border-white/15 min-w-[160px] shadow-xl">
                   <SponsorLogo sponsor={sponsor} />
-                  <span className="text-xs text-slate-500 font-semibold text-center">
+                  <span className="text-xs text-slate-200 font-semibold text-center">
                     {sponsor.name}
                   </span>
                 </div>

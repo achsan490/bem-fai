@@ -72,25 +72,25 @@ export default function AdminLoginPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white p-8 rounded-3xl border border-primary/15 shadow-[0_15px_35px_rgba(128,0,32,0.08)] relative overflow-hidden"
+          className="bg-[#26040A]/90 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl relative overflow-hidden"
         >
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018]" />
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-400 via-amber-500 to-amber-300" />
 
           {/* Header */}
           <div className="flex flex-col items-center text-center mb-8">
-            <div className="w-16 h-16 rounded-2xl border border-primary/20 bg-primary/5 flex items-center justify-center p-2 mb-4 shadow-[0_4px_12px_rgba(128,0,32,0.06)]">
+            <div className="w-16 h-16 rounded-2xl border border-white/20 bg-gradient-to-br from-[#6A0D18] to-[#250309] flex items-center justify-center p-3 mb-4 shadow-xl">
               <Image
                 src="/assets/logo.png"
                 alt="Logo BEM FAI"
                 width={50}
                 height={50}
-                className="object-contain"
+                className="object-contain filter drop-shadow(0 0 4px rgba(255,255,255,0.4))"
               />
             </div>
-            <h2 className="font-display font-bold text-2xl text-slate-800">
-              Admin <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent font-bold">Portal</span>
+            <h2 className="font-display font-bold text-2xl text-white">
+              Admin <span className="text-amber-400 font-bold">Portal</span>
             </h2>
-            <p className="text-xs text-slate-500 font-sans mt-2 tracking-wide">
+            <p className="text-xs text-slate-300 font-sans mt-2 tracking-wide">
               Masuk untuk mengelola publikasi artikel & kegiatan BEM FAI
             </p>
           </div>
@@ -98,18 +98,18 @@ export default function AdminLoginPage() {
           {/* Database Mode Status Badge */}
           <div className="mb-6 flex justify-center">
             {isSupabaseConfigured ? (
-              <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold text-primary border border-primary/20 bg-gradient-to-r from-[#800020]/10 to-[#A0203F]/5 uppercase tracking-wider">
+              <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold text-amber-300 border border-amber-400/30 bg-amber-400/10 uppercase tracking-wider">
                 <ShieldCheck size={12} />
                 Live Supabase DB
               </span>
             ) : (
               <div className="flex flex-col items-center gap-1">
-                <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold text-amber-700 border border-amber-200 bg-amber-50 uppercase tracking-wider">
+                <span className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold text-amber-400 border border-amber-400/30 bg-amber-400/10 uppercase tracking-wider">
                   <Database size={12} />
                   Offline Sandbox Mode
                 </span>
-                <p className="text-[10px] text-slate-500 max-w-xs text-center leading-normal mt-1 font-sans">
-                  Gunakan email <span className="text-slate-800 font-mono font-semibold">admin@fai.unwaha.ac.id</span> & password <span className="text-slate-800 font-mono font-semibold">admin123</span>
+                <p className="text-[10px] text-slate-300 max-w-xs text-center leading-normal mt-1 font-sans">
+                  Gunakan email <span className="text-amber-300 font-mono font-semibold">admin@fai.unwaha.ac.id</span> & password <span className="text-amber-300 font-mono font-semibold">admin123</span>
                 </p>
               </div>
             )}
@@ -120,7 +120,7 @@ export default function AdminLoginPage() {
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
-              className="mb-6 p-4 rounded-xl border border-red-200 bg-red-50 text-xs text-red-600 font-sans flex items-start gap-2.5"
+              className="mb-6 p-4 rounded-xl border border-red-400/30 bg-red-500/10 text-xs text-red-300 font-sans flex items-start gap-2.5"
             >
               <AlertCircle size={16} className="shrink-0 mt-0.5" />
               <span>{error}</span>
@@ -130,7 +130,7 @@ export default function AdminLoginPage() {
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 font-mono">
+              <label htmlFor="email" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 font-mono">
                 Email Address
               </label>
               <div className="relative">
@@ -141,14 +141,14 @@ export default function AdminLoginPage() {
                   placeholder="name@fai.unwaha.ac.id"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary focus:outline-none transition-all duration-300 text-sm font-sans text-slate-800 focus:ring-2 focus:ring-primary/20"
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-white/15 bg-black/40 focus:bg-black/60 focus:border-amber-400 focus:outline-none transition-all duration-300 text-sm font-sans text-white placeholder-slate-500"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 font-mono">
+              <label htmlFor="password" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2 font-mono">
                 Password
               </label>
               <div className="relative">
@@ -159,7 +159,7 @@ export default function AdminLoginPage() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-primary focus:outline-none transition-all duration-300 text-sm font-sans text-slate-800 focus:ring-2 focus:ring-primary/20"
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-white/15 bg-black/40 focus:bg-black/60 focus:border-amber-400 focus:outline-none transition-all duration-300 text-sm font-sans text-white placeholder-slate-500"
                   required
                 />
               </div>
@@ -170,10 +170,10 @@ export default function AdminLoginPage() {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={loading}
-              className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_6px_20px_rgba(128,0,32,0.3)] hover:shadow-[0_8px_25px_rgba(128,0,32,0.4)]"
+              className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg"
             >
               {loading ? (
-                <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span className="w-5 h-5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <LogIn size={14} />

@@ -8,10 +8,10 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { name: "Beranda",     href: "/" },
-  { name: "Tentang",     href: "/about" },
+  { name: "Beranda", href: "/" },
+  { name: "Tentang", href: "/about" },
   { name: "Kemenbirsan", href: "/kemenbirsan" },
-  { name: "Berita",      href: "/news" },
+  { name: "Berita", href: "/news" },
 ];
 
 export default function Navbar() {
@@ -32,34 +32,33 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "py-3 bg-white/90 backdrop-blur-md border-b border-primary/10 shadow-sm" : "py-4 sm:py-5 bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-3 bg-[#240309]/90 backdrop-blur-md border-b border-white/10 shadow-lg" : "py-4 sm:py-5 bg-transparent"
+        }`}
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       {/* Top Accent Gradient Bar */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#500014] via-[#800020] via-[#A0203F] to-[#800020]" />
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#460511] via-[#A81B30] via-[#FF5533] to-[#A81B30]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between min-w-0 w-full">
         {/* Logo and Brand */}
-        <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink">
-          <div className="relative w-9 h-9 sm:w-10 sm:h-10 overflow-hidden rounded-lg border border-primary/10 bg-white flex items-center justify-center p-1 transition-transform group-hover:scale-105 shrink-0">
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group min-w-0 shrink">
+          <div className="relative w-9 h-9 sm:w-10 sm:h-10 overflow-hidden rounded-xl border border-white/20 bg-gradient-to-br from-[#6A0D18] to-[#3B0611] flex items-center justify-center p-1.5 shadow-md transition-transform group-hover:scale-105 shrink-0">
             <Image
               src="/assets/logo.png"
-              alt="BEM FAI UNWAHA Logo"
-              width={40}
-              height={40}
-              className="object-contain"
+              alt="BEM FAI UNWAHA Logo HD"
+              width={36}
+              height={36}
+              className="object-contain filter drop-shadow(0 0 3px rgba(255,255,255,0.4))"
               priority
             />
           </div>
           <div className="min-w-0">
-            <p className="font-display font-bold text-sm sm:text-base md:text-lg leading-tight tracking-wider text-slate-800 flex items-center gap-1.5 truncate">
-              BEM <span className="text-primary font-extrabold">FAI UNWAHA</span>
+            <p className="font-display font-bold text-sm sm:text-base md:text-lg leading-tight tracking-wider text-white flex items-center gap-1.5 truncate">
+              BEM <span className="text-amber-400 font-extrabold">FAI UNWAHA</span>
             </p>
-            <p className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-500 tracking-wider uppercase font-sans font-medium truncate">
+            <p className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-300 tracking-wider uppercase font-sans font-medium truncate">
               Univ. KH. A. Wahab Hasbullah
             </p>
           </div>
@@ -73,11 +72,10 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 tracking-wide font-sans group ${
-                  isActive
-                    ? "text-primary bg-primary/10 border border-primary/20"
-                    : "text-slate-600 hover:text-primary hover:bg-primary/5"
-                }`}
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 tracking-wide font-sans group ${isActive
+                    ? "text-amber-400 bg-white/10 border border-white/20 shadow-sm"
+                    : "text-slate-200 hover:text-amber-400 hover:bg-white/5"
+                  }`}
               >
                 {link.name}
               </Link>
@@ -89,7 +87,7 @@ export default function Navbar() {
         <div className="md:hidden shrink-0 ml-2">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-xl text-slate-600 hover:text-primary hover:bg-primary/5 transition-colors cursor-pointer"
+            className="p-2 rounded-xl text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-colors cursor-pointer"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -104,7 +102,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 backdrop-blur-lg border-b border-primary/10 shadow-lg"
+            className="md:hidden bg-[#240309]/95 backdrop-blur-lg border-b border-white/10 shadow-lg"
           >
             <div className="px-6 py-6 flex flex-col gap-2">
               {navLinks.map((link) => {
@@ -113,11 +111,10 @@ export default function Navbar() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? "text-primary bg-primary/10 border border-primary/20"
-                        : "text-slate-600 hover:text-primary hover:bg-primary/5"
-                    }`}
+                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${isActive
+                        ? "text-amber-400 bg-white/10 border border-white/20"
+                        : "text-slate-200 hover:text-amber-400 hover:bg-white/5"
+                      }`}
                   >
                     {link.name}
                   </Link>

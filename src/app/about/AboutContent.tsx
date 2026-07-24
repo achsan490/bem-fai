@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
@@ -106,7 +106,7 @@ export default function AboutContent() {
         <section className="py-16 border-t border-slate-100">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Logo / Image Side */}
+              {/* Logo / Image Side (Fixed dark crimson bg so white logo mark pops!) */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -114,12 +114,12 @@ export default function AboutContent() {
                 transition={{ duration: 0.7 }}
                 className="flex items-center justify-center"
               >
-                <div className="relative w-56 h-56 rounded-3xl overflow-hidden border border-primary/10 bg-white p-4 shadow-[0_8px_30px_rgba(128,0,32,0.06)]">
+                <div className="relative w-56 h-56 rounded-3xl overflow-hidden border border-white/20 bg-gradient-to-br from-[#6A0D18] to-[#250309] p-6 shadow-2xl flex items-center justify-center">
                   <Image
                     src="/assets/logo.png"
                     alt="Logo BEM FAI UNWAHA"
                     fill
-                    className="object-contain p-4"
+                    className="object-contain p-6 filter drop-shadow(0 0 8px rgba(255,255,255,0.4))"
                   />
                 </div>
               </motion.div>
@@ -218,7 +218,7 @@ export default function AboutContent() {
                       {content.misi.split("\n").filter(Boolean).map((line, i) => (
                         <li key={i} className="flex items-start gap-2 text-slate-600 font-sans text-sm leading-relaxed">
                           <span className="text-primary font-bold mt-0.5 shrink-0">
-                            {line.match(/^\d+\./) ? "" : "âœ¦"}
+                            {line.match(/^\d+\./) ? "" : "✦"}
                           </span>
                           <span>{line.replace(/^\d+\.\s*/, "")}</span>
                         </li>
@@ -231,80 +231,81 @@ export default function AboutContent() {
           </div>
         </section>
 
-        {/* â”€â”€ Filosofi Logo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-        <section className="py-20 border-t border-slate-100">
-          <div className="max-w-5xl mx-auto px-6">
-            <motion.div
-              initial={{ scale: 0.9 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: false, margin: "-100px" }}
-              transition={{ type: "spring", stiffness: 100, damping: 15 }}
-              className="bg-[#F8E8EB] p-10 rounded-3xl border border-primary/20 shadow-[0_10px_25px_rgba(128,0,32,0.10)] bg-gradient-to-br from-primary/10 to-transparent"
-            >
-              <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center gap-1.5 mb-4 font-mono">
-                <Sparkles size={10} />
-                Filosofi Logo
-              </span>
-              <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-800 mb-6">
-                Makna Lambang BEM FAI UNWAHA
-              </h2>
-              {loading ? (
-                <div className="space-y-2">
-                  {[...Array(4)].map((_, i) => <div key={i} className="h-4 bg-slate-100 rounded animate-pulse" />)}
-                </div>
-              ) : (
-                <p className="text-slate-600 font-sans leading-relaxed text-sm md:text-base">
-                  {content.filosofi_logo}
-                </p>
-              )}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* â”€â”€ Interactive Sandbox Area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-        <section className="py-20 bg-white border-t border-slate-100">
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="text-center mb-10">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center justify-center gap-1.5 mb-2 font-mono">
-                <Hand size={10} />
-                Eksplorasi Interaktif
-              </span>
-              <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-800">
-                Kabinet Sandbox
-              </h2>
-              <p className="text-slate-500 font-sans text-xs md:text-sm mt-2 leading-relaxed">
-                Tekan dan geser kartu-kartu struktur BEM FAI UNWAHA di bawah ini untuk membuat visualisasi susunan organisasi Anda!
-              </p>
+        {/* --- Dark Velvet Section Wrapper --- */}
+        <div className="bg-[#1A0307]">
+          {/* ——— Filosofi Logo ———————————————————————————— */}
+          <section className="py-20 border-t border-white/10">
+            <div className="max-w-5xl mx-auto px-6">
+              <motion.div
+                initial={{ scale: 0.9 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: false, margin: "-100px" }}
+                transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                className="bg-[#26040A]/85 backdrop-blur-md p-10 rounded-3xl border border-white/15 shadow-xl bg-gradient-to-br from-[#6A0D18]/30 to-transparent"
+              >
+                <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center gap-1.5 mb-4 font-mono">
+                  <Sparkles size={10} />
+                  Filosofi Logo
+                </span>
+                <h2 className="font-display font-bold text-2xl md:text-3xl text-white mb-6">
+                  Makna Lambang BEM FAI UNWAHA
+                </h2>
+                {loading ? (
+                  <div className="space-y-2">
+                    {[...Array(4)].map((_, i) => <div key={i} className="h-4 bg-white/10 rounded animate-pulse" />)}
+                  </div>
+                ) : (
+                  <p className="text-slate-200 font-sans leading-relaxed text-sm md:text-base">
+                    {content.filosofi_logo}
+                  </p>
+                )}
+              </motion.div>
             </div>
+          </section>
 
-            <div 
-              ref={sandboxRef}
-              className="relative w-full h-[400px] overflow-hidden bg-[#F5F4FA] border border-dashed border-primary/20 rounded-3xl p-4 flex flex-wrap gap-3 items-center justify-center select-none shadow-inner"
-            >
-              {SANDBOX_ITEMS.map((item, idx) => (
-                <motion.div
-                  key={item.id}
-                  drag
-                  dragConstraints={sandboxRef}
-                  whileDrag={{ scale: 1.08, zIndex: 50, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.08)" }}
-                  className={`px-4 py-2.5 rounded-xl border text-xs md:text-sm font-semibold tracking-wide cursor-grab active:cursor-grabbing shadow-sm flex items-center gap-2 ${item.color}`}
-                  style={{
-                    position: "relative",
-                  }}
-                  initial={{
-                    x: Math.round(Math.sin(idx) * 20),
-                    y: Math.round(Math.cos(idx) * 20),
-                  }}
-                >
-                  {item.label}
-                </motion.div>
-              ))}
-              <div className="absolute bottom-4 right-4 text-[9px] font-mono text-slate-400 pointer-events-none flex items-center gap-1">
-                <span>Drag area sandbox</span>
+          {/* Interactive Sandbox Area */}
+          <section className="py-20 bg-transparent border-t border-white/10">
+            <div className="max-w-5xl mx-auto px-6">
+              <div className="text-center mb-10">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center justify-center gap-1.5 mb-2 font-mono">
+                  <Hand size={10} />
+                  Eksplorasi Interaktif
+                </span>
+                <h2 className="font-display font-bold text-2xl md:text-3xl text-white">
+                  Kabinet Sandbox
+                </h2>
+                <p className="text-slate-300 font-sans text-xs md:text-sm mt-2 leading-relaxed">
+                  Tekan dan geser kartu-kartu struktur BEM FAI UNWAHA di bawah ini untuk membuat visualisasi susunan organisasi Anda!
+                </p>
+              </div>
+
+              <div 
+                ref={sandboxRef}
+                className="relative w-full h-[400px] overflow-hidden bg-[#26040A]/85 backdrop-blur-md border border-dashed border-white/20 rounded-3xl p-4 flex flex-wrap gap-3 items-center justify-center select-none shadow-xl"
+              >
+                {SANDBOX_ITEMS.map((item, idx) => (
+                  <motion.div
+                    key={item.id}
+                    drag
+                    dragConstraints={sandboxRef}
+                    whileDrag={{ scale: 1.08, zIndex: 50, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.4)" }}
+                    className={`px-4 py-2.5 rounded-xl border text-xs md:text-sm font-semibold tracking-wide cursor-grab active:cursor-grabbing shadow-md flex items-center gap-2 ${item.color}`}
+                    style={{ position: "relative" }}
+                    initial={{
+                      x: Math.round(Math.sin(idx) * 20),
+                      y: Math.round(Math.cos(idx) * 20),
+                    }}
+                  >
+                    {item.label}
+                  </motion.div>
+                ))}
+                <div className="absolute bottom-4 right-4 text-[9px] font-mono text-slate-400 pointer-events-none flex items-center gap-1">
+                  <span>Drag area sandbox</span>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         {/* â”€â”€ Proker Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <ProgramSection />

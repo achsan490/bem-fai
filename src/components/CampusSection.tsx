@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef } from "react";
 import Image from "next/image";
@@ -187,7 +187,7 @@ function ParallaxCard({
 
       {/* Campus Info Header below the card */}
       <div className="text-center md:text-left mt-2">
-        <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center justify-center md:justify-start gap-1">
+        <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center justify-center md:justify-start gap-1 font-mono">
           <MapPin size={10} />
           {subtitle}
         </span>
@@ -199,9 +199,9 @@ function ParallaxCard({
 
 export default function CampusSection() {
   return (
-    <section id="kampus" className="py-24 bg-[#180208] border-t border-white/5 relative">
+    <section id="kampus" className="py-24 bg-transparent border-t border-white/10 relative">
       {/* Background glow lines */}
-      <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Title */}
@@ -213,14 +213,14 @@ export default function CampusSection() {
             transition={{ duration: 0.6 }}
             className="font-display font-bold text-3xl md:text-4xl text-white"
           >
-            Fasilitas Kampus <span className="text-primary neon-text-emerald">UNWAHA Jombang</span>
+            Fasilitas Kampus <span className="text-amber-400 font-extrabold">UNWAHA Jombang</span>
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-400 font-sans text-sm md:text-base mt-4 leading-relaxed"
+            className="text-slate-200 font-sans text-sm md:text-base mt-4 leading-relaxed"
           >
             Jelajahi setiap sudut infrastruktur Fakultas Agama Islam Universitas KH. A. Wahab Hasbullah (UNWAHA) melalui peta interaktif kami. Arahkan kursor ke titik-titik hotspot untuk mempelajari fasilitas unggulan kami secara real-time.
           </motion.p>
