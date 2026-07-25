@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative p-6 bg-[#FDF8F8] overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center relative p-6 bg-transparent overflow-hidden">
       {/* Background ambient glowing nodes */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-gradient-to-tr from-[#800020]/15 via-[#A0203F]/10 to-transparent rounded-full blur-[90px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] bg-gradient-to-br from-[#800020]/10 to-transparent rounded-full blur-[100px] pointer-events-none" />

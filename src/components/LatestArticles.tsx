@@ -178,7 +178,7 @@ export default function LatestArticles({ previewMode = false }: Props) {
                           <Tag size={10} />
                           {article.category}
                         </span>
-                        <span className="flex items-center gap-1 text-[11px] text-slate-400 font-sans">
+                        <span className="flex items-center gap-1 text-[11px] text-slate-200 font-sans">
                           <Calendar size={11} />
                           {formatDate(article.created_at)}
                         </span>

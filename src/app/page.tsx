@@ -1,4 +1,4 @@
-﻿import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import ProgramSection from "../components/ProgramSection";
 import LatestArticles from "../components/LatestArticles";
@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9F8FD]">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <Navbar />
       <main className="flex-grow">
         <Hero />

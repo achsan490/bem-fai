@@ -43,7 +43,7 @@ export default function NewsContent() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9F8FD]">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <Navbar />
 
       <main className="flex-grow">
@@ -56,24 +56,24 @@ export default function NewsContent() {
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center gap-1.5 mb-3 font-mono"
+              className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center gap-1.5 mb-3 font-mono"
             >
               <ChevronRight size={10} />
-              Publikasi & Kajian
+              Publikasi &amp; Kajian
             </motion.span>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="font-display font-bold text-4xl md:text-6xl text-slate-800 leading-tight max-w-3xl"
+              className="font-display font-bold text-4xl md:text-6xl text-white leading-tight max-w-3xl"
             >
-              Berita &amp; <span className="text-primary font-extrabold">Artikel</span>
+              Berita &amp; <span className="text-amber-400 font-extrabold">Artikel</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-slate-600 font-sans text-base md:text-lg mt-4 max-w-2xl leading-relaxed"
+              className="text-slate-300 font-sans text-base md:text-lg mt-4 max-w-2xl leading-relaxed"
             >
               Kumpulan tulisan, kajian akademik, dan berita terkini seputar kegiatan BEM FAI UNWAHA dan wawasan keislaman.
             </motion.p>
@@ -91,7 +91,7 @@ export default function NewsContent() {
                 placeholder="Cari artikel..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-10 py-3 text-sm text-slate-800 placeholder-slate-400 shadow-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200 font-sans"
+                className="w-full bg-[#26040A]/85 border border-white/15 rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder-slate-400 shadow-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition-all duration-200 font-sans backdrop-blur-md"
               />
               {searchQuery && (
                 <button
@@ -106,8 +106,8 @@ export default function NewsContent() {
           </div>
         </section>
 
-        {/* â”€â”€ Articles Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-        <section className="py-10 pb-24 border-t border-slate-100">
+        {/* ────────────────────────────────────────────────────────── */}
+        <section className="py-10 pb-24 border-t border-white/10">
           <div className="max-w-7xl mx-auto px-6">
             {/* Category Filter Pills */}
             {!loading && articles.length > 0 && (
@@ -118,8 +118,8 @@ export default function NewsContent() {
                     onClick={() => setActiveCategory(cat)}
                     className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                       activeCategory === cat
-                        ? "bg-primary text-white border border-primary"
-                        : "text-slate-600 border border-slate-200 bg-white hover:border-primary/40 hover:text-primary"
+                        ? "bg-amber-400 text-black border border-amber-400"
+                        : "text-slate-300 border border-white/20 bg-white/5 hover:border-amber-400/40 hover:text-amber-400"
                     }`}
                   >
                     {cat}
@@ -132,13 +132,13 @@ export default function NewsContent() {
             {loading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-2xl border border-slate-100 overflow-hidden animate-pulse shadow-[0_8px_30px_rgba(0,0,0,0.015)]">
-                    <div className="h-48 bg-slate-100 animate-pulse" />
+                  <div key={i} className="bg-[#26040A]/85 border border-white/10 rounded-2xl overflow-hidden animate-pulse shadow-xl">
+                    <div className="h-48 bg-white/10 animate-pulse" />
                     <div className="p-6 space-y-3">
-                      <div className="h-3 bg-slate-100 rounded w-1/3 animate-pulse" />
-                      <div className="h-5 bg-slate-100 rounded w-3/4 animate-pulse" />
-                      <div className="h-4 bg-slate-100 rounded animate-pulse" />
-                      <div className="h-4 bg-slate-100 rounded w-5/6 animate-pulse" />
+                      <div className="h-3 bg-white/10 rounded w-1/3 animate-pulse" />
+                      <div className="h-5 bg-white/10 rounded w-3/4 animate-pulse" />
+                      <div className="h-4 bg-white/10 rounded animate-pulse" />
+                      <div className="h-4 bg-white/10 rounded w-5/6 animate-pulse" />
                     </div>
                   </div>
                 ))}
@@ -150,11 +150,11 @@ export default function NewsContent() {
               </div>
             ) : filtered.length === 0 ? (
               <div className="text-center py-24">
-                <BookOpen size={56} className="text-primary/40 mx-auto mb-4 animate-pulse" />
-                <h3 className="font-display font-bold text-xl text-slate-800 mb-2">
+                <BookOpen size={56} className="text-amber-400/40 mx-auto mb-4 animate-pulse" />
+                <h3 className="font-display font-bold text-xl text-white mb-2">
                   {searchQuery || activeCategory !== "Semua" ? "Tidak ada artikel yang cocok" : "Belum Ada Artikel"}
                 </h3>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-300">
                   {searchQuery ? `Coba kata kunci lain.` : "Artikel akan ditampilkan di sini setelah diterbitkan."}
                 </p>
               </div>
@@ -202,7 +202,7 @@ export default function NewsContent() {
                             <Tag size={9} />
                             {article.category}
                           </span>
-                          <span className="flex items-center gap-1 text-[10px] text-slate-400 font-sans">
+                          <span className="flex items-center gap-1 text-[10px] text-slate-200 font-sans">
                             <Calendar size={10} />
                             {formatDate(article.created_at)}
                           </span>
@@ -219,13 +219,13 @@ export default function NewsContent() {
                         </p>
 
                         {/* CTA */}
-                        <div className="mt-4 pt-4 border-t border-slate-100">
+                        <div className="mt-4 pt-4 border-t border-white/10">
                           <Link
                             href={`/article/${article.id}`}
-                            className="text-xs font-semibold tracking-wider uppercase text-slate-600 hover:text-primary flex items-center gap-1 transition-all duration-200 group/link"
+                            className="text-xs font-semibold tracking-wider uppercase text-slate-300 hover:text-amber-400 flex items-center gap-1 transition-all duration-200 group/link"
                           >
                             Baca Selengkapnya
-                            <ArrowUpRight size={12} className="text-primary group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                            <ArrowUpRight size={12} className="text-amber-400 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                           </Link>
                         </div>
                       </div>

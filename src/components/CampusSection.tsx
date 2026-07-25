@@ -169,8 +169,8 @@ function ParallaxCard({
                     transition={{ duration: 0.2 }}
                     className="absolute bottom-10 left-1/2 -translate-x-1/2 w-64 glass-emerald p-4 rounded-xl shadow-xl z-30 pointer-events-auto text-left"
                   >
-                    <h5 className="font-display font-semibold text-sm text-primary flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <h5 className="font-display font-semibold text-sm text-amber-400 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                       {spot.title}
                     </h5>
                     <p className="text-xs text-gray-300 mt-1.5 leading-relaxed font-sans">

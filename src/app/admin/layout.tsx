@@ -1,4 +1,4 @@
-﻿import { Metadata } from "next";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Admin Portal - BEM FAI",
@@ -11,7 +11,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#F9F8FD] text-slate-800 font-sans flex flex-col">
+    <div className="min-h-screen bg-transparent text-white font-sans flex flex-col">
       {children}
     </div>
   );

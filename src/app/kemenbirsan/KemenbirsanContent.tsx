@@ -11,7 +11,7 @@ import { KemenbirsanMember } from "../../types/database.types";
 
 const ROLE_ICON: Record<string, React.ReactNode> = {
   "Presiden BEM": <Crown size={16} className="text-amber-500 animate-pulse" />,
-  default: <Star size={16} className="text-primary" />,
+  default: <Star size={16} className="text-amber-400" />,
 };
 
 function getRoleIcon(role: string) {
@@ -134,7 +134,7 @@ export default function KemenbirsanContent() {
               transition={{ delay: 0.1 }}
               className="font-display font-bold text-4xl md:text-6xl text-white leading-tight"
             >
-              Pimpinan <span className="text-amber-400 font-extrabold">BEM FAI UNWAHA</span>
+              Pimpinan <span className="text-white font-extrabold">BEM FAI UNWAHA</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

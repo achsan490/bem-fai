@@ -147,10 +147,10 @@ export default function ProgramSection({ previewMode = false }: Props) {
 
   if (loading) {
     return (
-      <section className="py-20 bg-white text-center">
+      <section className="py-20 bg-transparent text-center">
         <div className="flex flex-col items-center gap-4">
-          <span className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-xs text-slate-500 font-mono uppercase tracking-widest">Memuat Program Kerja BEM...</p>
+          <span className="w-8 h-8 border-3 border-amber-400 border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs text-slate-400 font-mono uppercase tracking-widest">Memuat Program Kerja BEM...</p>
         </div>
       </section>
     );
@@ -265,9 +265,9 @@ export default function ProgramSection({ previewMode = false }: Props) {
                 </div>
 
                 {/* Footer timeline row */}
-                <motion.div variants={childVariants} className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                <motion.div variants={childVariants} className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-200 font-mono">
                   <span className="flex items-center gap-1.5">
-                    <Calendar size={12} className="text-slate-400" />
+                    <Calendar size={12} className="text-slate-200" />
                     Target: {program.target_timeline}
                   </span>
                   <span className="text-amber-400 font-bold">BEM FAI</span>
@@ -284,8 +284,8 @@ export default function ProgramSection({ previewMode = false }: Props) {
                 onClick={() => scrollTo(i)}
                 className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                   activeIndex === i
-                    ? "w-8 bg-primary"
-                    : "w-2.5 bg-primary/20 hover:bg-primary/40"
+                    ? "w-8 bg-amber-400"
+                    : "w-2.5 bg-white/20 hover:bg-white/40"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
@@ -293,7 +293,7 @@ export default function ProgramSection({ previewMode = false }: Props) {
           </div>
         </div>
 
-        {/* Preview Mode â€” link to full proker section */}
+        {/* Preview Mode — link to full proker section */}
         {previewMode && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -303,10 +303,10 @@ export default function ProgramSection({ previewMode = false }: Props) {
           >
             <Link
               href="/about#proker"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-primary/20 text-primary text-sm font-semibold hover:bg-primary/5 transition-all duration-200"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl border border-amber-400/40 text-amber-300 bg-black/50 hover:bg-black/70 hover:text-amber-200 text-xs font-extrabold uppercase tracking-wider transition-all duration-200 shadow-xl backdrop-blur-md cursor-pointer"
             >
-              Lihat Semua Program Kerja
-              <ArrowRight size={14} />
+              <span>Lihat Semua Program Kerja</span>
+              <ArrowRight size={14} className="text-amber-400" />
             </Link>
           </motion.div>
         )}

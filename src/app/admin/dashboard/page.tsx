@@ -258,7 +258,11 @@ export default function AdminDashboard() {
     try {
       setSubmitting(true);
       setFormError(null);
-      const payload = { name: sponsorName, logo_url: sponsorLogo || null, website_url: sponsorWebsite || null, sort_order: sponsorSortOrder };
+      let formattedWebsite = sponsorWebsite.trim();
+      if (formattedWebsite && !/^https?:\/\//i.test(formattedWebsite)) {
+        formattedWebsite = `https://${formattedWebsite}`;
+      }
+      const payload = { name: sponsorName, logo_url: sponsorLogo || null, website_url: formattedWebsite || null, sort_order: sponsorSortOrder };
       if (editingSponsor) {
         await db.updateSponsor(editingSponsor.id, payload);
         setSuccessMsg("Sponsor berhasil diperbarui.");
@@ -662,7 +666,7 @@ export default function AdminDashboard() {
 
   if (checkingAuth) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FDF8F8]">
+      <div className="min-h-screen flex items-center justify-center bg-transparent">
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
@@ -679,7 +683,7 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FDF8F8] admin-dashboard">
+    <div className="min-h-screen flex flex-col bg-transparent">
       {/* Top Banner Navigation */}
       <header className="py-4 px-6 bg-[#100105]/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-40 relative">
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#500014] via-[#800020] via-[#A0203F] to-[#800020]" />
@@ -727,55 +731,55 @@ export default function AdminDashboard() {
         {/* Page title and description */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h2 className="font-display font-bold text-2xl text-slate-800">
-              Kelola <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent">Publikasi & Konten</span>
+            <h2 className="font-display font-bold text-2xl text-white">
+              Kelola <span className="bg-gradient-to-r from-[#800020] via-[#B8284F] to-[#600018] bg-clip-text text-transparent">Publikasi &amp; Konten</span>
             </h2>
-            <p className="text-xs text-slate-500 mt-1">Kelola artikel ilmiah, kegiatan, profil BEM, dan mitra sponsor Fakultas Agama Islam</p>
+            <p className="text-xs text-slate-200 mt-1">Kelola artikel ilmiah, kegiatan, profil BEM, dan mitra sponsor Fakultas Agama Islam</p>
           </div>
         </div>
 
         {/* Dashboard Statistics Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {/* Stat 1: Total Articles */}
-          <div className="bg-white p-5 rounded-2xl border border-primary/15 shadow-[0_8px_25px_rgba(128,0,32,0.05)] relative overflow-hidden flex items-center justify-between group hover:border-primary/30 transition-all duration-300">
+          <div className="bg-[#26040A]/85 backdrop-blur-md p-5 rounded-2xl border border-white/15 shadow-xl relative overflow-hidden flex items-center justify-between group hover:border-amber-400/40 transition-all duration-300">
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#800020] to-[#A0203F]" />
             <div className="space-y-1">
-              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Total Artikel</p>
-              <h3 className="text-3xl font-display font-bold text-slate-800">{articles.length}</h3>
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-200">Total Artikel</p>
+              <h3 className="text-3xl font-display font-bold text-white">{articles.length}</h3>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#800020]/10 to-[#A0203F]/5 border border-primary/20 flex items-center justify-center text-[#800020] shadow-sm group-hover:scale-105 transition-transform">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#800020]/20 to-[#A0203F]/10 border border-primary/30 flex items-center justify-center text-primary shadow-sm group-hover:scale-105 transition-transform">
               <FileText size={20} />
             </div>
           </div>
 
           {/* Stat 2: Categories */}
-          <div className="bg-white p-5 rounded-2xl border border-amber-500/15 shadow-[0_8px_25px_rgba(217,119,6,0.05)] relative overflow-hidden flex items-center justify-between group hover:border-amber-500/30 transition-all duration-300">
+          <div className="bg-[#26040A]/85 backdrop-blur-md p-5 rounded-2xl border border-amber-500/20 shadow-xl relative overflow-hidden flex items-center justify-between group hover:border-amber-400/40 transition-all duration-300">
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#d97706] to-[#f59e0b]" />
             <div className="space-y-1">
-              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Kategori Terbit</p>
-              <h3 className="text-3xl font-display font-bold text-slate-800">
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-200">Kategori Terbit</p>
+              <h3 className="text-3xl font-display font-bold text-white">
                 {new Set(articles.map(a => a.category)).size}
               </h3>
             </div>
-            <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shadow-sm group-hover:scale-105 transition-transform">
+            <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-sm group-hover:scale-105 transition-transform">
               <Tag size={20} />
             </div>
           </div>
 
           {/* Stat 3: Sandbox/Live State */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-[0_8px_25px_rgba(0,0,0,0.03)] relative overflow-hidden flex items-center justify-between group hover:border-primary/20 transition-all duration-300">
+          <div className="bg-[#26040A]/85 backdrop-blur-md p-5 rounded-2xl border border-white/15 shadow-xl relative overflow-hidden flex items-center justify-between group hover:border-amber-400/40 transition-all duration-300">
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#800020] via-[#d97706] to-[#10b981]" />
             <div className="space-y-1">
-              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Basis Data</p>
-              <h3 className="text-sm font-sans font-bold text-slate-800 flex items-center gap-1.5 mt-2">
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-200">Basis Data</p>
+              <h3 className="text-sm font-sans font-bold text-white flex items-center gap-1.5 mt-2">
                 <span className={`w-2 h-2 rounded-full ${isSupabaseConfigured ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`} />
                 {isSupabaseConfigured ? "Supabase Cloud" : "Offline Sandbox"}
               </h3>
             </div>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center border shadow-sm group-hover:scale-105 transition-transform ${
               isSupabaseConfigured 
-                ? "bg-emerald-50 border-emerald-200 text-emerald-600" 
-                : "bg-amber-50 border-amber-200 text-amber-600"
+                ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" 
+                : "bg-amber-500/10 border-amber-500/30 text-amber-400"
             }`}>
               <Database size={20} />
             </div>
@@ -783,7 +787,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Tab Selection Navigation */}
-        <div className="flex border-b border-slate-200 gap-2 overflow-x-auto pb-1">
+        <div className="flex border-b border-white/10 gap-2 overflow-x-auto pb-1">
           <button
             onClick={() => {
               setActiveTab("articles");
@@ -792,10 +796,10 @@ export default function AdminDashboard() {
             className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "articles"
                 ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
-                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
+                : "bg-white/5 text-slate-200 border border-white/10 hover:text-amber-400 hover:border-amber-400/30"
             }`}
           >
-            Artikel & Berita
+            Artikel &amp; Berita
           </button>
           <button
             onClick={() => {
@@ -805,7 +809,7 @@ export default function AdminDashboard() {
             className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "programs"
                 ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
-                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
+                : "bg-white/5 text-slate-200 border border-white/10 hover:text-amber-400 hover:border-amber-400/30"
             }`}
           >
             Program Kerja
@@ -815,7 +819,7 @@ export default function AdminDashboard() {
             className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "about"
                 ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
-                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
+                : "bg-white/5 text-slate-200 border border-white/10 hover:text-amber-400 hover:border-amber-400/30"
             }`}
           >
             Tentang Kami
@@ -825,7 +829,7 @@ export default function AdminDashboard() {
             className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "kemenbirsan"
                 ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
-                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
+                : "bg-white/5 text-slate-200 border border-white/10 hover:text-amber-400 hover:border-amber-400/30"
             }`}
           >
             Kemenbirsan
@@ -835,7 +839,7 @@ export default function AdminDashboard() {
             className={`px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
               activeTab === "sponsors"
                 ? "bg-gradient-to-r from-[#800020] to-[#A0203F] text-white shadow-[0_4px_15px_rgba(128,0,32,0.25)]"
-                : "bg-white text-slate-600 border border-slate-200 hover:text-primary hover:border-primary/30"
+                : "bg-white/5 text-slate-200 border border-white/10 hover:text-amber-400 hover:border-amber-400/30"
             }`}
           >
             Sponsor

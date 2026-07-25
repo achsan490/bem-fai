@@ -53,7 +53,7 @@ export default function ArticleDetailPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9F8FD]">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <Navbar />
 
       {/* Main Content Area */}
@@ -103,7 +103,7 @@ export default function ArticleDetailPage() {
                   <Tag size={10} />
                   {article.category}
                 </span>
-                <span className="flex items-center gap-1.5 text-xs text-slate-400 font-sans">
+                <span className="flex items-center gap-1.5 text-xs text-slate-200 font-sans">
                   <Calendar size={12} />
                   {formatDate(article.created_at)}
                 </span>

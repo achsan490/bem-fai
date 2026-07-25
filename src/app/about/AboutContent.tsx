@@ -62,11 +62,11 @@ export default function AboutContent() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9F8FD]">
+    <div className="min-h-screen flex flex-col bg-transparent">
       <Navbar />
 
       <main className="flex-grow">
-        {/* â”€â”€ Page Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        {/* —————————————————————————————————————————————————————————— */}
         <section className="pt-32 pb-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
           <div className="absolute top-20 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
@@ -76,7 +76,7 @@ export default function AboutContent() {
               variants={FADE_UP}
               initial="hidden"
               animate="visible"
-              className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center gap-1.5 mb-3 font-mono"
+              className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center gap-1.5 mb-3 font-mono"
             >
               <ChevronRight size={10} />
               Tentang Kami
@@ -86,24 +86,24 @@ export default function AboutContent() {
               initial="hidden"
               animate="visible"
               custom={0.1}
-              className="font-display font-bold text-4xl md:text-6xl text-slate-800 leading-tight max-w-3xl"
+              className="font-display font-bold text-4xl md:text-6xl text-white leading-tight max-w-3xl"
             >
-              Mengenal <span className="text-primary font-extrabold">BEM FAI UNWAHA</span>
+              Mengenal <span className="text-amber-400 font-extrabold">BEM FAI UNWAHA</span>
             </motion.h1>
             <motion.p
               variants={FADE_UP}
               initial="hidden"
               animate="visible"
               custom={0.2}
-              className="text-slate-600 font-sans text-base md:text-lg mt-4 max-w-2xl leading-relaxed"
+              className="text-slate-300 font-sans text-base md:text-lg mt-4 max-w-2xl leading-relaxed"
             >
               Visi, Misi, dan Filosofi Organisasi Kemahasiswaan Fakultas Agama Islam Universitas KH. A. Wahab Hasbullah.
             </motion.p>
           </div>
         </section>
 
-        {/* â”€â”€ Deskripsi Fakultas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-        <section className="py-16 border-t border-slate-100">
+        {/* ——— Deskripsi Fakultas ——————————————————————————————————————————— */}
+        <section className="py-16 border-t border-white/10">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Logo / Image Side (Fixed dark crimson bg so white logo mark pops!) */}
@@ -132,11 +132,11 @@ export default function AboutContent() {
                 transition={{ duration: 0.7 }}
                 className="space-y-4"
               >
-                <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center gap-1.5 font-mono">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center gap-1.5 font-mono">
                   <BookOpen size={10} />
                   Deskripsi Fakultas
                 </span>
-                <h2 className="font-display font-bold text-2xl md:text-3xl text-slate-800">
+                <h2 className="font-display font-bold text-2xl md:text-3xl text-white">
                   Tentang FAI UNWAHA
                 </h2>
                 {loading ? (
@@ -146,7 +146,7 @@ export default function AboutContent() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-slate-600 font-sans leading-relaxed text-sm md:text-base">
+                  <p className="text-slate-300 font-sans leading-relaxed text-sm md:text-base">
                     {content.deskripsi}
                   </p>
                 )}
@@ -155,16 +155,16 @@ export default function AboutContent() {
           </div>
         </section>
 
-        {/* â”€â”€ Visi & Misi â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-        <section className="py-20 bg-white border-t border-slate-100">
+        {/* ——— Visi & Misi ——————————————————————————————————————————— */}
+        <section className="py-20 border-t border-white/10">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-14">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-primary flex items-center justify-center gap-1.5 mb-2 font-mono">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center justify-center gap-1.5 mb-2 font-mono">
                 <Sparkles size={10} />
                 Landasan Organisasi
               </span>
-              <h2 className="font-display font-bold text-3xl md:text-4xl text-slate-800">
-                Visi &amp; <span className="text-primary font-extrabold">Misi</span>
+              <h2 className="font-display font-bold text-3xl md:text-4xl text-white">
+                Visi &amp; <span className="text-amber-400 font-extrabold">Misi</span>
               </h2>
             </div>
 
@@ -175,13 +175,13 @@ export default function AboutContent() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: false, margin: "-100px" }}
                 transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                className="bg-[#F8E8EB] p-8 rounded-2xl border border-primary/20 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(128,0,32,0.10)] hover:shadow-[0_16px_35px_rgba(128,0,32,0.18)] group"
+                className="bg-[#26040A]/85 backdrop-blur-md p-8 rounded-2xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 flex flex-col justify-between shadow-xl group"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mb-5">
-                    <Eye size={22} className="text-primary" />
+                  <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center mb-5">
+                    <Eye size={22} className="text-amber-400" />
                   </div>
-                  <h3 className="font-display font-bold text-xl text-slate-800 mb-4 group-hover:text-primary transition-colors">
+                  <h3 className="font-display font-bold text-xl text-white mb-4 group-hover:text-amber-400 transition-colors">
                     Visi
                   </h3>
                   {loading ? (
@@ -189,7 +189,7 @@ export default function AboutContent() {
                       {[...Array(3)].map((_, i) => <div key={i} className="h-4 bg-slate-200 rounded animate-pulse" />)}
                     </div>
                   ) : (
-                    <p className="text-slate-600 font-sans text-sm leading-relaxed">{content.visi}</p>
+                    <p className="text-slate-300 font-sans text-sm leading-relaxed">{content.visi}</p>
                   )}
                 </div>
               </motion.div>
@@ -200,13 +200,13 @@ export default function AboutContent() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: false, margin: "-100px" }}
                 transition={{ type: "spring", stiffness: 100, damping: 15, delay: 0.15 }}
-                className="bg-[#F8E8EB] p-8 rounded-2xl border border-primary/20 hover:border-primary/30 transition-all duration-300 flex flex-col justify-between shadow-[0_10px_25px_rgba(128,0,32,0.10)] hover:shadow-[0_16px_35px_rgba(128,0,32,0.18)] group"
+                className="bg-[#26040A]/85 backdrop-blur-md p-8 rounded-2xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 flex flex-col justify-between shadow-xl group"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mb-5">
-                    <Target size={22} className="text-primary" />
+                  <div className="w-12 h-12 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center mb-5">
+                    <Target size={22} className="text-amber-400" />
                   </div>
-                  <h3 className="font-display font-bold text-xl text-slate-800 mb-4 group-hover:text-primary transition-colors">
+                  <h3 className="font-display font-bold text-xl text-white mb-4 group-hover:text-amber-400 transition-colors">
                     Misi
                   </h3>
                   {loading ? (
@@ -216,8 +216,8 @@ export default function AboutContent() {
                   ) : (
                     <ul className="space-y-2">
                       {content.misi.split("\n").filter(Boolean).map((line, i) => (
-                        <li key={i} className="flex items-start gap-2 text-slate-600 font-sans text-sm leading-relaxed">
-                          <span className="text-primary font-bold mt-0.5 shrink-0">
+                        <li key={i} className="flex items-start gap-2 text-slate-300 font-sans text-sm leading-relaxed">
+                          <span className="text-amber-400 font-bold mt-0.5 shrink-0">
                             {line.match(/^\d+\./) ? "" : "✦"}
                           </span>
                           <span>{line.replace(/^\d+\.\s*/, "")}</span>

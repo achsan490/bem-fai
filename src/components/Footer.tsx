@@ -79,7 +79,7 @@ export default function Footer() {
             <li><Link href="/kemenbirsan" className="hover:text-amber-400 transition-colors">Kemenbirsan</Link></li>
             <li><Link href="/news" className="hover:text-amber-400 transition-colors">Berita & Artikel</Link></li>
             <li className="pt-2 border-t border-white/10">
-              <Link href="/admin/dashboard" className="text-slate-400 hover:text-amber-400 transition-colors flex items-center gap-1.5">
+              <Link href="/admin/dashboard" className="text-slate-200 hover:text-amber-400 transition-colors flex items-center gap-1.5">
                 <Lock size={10} className="text-amber-400" />
                 <span>Portal Administrasi</span>
               </Link>
@@ -119,7 +119,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10 text-[10px] text-slate-400 tracking-wider">
+      <div className="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10 text-[10px] text-slate-200 tracking-wider">
         <p>© 2026 BEM FAI UNWAHA Jombang. Hak Cipta Dilindungi Undang-Undang.</p>
         <p className="font-sans flex items-center gap-1.5">
           Designed for <span className="text-amber-400 font-bold">UNWAHA Islamic Tech Campus</span>

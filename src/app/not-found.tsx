@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -6,7 +6,7 @@ import { Home, ArrowLeft, Search } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#F9F8FD] relative overflow-hidden px-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-transparent relative overflow-hidden px-6">
       {/* Background glows */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 translate-x-1/2 translate-y-1/2 w-[300px] h-[300px] bg-gold/5 rounded-full blur-[100px] pointer-events-none" />
@@ -49,7 +49,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="font-display font-bold text-2xl md:text-3xl text-slate-800 mb-3"
+          className="font-display font-bold text-2xl md:text-3xl text-white mb-3"
         >
           Halaman Tidak Ditemukan
         </motion.h1>
@@ -57,7 +57,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="text-slate-500 font-sans text-sm md:text-base leading-relaxed mb-8"
+          className="text-slate-300 font-sans text-sm md:text-base leading-relaxed mb-8"
         >
           Maaf, halaman yang kamu cari tidak tersedia atau telah dipindahkan. Silakan kembali ke beranda BEM FAI UNWAHA.
         </motion.p>
@@ -81,7 +81,7 @@ export default function NotFound() {
           </Link>
           <button
             onClick={() => window.history.back()}
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-primary/20 text-primary text-sm font-semibold hover:bg-primary/5 transition-all duration-200 cursor-pointer"
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/20 text-white text-sm font-semibold hover:bg-white/10 transition-all duration-200 cursor-pointer"
           >
             <ArrowLeft size={16} />
             Halaman Sebelumnya

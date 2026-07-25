@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronRight, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -87,10 +87,17 @@ export default function Navbar() {
         <div className="md:hidden shrink-0 ml-2">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-xl text-slate-200 hover:text-amber-400 hover:bg-white/5 transition-colors cursor-pointer"
+            className="p-2.5 rounded-xl text-amber-300 border border-white/15 bg-black/40 hover:bg-black/60 hover:border-amber-400/40 transition-all duration-200 cursor-pointer shadow-md backdrop-blur-md flex items-center justify-center"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            <motion.div
+              key={isMobileMenuOpen ? "close" : "open"}
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isMobileMenuOpen ? <X size={20} className="text-amber-400" /> : <Menu size={20} />}
+            </motion.div>
           </button>
         </div>
       </div>
@@ -102,22 +109,38 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#240309]/95 backdrop-blur-lg border-b border-white/10 shadow-lg"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden bg-[#1B0207]/95 backdrop-blur-xl border-b border-white/15 shadow-2xl overflow-hidden relative"
           >
-            <div className="px-6 py-6 flex flex-col gap-2">
-              {navLinks.map((link) => {
+            {/* Ambient Background Glow inside Drawer */}
+            <div className="absolute top-0 right-0 w-[250px] h-[250px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[200px] h-[200px] bg-primary/15 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="px-5 py-6 flex flex-col gap-2.5 relative z-10">
+              {navLinks.map((link, idx) => {
                 const isActive = pathname === link.href;
                 return (
-                  <Link
+                  <motion.div
                     key={link.name}
-                    href={link.href}
-                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${isActive
-                        ? "text-amber-400 bg-white/10 border border-white/20"
-                        : "text-slate-200 hover:text-amber-400 hover:bg-white/5"
-                      }`}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05, duration: 0.25 }}
                   >
-                    {link.name}
-                  </Link>
+                    <Link
+                      href={link.href}
+                      className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                        isActive
+                          ? "text-amber-300 bg-amber-400/10 border border-amber-400/30 shadow-md backdrop-blur-md"
+                          : "text-slate-200 hover:text-amber-300 hover:bg-white/5 border border-transparent"
+                      }`}
+                    >
+                      <span className="flex items-center gap-3">
+                        <span className={`w-2 h-2 rounded-full ${isActive ? "bg-amber-400 animate-pulse" : "bg-white/20"}`} />
+                        {link.name}
+                      </span>
+                      <ChevronRight size={14} className={isActive ? "text-amber-400" : "opacity-40"} />
+                    </Link>
+                  </motion.div>
                 );
               })}
             </div>

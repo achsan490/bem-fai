@@ -59,7 +59,11 @@ export default function SponsorsSection() {
             >
               {sponsor.website_url ? (
                 <a
-                  href={sponsor.website_url}
+                  href={
+                    sponsor.website_url.startsWith("http://") || sponsor.website_url.startsWith("https://")
+                      ? sponsor.website_url
+                      : `https://${sponsor.website_url}`
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex flex-col items-center gap-3 px-8 py-5 bg-[#26040A]/80 backdrop-blur-md rounded-2xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl min-w-[160px]"
