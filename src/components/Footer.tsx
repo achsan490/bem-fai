@@ -60,12 +60,28 @@ export default function Footer() {
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 border border-white/15 text-xs text-white hover:text-amber-300 hover:border-amber-400/50 hover:bg-white/20 transition-all duration-200 shadow-sm"
               aria-label="Threads bemfai_unwaha"
             >
-              <div className="w-5 h-5 rounded-full bg-black border border-white/20 flex items-center justify-center text-white shrink-0">
+              <div className="w-5 h-5 rounded-full bg-slate-900 border border-white/20 flex items-center justify-center text-white shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 21.75c-5.38 0-9.75-4.37-9.75-9.75S6.62 2.25 12 2.25s9.75 4.37 9.75 9.75c0 3.8-2.17 6.78-5.38 7.42-2.18.43-4.22-.38-5.06-2.02-.45-.88-.5-1.98-.5-3.4 0-1.7.46-2.6 1.48-3.08.68-.32 1.56-.37 2.62-.37h1.09v-1.1c0-1.46-.86-2.31-2.35-2.31-1.41 0-2.2.82-2.32 2.01h-2.16c.14-2.32 1.87-3.95 4.48-3.95 2.76 0 4.51 1.63 4.51 4.25v5.33c0 1.05.34 1.7 1.15 1.7.67 0 1.56-.56 1.94-1.63.38-1.07.49-2.58.49-4.88 0-4.31-3.32-7.85-7.75-7.85-4.43 0-7.75 3.54-7.75 7.85 0 4.31 3.32 7.85 7.75 7.85 2.04 0 3.97-.75 5.43-2.12l1.38 1.42C17.3 20.73 14.77 21.75 12 21.75zm1.09-8.4h-.94c-.65 0-1.12.04-1.45.22-.44.24-.65.68-.65 1.34 0 .76.38 1.25 1.04 1.25.59 0 1.15-.36 1.54-.95.32-.49.46-1.11.46-1.86v-.001z"/>
+                  <path d="M12.186 24.007c-3.553 0-6.444-1.127-8.356-3.26-1.745-1.948-2.618-4.708-2.618-8.204 0-3.528.917-6.31 2.727-8.267C5.787 2.274 8.7 1.134 12.443 1.134c3.67 0 6.586 1.096 8.435 3.167 1.83 2.05 2.722 4.887 2.653 8.436h-3.003c.056-2.67-.58-4.733-1.89-6.133-1.325-1.417-3.486-2.167-6.243-2.167-2.825 0-5.012.805-6.326 2.327-1.328 1.537-1.974 3.75-1.974 6.577 0 2.766.623 4.965 1.85 6.536 1.258 1.61 3.344 2.457 6.03 2.457 2.062 0 3.74-.47 4.988-1.398.983-.73 1.639-1.764 1.95-3.07h-6.726v-2.887h9.728c.08.572.122 1.18.122 1.826 0 2.684-.87 4.908-2.585 6.611-2.023 2.008-4.836 3.023-8.36 3.023z"/>
                 </svg>
               </div>
               <span className="font-mono text-[11px] font-semibold">bemfai_unwaha</span>
+            </a>
+
+            {/* X / Twitter */}
+            <a
+              href="https://x.com/Bemfai_Unwaha"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 border border-white/15 text-xs text-white hover:text-amber-300 hover:border-amber-400/50 hover:bg-white/20 transition-all duration-200 shadow-sm"
+              aria-label="X Bemfai_Unwaha"
+            >
+              <div className="w-5 h-5 rounded-full bg-[#1DA1F2] flex items-center justify-center text-white shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/>
+                </svg>
+              </div>
+              <span className="font-mono text-[11px] font-semibold">Bemfai_Unwaha</span>
             </a>
 
             {/* YouTube */}
