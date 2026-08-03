@@ -20,6 +20,7 @@ import {
   AlertCircle,
   CheckCircle2,
   Database,
+  X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { db, isSupabaseConfigured, supabase } from "../../../lib/supabase";
@@ -41,7 +42,9 @@ export default function AdminDashboard() {
   const [loadingArticles, setLoadingArticles] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   
-  // Form states
+  // Form states & Alert Modal visibility
+  const [showArticleForm, setShowArticleForm] = useState(false);
+  const [showProgramForm, setShowProgramForm] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [title, setTitle] = useState("");
@@ -342,6 +345,7 @@ export default function AdminDashboard() {
     setIsEditMode(false);
     setEditingId(null);
     setFormError(null);
+    setShowArticleForm(false);
   };
 
   const handleImageFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -493,8 +497,7 @@ export default function AdminDashboard() {
     setContent(article.content);
     setImageUrl(article.image_url || "/assets/gedung1.png");
     setFormError(null);
-    // Scroll form into view for mobile
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setShowArticleForm(true);
   };
 
   const handleDeleteClick = (article: Article) => {
@@ -571,6 +574,7 @@ export default function AdminDashboard() {
     setIsEditProgramMode(false);
     setEditingProgramId(null);
     setFormError(null);
+    setShowProgramForm(false);
   };
 
   const handleEditProgramClick = (program: Program) => {
@@ -582,7 +586,7 @@ export default function AdminDashboard() {
     setProgramTimeline(program.target_timeline);
     setProgramStatus(program.status);
     setFormError(null);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setShowProgramForm(true);
   };
 
   const handleDeleteProgramClick = (program: Program) => {
@@ -848,17 +852,17 @@ export default function AdminDashboard() {
 
         {/* Dashboard Tab Panels */}
         {activeTab === "articles" && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {/* Left Column (2/3 width) - Articles Table */}
-            <section className="lg:col-span-2 flex flex-col gap-6">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <h3 className="font-display font-semibold text-lg text-white">Daftar Publikasi</h3>
-                  <p className="text-xs text-gray-500">Gunakan kolom pencarian untuk memfilter artikel secara real-time</p>
-                </div>
-                
+          <div className="flex flex-col gap-6">
+            {/* Header with Search and + Tambah Artikel Button */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <h3 className="font-display font-semibold text-lg text-white">Daftar Publikasi</h3>
+                <p className="text-xs text-gray-500">Kelola dan publikasikan artikel ilmiah BEM FAI</p>
+              </div>
+              
+              <div className="flex items-center gap-3 w-full sm:w-auto">
                 {/* Search Box */}
-                <div className="relative w-full sm:w-64">
+                <div className="relative flex-1 sm:w-64">
                   <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
                   <input
                     type="text"
@@ -868,336 +872,400 @@ export default function AdminDashboard() {
                     className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-white/5 bg-[#180208]/60 focus:bg-[#180208] focus:border-primary/50 focus:outline-none transition-all text-xs font-sans text-white focus:ring-1 focus:ring-primary/20 placeholder-gray-600"
                   />
                 </div>
+
+                {/* + Tambah Artikel Button */}
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => {
+                    resetForm();
+                    setShowArticleForm(true);
+                  }}
+                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-primary/30 transition-all shrink-0 border border-gold/20"
+                >
+                  <Plus size={15} />
+                  <span className="hidden sm:inline">Tambah Artikel Baru</span>
+                  <span className="sm:hidden">Tambah</span>
+                </motion.button>
               </div>
+            </div>
 
-              {/* Action Feedback Banner */}
-              <AnimatePresence>
-                {successMsg && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="p-4 rounded-xl border border-primary/20 bg-primary/5 text-xs text-primary font-sans flex items-center gap-2.5"
-                  >
-                    <CheckCircle2 size={16} className="shrink-0 text-primary" />
-                    <span>{successMsg}</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            {/* Action Feedback Banner */}
+            <AnimatePresence>
+              {successMsg && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="p-4 rounded-xl border border-primary/20 bg-primary/5 text-xs text-primary font-sans flex items-center gap-2.5"
+                >
+                  <CheckCircle2 size={16} className="shrink-0 text-primary" />
+                  <span>{successMsg}</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-              {/* Table Card Wrapper */}
-              <div className="glass rounded-2xl border border-white/5 overflow-hidden bg-[#100105]/40 backdrop-blur-md">
-                {loadingArticles ? (
-                  <div className="py-24 flex flex-col items-center gap-4 text-center">
-                    <span className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
-                    <p className="text-xs text-gray-500 font-sans uppercase tracking-widest">Memuat Artikel...</p>
-                  </div>
-                ) : filteredArticles.length === 0 ? (
-                  <div className="py-24 text-center flex flex-col items-center gap-4">
-                    <BookOpen size={44} className="text-gray-700" />
-                    <h4 className="font-display font-semibold text-sm text-gray-400">Tidak Ada Artikel Ditemukan</h4>
-                    <p className="text-xs text-gray-500 font-sans max-w-sm leading-relaxed">
-                      {searchQuery ? "Sesuaikan kata kunci pencarian Anda." : "Platform kosong. Silakan buat artikel pertama melalui form editor."}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="overflow-x-auto w-full">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="border-b border-white/5 bg-[#180208]/40 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
-                          <th className="py-4 px-6">Informasi Artikel</th>
-                          <th className="py-4 px-6">Kategori</th>
-                          <th className="py-4 px-6">Tanggal Terbit</th>
-                          <th className="py-4 px-6 text-center">Aksi</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-white/5 text-xs font-sans text-gray-300">
-                        {filteredArticles.map((article) => (
-                          <tr key={article.id} className="hover:bg-white/[0.02] transition-colors duration-200 group">
-                            {/* Title & ID */}
-                            <td className="py-4 px-6 max-w-xs md:max-w-sm">
-                              <div className="flex flex-col gap-1">
-                                <span className="font-semibold text-white line-clamp-1 leading-tight group-hover:text-primary transition-colors">
-                                  {article.title}
-                                </span>
-                                <span className="text-[10px] text-gray-500 line-clamp-1 font-mono">
-                                  ID: {article.id}
-                                </span>
-                              </div>
-                            </td>
-
-                            {/* Category Badge */}
-                            <td className="py-4 px-6">
-                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-primary border border-primary/20 bg-primary/5 uppercase">
-                                <Tag size={8} />
-                                {article.category}
-                              </span>
-                            </td>
-
-                            {/* Date Published */}
-                            <td className="py-4 px-6 text-gray-400">
-                              <span className="flex items-center gap-1.5 font-mono text-[10px]">
-                                <Calendar size={10} className="text-gray-500" />
-                                {new Date(article.created_at).toLocaleDateString("id-ID", {
-                                  year: "numeric",
-                                  month: "short",
-                                  day: "numeric",
-                                })}
-                              </span>
-                            </td>
-
-                            {/* Action Buttons */}
-                            <td className="py-4 px-6">
-                              <div className="flex items-center justify-center gap-2">
-                                {/* Edit */}
-                                <button
-                                  onClick={() => handleEditClick(article)}
-                                  title="Edit artikel"
-                                  className="p-2 rounded-lg text-gold hover:text-white hover:bg-gold/25 border border-gold/20 bg-gold/5 transition-all cursor-pointer"
-                                >
-                                  <Edit size={12} />
-                                </button>
-
-                                {/* Delete */}
-                                <button
-                                  onClick={() => handleDeleteClick(article)}
-                                  title="Hapus artikel"
-                                  className="p-2 rounded-lg text-red-400 hover:text-white hover:bg-red-500/25 border border-red-500/20 bg-red-500/5 transition-all cursor-pointer"
-                                >
-                                  <Trash2 size={12} />
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
-            </section>
-
-            {/* Right Column (1/3 width) - Editor Form */}
-            <section className="lg:col-span-1">
-              <div className="glass p-6 rounded-2xl border border-white/5 bg-[#100105]/40 backdrop-blur-md sticky top-24">
-                
-                {/* Form Header */}
-                <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
-                  <h3 className="font-display font-bold text-sm text-white flex items-center gap-2">
-                    <Sparkles size={14} className="text-primary animate-pulse" />
-                    <span>{isEditMode ? "Ubah Artikel" : "Terbitkan Artikel"}</span>
-                  </h3>
-                  
-                  {isEditMode && (
-                    <button
-                      onClick={resetForm}
-                      className="text-[10px] font-semibold text-gray-400 hover:text-white hover:underline transition-all cursor-pointer"
-                    >
-                      Batal Edit
-                    </button>
-                  )}
+            {/* Table Card Wrapper */}
+            <div className="glass rounded-2xl border border-white/5 overflow-hidden bg-[#100105]/40 backdrop-blur-md">
+              {loadingArticles ? (
+                <div className="py-24 flex flex-col items-center gap-4 text-center">
+                  <span className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+                  <p className="text-xs text-gray-500 font-sans uppercase tracking-widest">Memuat Artikel...</p>
                 </div>
+              ) : filteredArticles.length === 0 ? (
+                <div className="py-24 text-center flex flex-col items-center gap-4">
+                  <BookOpen size={44} className="text-gray-700" />
+                  <h4 className="font-display font-semibold text-sm text-gray-400">Tidak Ada Artikel Ditemukan</h4>
+                  <p className="text-xs text-gray-500 font-sans max-w-sm leading-relaxed">
+                    {searchQuery ? "Sesuaikan kata kunci pencarian Anda." : "Platform kosong. Klik tombol 'Tambah Artikel Baru' untuk mulai."}
+                  </p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto w-full">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-white/5 bg-[#180208]/40 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                        <th className="py-4 px-6">Informasi Artikel</th>
+                        <th className="py-4 px-6">Kategori</th>
+                        <th className="py-4 px-6">Tanggal Terbit</th>
+                        <th className="py-4 px-6 text-center">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5 text-xs font-sans text-gray-300">
+                      {filteredArticles.map((article) => (
+                        <tr key={article.id} className="hover:bg-white/[0.02] transition-colors duration-200 group">
+                          {/* Title & ID */}
+                          <td className="py-4 px-6 max-w-xs md:max-w-sm">
+                            <div className="flex flex-col gap-1">
+                              <span className="font-semibold text-white line-clamp-1 leading-tight group-hover:text-primary transition-colors">
+                                {article.title}
+                              </span>
+                              <span className="text-[10px] text-gray-500 line-clamp-1 font-mono">
+                                ID: {article.id}
+                              </span>
+                            </div>
+                          </td>
 
-                {/* Form Error Banner */}
-                {formError && (
-                  <div className="mb-5 p-3.5 rounded-xl border border-red-500/20 bg-red-500/5 text-[11px] text-red-400 font-sans flex items-start gap-2">
-                    <AlertCircle size={14} className="shrink-0 mt-0.5" />
-                    <span>{formError}</span>
-                  </div>
-                )}
+                          {/* Category Badge */}
+                          <td className="py-4 px-6">
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-primary border border-primary/20 bg-primary/5 uppercase">
+                              <Tag size={8} />
+                              {article.category}
+                            </span>
+                          </td>
 
-                {/* Editor Form */}
-                <form onSubmit={handleFormSubmit} className="space-y-5 text-xs">
-                  {/* Title */}
-                  <div>
-                    <label className="block font-bold text-gray-400 uppercase tracking-wider mb-2">
-                      Judul Artikel
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Masukkan judul artikel ilmiah..."
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-white/5 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary/50 focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20"
-                      required
-                    />
-                  </div>
+                          {/* Date Published */}
+                          <td className="py-4 px-6 text-gray-400">
+                            <span className="flex items-center gap-1.5 font-mono text-[10px]">
+                              <Calendar size={10} className="text-gray-500" />
+                              {new Date(article.created_at).toLocaleDateString("id-ID", {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              })}
+                            </span>
+                          </td>
 
-                  {/* Category */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="block font-bold text-gray-400 uppercase tracking-wider">
-                        Kategori
-                      </label>
+                          {/* Action Buttons */}
+                          <td className="py-4 px-6">
+                            <div className="flex items-center justify-center gap-2">
+                              {/* Edit */}
+                              <button
+                                onClick={() => handleEditClick(article)}
+                                title="Edit artikel"
+                                className="px-2.5 py-1.5 rounded-lg text-gold hover:text-white hover:bg-gold/25 border border-gold/20 bg-gold/5 transition-all cursor-pointer flex items-center gap-1.5 text-[11px] font-semibold"
+                              >
+                                <Edit size={12} />
+                                <span>Edit</span>
+                              </button>
+
+                              {/* Delete */}
+                              <button
+                                onClick={() => handleDeleteClick(article)}
+                                title="Hapus artikel"
+                                className="p-2 rounded-lg text-red-400 hover:text-white hover:bg-red-500/25 border border-red-500/20 bg-red-500/5 transition-all cursor-pointer"
+                              >
+                                <Trash2 size={12} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+
+            {/* Large Alert Modal Popup for Articles */}
+            <AnimatePresence>
+              {showArticleForm && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+                  {/* Backdrop click to close */}
+                  <div
+                    className="fixed inset-0"
+                    onClick={() => {
+                      resetForm();
+                      setShowArticleForm(false);
+                    }}
+                  />
+
+                  {/* Alert Modal Box */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.93, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.93, y: 20 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                    className={`glass max-w-4xl w-full p-6 sm:p-8 rounded-3xl border transition-all duration-300 backdrop-blur-xl relative my-auto max-h-[90vh] overflow-y-auto shadow-2xl ${
+                      isEditMode
+                        ? "border-amber-500/40 bg-[#18030c]/95 shadow-[0_0_60px_rgba(245,158,11,0.25)]"
+                        : "border-primary/40 bg-[#160209]/95 shadow-[0_0_60px_rgba(128,0,32,0.3)]"
+                    }`}
+                  >
+                    {/* Alert Banner Top Header */}
+                    <div className="mb-6 pb-4 border-b border-white/10 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2.5 rounded-xl border ${isEditMode ? "bg-amber-500/10 border-amber-500/30 text-amber-400" : "bg-primary/10 border-primary/30 text-primary"}`}>
+                          <Sparkles size={20} className="animate-pulse" />
+                        </div>
+                        <div>
+                          <h3 className="font-display font-bold text-lg text-white">
+                            {isEditMode ? "Edit Artikel Publikasi" : "Tambah Artikel Baru"}
+                          </h3>
+                          <p className="text-xs text-gray-400">
+                            {isEditMode
+                              ? `Mengubah artikel: "${title || "Artikel"}"`
+                              : "Isi formulir di bawah ini untuk mengunggah artikel ilmiah baru ke publikasi"}
+                          </p>
+                        </div>
+                      </div>
+
                       <button
-                        type="button"
                         onClick={() => {
-                          setIsAddingCategory(!isAddingCategory);
-                          setNewCategoryName("");
+                          resetForm();
+                          setShowArticleForm(false);
                         }}
-                        className="text-[10px] font-semibold text-primary hover:text-white hover:underline transition-all cursor-pointer flex items-center gap-1"
+                        className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all cursor-pointer border border-white/10"
+                        title="Tutup Form"
                       >
-                        {isAddingCategory ? "Pilih Kategori" : "+ Tambah Kategori Baru"}
+                        <X size={18} />
                       </button>
                     </div>
 
-                    {isAddingCategory ? (
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          placeholder="Masukkan nama kategori baru..."
-                          value={newCategoryName}
-                          onChange={(e) => setNewCategoryName(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                              e.preventDefault();
-                              handleAddCategory();
-                            }
-                          }}
-                          className="flex-1 px-3 py-2.5 rounded-xl border border-primary/30 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20 text-xs"
-                        />
-                        <button
-                          type="button"
-                          onClick={handleAddCategory}
-                          className="px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-glow text-white text-[10px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
-                        >
-                          Simpan
-                        </button>
+                    {/* Form Error Banner */}
+                    {formError && (
+                      <div className="mb-5 p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-xs text-red-300 font-sans flex items-start gap-2.5">
+                        <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                        <span>{formError}</span>
                       </div>
-                    ) : (
-                      <select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="w-full px-3 py-2.5 rounded-xl border border-white/5 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary/50 focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20 cursor-pointer"
-                      >
-                        {categories.map((cat) => (
-                          <option key={cat} value={cat} className="bg-[#070b13] text-white">
-                            {cat}
-                          </option>
-                        ))}
-                      </select>
                     )}
-                  </div>
 
-                  {/* Cover Select Grid & Upload */}
-                  <div>
-                    <label className="block font-bold text-gray-400 uppercase tracking-wider mb-2">
-                      Gambar Cover Artikel
-                    </label>
-                    <div className="space-y-3">
-                      <div className="grid grid-cols-4 gap-2.5">
-                        {PRESET_COVERS.map((preset) => {
-                          const isSelected = imageUrl === preset.url;
-                          return (
-                            <button
-                              key={preset.url}
-                              type="button"
-                              onClick={() => setImageUrl(preset.url)}
-                              className={`relative aspect-[4/3] rounded-xl overflow-hidden border-2 transition-all duration-300 group cursor-pointer ${
-                                isSelected
-                                  ? "border-primary shadow-[0_0_12px_rgba(185,28,28,0.3)] scale-[1.03]"
-                                  : "border-white/5 bg-[#070b13]/60 opacity-60 hover:opacity-100 hover:border-white/20"
-                              }`}
-                            >
-                              <Image src={preset.url} alt={preset.label} fill className="object-cover group-hover:scale-105 transition-transform" />
-                              <div className="absolute inset-0 bg-black/45 flex items-end p-1">
-                                <span className="text-[8px] font-semibold text-white tracking-wide truncate w-full text-center">
-                                  {preset.label}
-                                </span>
-                              </div>
-                            </button>
-                          );
-                        })}
-
-                        {/* Custom Upload block */}
-                        <label
-                          className={`relative aspect-[4/3] rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${
-                            !PRESET_COVERS.some((p) => p.url === imageUrl) && imageUrl
-                              ? "border-primary bg-primary/5 text-primary shadow-[0_0_12px_rgba(185,28,28,0.2)] scale-[1.03]"
-                              : "border-white/10 bg-[#070b13]/60 text-gray-500 hover:border-white/30 hover:text-gray-300"
-                          }`}
-                        >
-                          <Plus size={16} />
-                          <span className="text-[8px] mt-1 font-semibold uppercase tracking-wider text-center">Kustom</span>
+                    {/* Editor Form */}
+                    <form onSubmit={handleFormSubmit} className="space-y-6 text-xs font-sans">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* Title */}
+                        <div className="md:col-span-2">
+                          <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">
+                            Judul Artikel *
+                          </label>
                           <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageFileChange}
-                            disabled={uploadingImage}
-                            className="hidden"
+                            type="text"
+                            placeholder="Masukkan judul artikel ilmiah..."
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm focus:ring-1 focus:ring-primary/20 placeholder-gray-600"
+                            required
                           />
-                        </label>
+                        </div>
+
+                        {/* Category */}
+                        <div className="md:col-span-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <label className="block font-bold text-gray-300 uppercase tracking-wider">
+                              Kategori *
+                            </label>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setIsAddingCategory(!isAddingCategory);
+                                setNewCategoryName("");
+                              }}
+                              className="text-[10px] font-semibold text-primary hover:text-white hover:underline transition-all cursor-pointer flex items-center gap-1"
+                            >
+                              {isAddingCategory ? "Pilih Kategori" : "+ Tambah Baru"}
+                            </button>
+                          </div>
+
+                          {isAddingCategory ? (
+                            <div className="flex gap-2">
+                              <input
+                                type="text"
+                                placeholder="Kategori baru..."
+                                value={newCategoryName}
+                                onChange={(e) => setNewCategoryName(e.target.value)}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter") {
+                                    e.preventDefault();
+                                    handleAddCategory();
+                                  }
+                                }}
+                                className="flex-1 px-3 py-2.5 rounded-xl border border-primary/40 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary focus:outline-none transition-all font-sans text-white text-xs"
+                              />
+                              <button
+                                type="button"
+                                onClick={handleAddCategory}
+                                className="px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-glow text-white text-[10px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                              >
+                                Simpan
+                              </button>
+                            </div>
+                          ) : (
+                            <select
+                              value={category}
+                              onChange={(e) => setCategory(e.target.value)}
+                              className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm cursor-pointer"
+                            >
+                              {categories.map((cat) => (
+                                <option key={cat} value={cat} className="bg-[#070b13] text-white">
+                                  {cat}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                        </div>
                       </div>
 
-                      {/* Cover Preview */}
-                      {imageUrl && (
-                        <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-white/5 bg-[#070b13]/80">
-                          <Image
-                            src={imageUrl}
-                            alt="Preview cover"
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 400px) 100vw, 400px"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-                          <div className="absolute bottom-2.5 left-3 px-2 py-0.5 rounded bg-black/70 border border-white/5 text-[9px] text-gray-400 font-mono">
-                            {imageUrl.startsWith("data:") ? "Foto Kustom (Sandbox)" : "Gambar Preset"}
+                      {/* Cover Upload / URL */}
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">
+                          Gambar Cover Artikel
+                        </label>
+                        
+                        <div className="flex flex-col sm:flex-row gap-3 items-stretch">
+                          {/* File Upload Button */}
+                          <label className="flex-1 px-4 py-3.5 rounded-xl border border-dashed border-white/20 bg-[#070b13]/80 hover:bg-[#070b13] hover:border-primary/50 transition-all flex items-center justify-center gap-2 cursor-pointer group">
+                            {uploadingImage ? (
+                              <span className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                            ) : (
+                              <Plus size={16} className="text-primary group-hover:scale-110 transition-transform" />
+                            )}
+                            <span className="text-xs text-gray-300 font-semibold">
+                              {uploadingImage ? "Mengunggah Gambar..." : "Unggah Foto dari Komputer/HP"}
+                            </span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageFileChange}
+                              disabled={uploadingImage}
+                              className="hidden"
+                            />
+                          </label>
+
+                          {/* Or URL input */}
+                          <div className="flex-1 flex items-center">
+                            <input
+                              type="text"
+                              placeholder="atau masukkan URL Gambar (https://...)"
+                              value={imageUrl}
+                              onChange={(e) => setImageUrl(e.target.value)}
+                              className="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-xs placeholder-gray-600"
+                            />
                           </div>
                         </div>
-                      )}
-                    </div>
-                  </div>
 
-                  {/* Content */}
-                  <div>
-                    <label className="block font-bold text-gray-400 uppercase tracking-wider mb-2">
-                      Isi Konten Artikel (Mendukung Markdown)
-                    </label>
-                    <textarea
-                      placeholder="Tulis draf artikel di sini... Mendukung penulisan markdown sederhana."
-                      value={content}
-                      onChange={(e) => setContent(e.target.value)}
-                      rows={8}
-                      className="w-full px-3 py-2.5 rounded-xl border border-white/5 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary/50 focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20 resize-y"
-                      required
-                    />
-                  </div>
+                        {/* Cover Preview Box */}
+                        {imageUrl && (
+                          <div className="mt-3 relative aspect-[21/9] max-h-48 w-full rounded-2xl overflow-hidden border border-white/10 bg-[#070b13] group">
+                            <Image
+                              src={imageUrl}
+                              alt="Preview cover"
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 800px) 100vw, 800px"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
+                            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+                              <span className="px-2.5 py-1 rounded-lg bg-black/80 border border-white/10 text-[10px] text-gray-300 font-mono flex items-center gap-1.5">
+                                <Tag size={10} className="text-primary" />
+                                <span>Preview Cover Artikel</span>
+                              </span>
 
-                  {/* Submit button */}
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_6px_20px_rgba(128,0,32,0.3)] hover:shadow-[0_8px_25px_rgba(128,0,32,0.4)]"
-                  >
-                    {submitting ? (
-                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    ) : (
-                      <>
-                        <Plus size={14} />
-                        <span>{isEditMode ? "Simpan Perubahan" : "Terbitkan Sekarang"}</span>
-                      </>
-                    )}
-                  </motion.button>
-                </form>
-              </div>
-            </section>
+                              <button
+                                type="button"
+                                onClick={() => setImageUrl("")}
+                                className="px-2.5 py-1 rounded-lg bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 text-red-300 text-[10px] font-semibold transition-all cursor-pointer"
+                              >
+                                Hapus Gambar
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Content */}
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">
+                          Isi Konten Artikel (Mendukung Markdown) *
+                        </label>
+                        <textarea
+                          placeholder="Tulis draf artikel di sini... Mendukung penulisan markdown sederhana."
+                          value={content}
+                          onChange={(e) => setContent(e.target.value)}
+                          rows={10}
+                          className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm leading-relaxed resize-y"
+                          required
+                        />
+                      </div>
+
+                      {/* Submit & Cancel Buttons */}
+                      <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            resetForm();
+                            setShowArticleForm(false);
+                          }}
+                          className="px-6 py-3.5 rounded-xl border border-white/10 text-gray-300 text-xs font-bold uppercase tracking-wider hover:bg-white/5 hover:text-white transition-all cursor-pointer"
+                        >
+                          Batal
+                        </button>
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          type="submit"
+                          disabled={submitting}
+                          className="px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_6px_20px_rgba(128,0,32,0.4)]"
+                        >
+                          {submitting ? (
+                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          ) : (
+                            <>
+                              <Plus size={15} />
+                              <span>{isEditMode ? "Simpan Perubahan" : "Terbitkan Sekarang"}</span>
+                            </>
+                          )}
+                        </motion.button>
+                      </div>
+                    </form>
+                  </motion.div>
+                </div>
+              )}
+            </AnimatePresence>
           </div>
         )}
 
         {activeTab === "programs" && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {/* Left Column (2/3 width) - Programs Table */}
-            <section className="lg:col-span-2 flex flex-col gap-6">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <h3 className="font-display font-semibold text-lg text-white">Daftar Program Kerja</h3>
-                  <p className="text-xs text-gray-500">Kelola 5 program kerja utama BEM FAI untuk ditampilkan di halaman depan</p>
-                </div>
-                
-                {/* Program Search Box */}
-                <div className="relative w-full sm:w-64">
+          <div className="flex flex-col gap-6">
+            {/* Header with Search and + Tambah Proker Button */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <h3 className="font-display font-semibold text-lg text-white">Daftar Program Kerja</h3>
+                <p className="text-xs text-gray-500">Kelola program kerja utama BEM FAI untuk ditampilkan di halaman depan</p>
+              </div>
+              
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                {/* Search Box */}
+                <div className="relative flex-1 sm:w-64">
                   <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
                   <input
                     type="text"
@@ -1207,253 +1275,319 @@ export default function AdminDashboard() {
                     className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-white/5 bg-[#180208]/60 focus:bg-[#180208] focus:border-primary/50 focus:outline-none transition-all text-xs font-sans text-white focus:ring-1 focus:ring-primary/20 placeholder-gray-600"
                   />
                 </div>
+
+                {/* + Tambah Proker Button */}
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => {
+                    resetProgramForm();
+                    setShowProgramForm(true);
+                  }}
+                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-primary/30 transition-all shrink-0 border border-gold/20"
+                >
+                  <Plus size={15} />
+                  <span className="hidden sm:inline">Tambah Proker Baru</span>
+                  <span className="sm:hidden">Tambah</span>
+                </motion.button>
               </div>
+            </div>
 
-              {/* Action Feedback Banner */}
-              <AnimatePresence>
-                {successMsg && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="p-4 rounded-xl border border-primary/20 bg-primary/5 text-xs text-primary font-sans flex items-center gap-2.5"
-                  >
-                    <CheckCircle2 size={16} className="shrink-0 text-primary" />
-                    <span>{successMsg}</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            {/* Action Feedback Banner */}
+            <AnimatePresence>
+              {successMsg && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="p-4 rounded-xl border border-primary/20 bg-primary/5 text-xs text-primary font-sans flex items-center gap-2.5"
+                >
+                  <CheckCircle2 size={16} className="shrink-0 text-primary" />
+                  <span>{successMsg}</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-              {/* Table Card Wrapper */}
-              <div className="glass rounded-2xl border border-white/5 overflow-hidden bg-[#100105]/40 backdrop-blur-md">
-                {loadingPrograms ? (
-                  <div className="py-24 flex flex-col items-center gap-4 text-center">
-                    <span className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
-                    <p className="text-xs text-gray-500 font-sans uppercase tracking-widest">Memuat Proker...</p>
-                  </div>
-                ) : filteredPrograms.length === 0 ? (
-                  <div className="py-24 text-center flex flex-col items-center gap-4">
-                    <FileText size={44} className="text-gray-700" />
-                    <h4 className="font-display font-semibold text-sm text-gray-400">Tidak Ada Program Kerja Ditemukan</h4>
-                    <p className="text-xs text-gray-500 font-sans max-w-sm leading-relaxed">
-                      {programSearchQuery ? "Sesuaikan kata kunci pencarian Anda." : "Daftar kosong. Silakan buat program kerja baru lewat form editor."}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="overflow-x-auto w-full">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="border-b border-white/5 bg-[#180208]/40 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
-                          <th className="py-4 px-6">Nama Program</th>
-                          <th className="py-4 px-6">Divisi</th>
-                          <th className="py-4 px-6">Target Timeline</th>
-                          <th className="py-4 px-6">Status</th>
-                          <th className="py-4 px-6 text-center">Aksi</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-white/5 text-xs font-sans text-gray-300">
-                        {filteredPrograms.map((program) => (
-                          <tr key={program.id} className="hover:bg-white/[0.02] transition-colors duration-200 group">
-                            {/* Name & Desc Preview */}
-                            <td className="py-4 px-6 max-w-xs">
-                              <div className="flex flex-col gap-1">
-                                <span className="font-semibold text-white line-clamp-1 leading-tight group-hover:text-primary transition-colors">
-                                  {program.name}
-                                </span>
-                                <span className="text-[10px] text-gray-500 line-clamp-1">
-                                  {program.description}
-                                </span>
-                              </div>
-                            </td>
-
-                            {/* Division */}
-                            <td className="py-4 px-6">
-                              <span className="text-gray-300 font-medium">{program.division}</span>
-                            </td>
-
-                            {/* Timeline */}
-                            <td className="py-4 px-6 text-gray-400">
-                              <span className="font-mono text-[10px]">{program.target_timeline}</span>
-                            </td>
-
-                            {/* Status */}
-                            <td className="py-4 px-6">
-                              {program.status === "Selesai" ? (
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-emerald-400 border border-emerald-500/20 bg-emerald-500/5">
-                                  Selesai
-                                </span>
-                              ) : program.status === "Berjalan" ? (
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-400 border border-amber-500/20 bg-amber-500/5">
-                                  Berjalan
-                                </span>
-                              ) : (
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-gray-400 border border-white/5 bg-white/5">
-                                  Terencana
-                                </span>
-                              )}
-                            </td>
-
-                            {/* Action Buttons */}
-                            <td className="py-4 px-6">
-                              <div className="flex items-center justify-center gap-2">
-                                {/* Edit */}
-                                <button
-                                  onClick={() => handleEditProgramClick(program)}
-                                  title="Edit program"
-                                  className="p-2 rounded-lg text-gold hover:text-white hover:bg-gold/25 border border-gold/20 bg-gold/5 transition-all cursor-pointer"
-                                >
-                                  <Edit size={12} />
-                                </button>
-
-                                {/* Delete */}
-                                <button
-                                  onClick={() => handleDeleteProgramClick(program)}
-                                  title="Hapus program"
-                                  className="p-2 rounded-lg text-red-400 hover:text-white hover:bg-red-500/25 border border-red-500/20 bg-red-500/5 transition-all cursor-pointer"
-                                >
-                                  <Trash2 size={12} />
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
-            </section>
-
-            {/* Right Column (1/3 width) - Program Editor Form */}
-            <section className="lg:col-span-1">
-              <div className="glass p-6 rounded-2xl border border-white/5 bg-[#100105]/40 backdrop-blur-md sticky top-24">
-                
-                {/* Form Header */}
-                <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
-                  <h3 className="font-display font-bold text-sm text-white flex items-center gap-2">
-                    <Sparkles size={14} className="text-primary animate-pulse" />
-                    <span>{isEditProgramMode ? "Ubah Program Kerja" : "Terbitkan Proker Baru"}</span>
-                  </h3>
-                  
-                  {isEditProgramMode && (
-                    <button
-                      onClick={resetProgramForm}
-                      className="text-[10px] font-semibold text-gray-400 hover:text-white hover:underline transition-all cursor-pointer"
-                    >
-                      Batal Edit
-                    </button>
-                  )}
+            {/* Table Card Wrapper */}
+            <div className="glass rounded-2xl border border-white/5 overflow-hidden bg-[#100105]/40 backdrop-blur-md">
+              {loadingPrograms ? (
+                <div className="py-24 flex flex-col items-center gap-4 text-center">
+                  <span className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+                  <p className="text-xs text-gray-500 font-sans uppercase tracking-widest">Memuat Proker...</p>
                 </div>
+              ) : filteredPrograms.length === 0 ? (
+                <div className="py-24 text-center flex flex-col items-center gap-4">
+                  <FileText size={44} className="text-gray-700" />
+                  <h4 className="font-display font-semibold text-sm text-gray-400">Tidak Ada Program Kerja Ditemukan</h4>
+                  <p className="text-xs text-gray-500 font-sans max-w-sm leading-relaxed">
+                    {programSearchQuery ? "Sesuaikan kata kunci pencarian Anda." : "Daftar kosong. Silakan buat program kerja baru lewat tombol di atas."}
+                  </p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto w-full">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-white/5 bg-[#180208]/40 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                        <th className="py-4 px-6">Nama Program</th>
+                        <th className="py-4 px-6">Divisi</th>
+                        <th className="py-4 px-6">Target Timeline</th>
+                        <th className="py-4 px-6">Status</th>
+                        <th className="py-4 px-6 text-center">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5 text-xs font-sans text-gray-300">
+                      {filteredPrograms.map((program) => (
+                        <tr key={program.id} className="hover:bg-white/[0.02] transition-colors duration-200 group">
+                          {/* Name & Desc Preview */}
+                          <td className="py-4 px-6 max-w-xs">
+                            <div className="flex flex-col gap-1">
+                              <span className="font-semibold text-white line-clamp-1 leading-tight group-hover:text-primary transition-colors">
+                                {program.name}
+                              </span>
+                              <span className="text-[10px] text-gray-500 line-clamp-1">
+                                {program.description}
+                              </span>
+                            </div>
+                          </td>
 
-                {/* Form Error Banner */}
-                {formError && (
-                  <div className="mb-5 p-3.5 rounded-xl border border-red-500/20 bg-red-500/5 text-[11px] text-red-400 font-sans flex items-start gap-2">
-                    <AlertCircle size={14} className="shrink-0 mt-0.5" />
-                    <span>{formError}</span>
-                  </div>
-                )}
+                          {/* Division */}
+                          <td className="py-4 px-6">
+                            <span className="text-gray-300 font-medium">{program.division}</span>
+                          </td>
 
-                {/* Editor Form */}
-                <form onSubmit={handleProgramFormSubmit} className="space-y-5 text-xs">
-                  {/* Name */}
-                  <div>
-                    <label className="block font-bold text-gray-400 uppercase tracking-wider mb-2">
-                      Nama Program Kerja
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Nama program kerja..."
-                      value={programName}
-                      onChange={(e) => setProgramName(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-white/5 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary/50 focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20"
-                      required
-                    />
-                  </div>
+                          {/* Timeline */}
+                          <td className="py-4 px-6 text-gray-400">
+                            <span className="font-mono text-[10px]">{program.target_timeline}</span>
+                          </td>
 
-                  {/* Division */}
-                  <div>
-                    <label className="block font-bold text-gray-400 uppercase tracking-wider mb-2">
-                      Divisi Penyelenggara
-                    </label>
-                    <select
-                      value={programDivision}
-                      onChange={(e) => setProgramDivision(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-white/5 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary/50 focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20 cursor-pointer"
-                    >
-                      <option value="Kaderisasi & PSDM" className="bg-[#070b13] text-white">Kaderisasi & PSDM</option>
-                      <option value="Kajian Keagamaan" className="bg-[#070b13] text-white">Kajian Keagamaan</option>
-                      <option value="Pengabdian Masyarakat" className="bg-[#070b13] text-white">Pengabdian Masyarakat</option>
-                      <option value="Minat & Bakat (Olahraga)" className="bg-[#070b13] text-white">Minat & Bakat (Olahraga)</option>
-                      <option value="Komunikasi & Media" className="bg-[#070b13] text-white">Komunikasi & Media</option>
-                    </select>
-                  </div>
+                          {/* Status */}
+                          <td className="py-4 px-6">
+                            {program.status === "Selesai" ? (
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-emerald-400 border border-emerald-500/20 bg-emerald-500/5">
+                                Selesai
+                              </span>
+                            ) : program.status === "Berjalan" ? (
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-400 border border-amber-500/20 bg-amber-500/5">
+                                Berjalan
+                              </span>
+                            ) : (
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-gray-400 border border-white/5 bg-white/5">
+                                Terencana
+                              </span>
+                            )}
+                          </td>
 
-                  {/* Target Timeline */}
-                  <div>
-                    <label className="block font-bold text-gray-400 uppercase tracking-wider mb-2">
-                      Target Pelaksanaan (Timeline)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Contoh: Triwulan I, Agustus 2026, Bulanan"
-                      value={programTimeline}
-                      onChange={(e) => setProgramTimeline(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-white/5 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary/50 focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20"
-                      required
-                    />
-                  </div>
+                          {/* Action Buttons */}
+                          <td className="py-4 px-6">
+                            <div className="flex items-center justify-center gap-2">
+                              {/* Edit */}
+                              <button
+                                onClick={() => handleEditProgramClick(program)}
+                                title="Edit program"
+                                className="px-2.5 py-1.5 rounded-lg text-gold hover:text-white hover:bg-gold/25 border border-gold/20 bg-gold/5 transition-all cursor-pointer flex items-center gap-1.5 text-[11px] font-semibold"
+                              >
+                                <Edit size={12} />
+                                <span>Edit</span>
+                              </button>
 
-                  {/* Status */}
-                  <div>
-                    <label className="block font-bold text-gray-400 uppercase tracking-wider mb-2">
-                      Status Pelaksanaan
-                    </label>
-                    <select
-                      value={programStatus}
-                      onChange={(e) => setProgramStatus(e.target.value as Program["status"])}
-                      className="w-full px-3 py-2.5 rounded-xl border border-white/5 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary/50 focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20 cursor-pointer"
-                    >
-                      <option value="Terencana" className="bg-[#070b13] text-white">Terencana</option>
-                      <option value="Berjalan" className="bg-[#070b13] text-white">Berjalan</option>
-                      <option value="Selesai" className="bg-[#070b13] text-white">Selesai</option>
-                    </select>
-                  </div>
+                              {/* Delete */}
+                              <button
+                                onClick={() => handleDeleteProgramClick(program)}
+                                title="Hapus program"
+                                className="p-2 rounded-lg text-red-400 hover:text-white hover:bg-red-500/25 border border-red-500/20 bg-red-500/5 transition-all cursor-pointer"
+                              >
+                                <Trash2 size={12} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
 
-                  {/* Description */}
-                  <div>
-                    <label className="block font-bold text-gray-400 uppercase tracking-wider mb-2">
-                      Deskripsi Ringkas Program
-                    </label>
-                    <textarea
-                      placeholder="Jelaskan secara ringkas mengenai tujuan dan bentuk program kerja ini..."
-                      value={programDescription}
-                      onChange={(e) => setProgramDescription(e.target.value)}
-                      rows={6}
-                      className="w-full px-3 py-2.5 rounded-xl border border-white/5 bg-[#070b13]/60 focus:bg-[#070b13]/90 focus:border-primary/50 focus:outline-none transition-all font-sans text-white focus:ring-1 focus:ring-primary/20 resize-y"
-                      required
-                    />
-                  </div>
+            {/* Large Alert Modal Popup for Programs */}
+            <AnimatePresence>
+              {showProgramForm && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+                  {/* Backdrop click to close */}
+                  <div
+                    className="fixed inset-0"
+                    onClick={() => {
+                      resetProgramForm();
+                      setShowProgramForm(false);
+                    }}
+                  />
 
-                  {/* Submit button */}
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full py-4 mt-2 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_6px_20px_rgba(128,0,32,0.3)] hover:shadow-[0_8px_25px_rgba(128,0,32,0.4)]"
+                  {/* Alert Modal Box */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.93, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.93, y: 20 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                    className={`glass max-w-4xl w-full p-6 sm:p-8 rounded-3xl border transition-all duration-300 backdrop-blur-xl relative my-auto max-h-[90vh] overflow-y-auto shadow-2xl ${
+                      isEditProgramMode
+                        ? "border-amber-500/40 bg-[#18030c]/95 shadow-[0_0_60px_rgba(245,158,11,0.25)]"
+                        : "border-primary/40 bg-[#160209]/95 shadow-[0_0_60px_rgba(128,0,32,0.3)]"
+                    }`}
                   >
-                    {submitting ? (
-                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    ) : (
-                      <>
-                        <Plus size={14} />
-                        <span>{isEditProgramMode ? "Simpan Perubahan" : "Terbitkan Sekarang"}</span>
-                      </>
+                    {/* Alert Banner Top Header */}
+                    <div className="mb-6 pb-4 border-b border-white/10 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2.5 rounded-xl border ${isEditProgramMode ? "bg-amber-500/10 border-amber-500/30 text-amber-400" : "bg-primary/10 border-primary/30 text-primary"}`}>
+                          <Sparkles size={20} className="animate-pulse" />
+                        </div>
+                        <div>
+                          <h3 className="font-display font-bold text-lg text-white">
+                            {isEditProgramMode ? "Edit Program Kerja" : "Tambah Program Kerja Baru"}
+                          </h3>
+                          <p className="text-xs text-gray-400">
+                            {isEditProgramMode
+                              ? `Mengubah program kerja: "${programName || "Proker"}"`
+                              : "Isi formulir di bawah ini untuk menerbitkan program kerja BEM FAI baru"}
+                          </p>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          resetProgramForm();
+                          setShowProgramForm(false);
+                        }}
+                        className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all cursor-pointer border border-white/10"
+                        title="Tutup Form"
+                      >
+                        <X size={18} />
+                      </button>
+                    </div>
+
+                    {/* Form Error Banner */}
+                    {formError && (
+                      <div className="mb-5 p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-xs text-red-300 font-sans flex items-start gap-2.5">
+                        <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                        <span>{formError}</span>
+                      </div>
                     )}
-                  </motion.button>
-                </form>
-              </div>
-            </section>
+
+                    {/* Program Editor Form */}
+                    <form onSubmit={handleProgramFormSubmit} className="space-y-6 text-xs font-sans">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Name */}
+                        <div>
+                          <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">
+                            Nama Program Kerja *
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Masukkan nama program kerja..."
+                            value={programName}
+                            onChange={(e) => setProgramName(e.target.value)}
+                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm"
+                            required
+                          />
+                        </div>
+
+                        {/* Division */}
+                        <div>
+                          <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">
+                            Divisi Penyelenggara *
+                          </label>
+                          <select
+                            value={programDivision}
+                            onChange={(e) => setProgramDivision(e.target.value)}
+                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm cursor-pointer"
+                          >
+                            <option value="Kaderisasi & PSDM" className="bg-[#070b13] text-white">Kaderisasi & PSDM</option>
+                            <option value="Kajian Keagamaan" className="bg-[#070b13] text-white">Kajian Keagamaan</option>
+                            <option value="Pengabdian Masyarakat" className="bg-[#070b13] text-white">Pengabdian Masyarakat</option>
+                            <option value="Minat & Bakat (Olahraga)" className="bg-[#070b13] text-white">Minat & Bakat (Olahraga)</option>
+                            <option value="Komunikasi & Media" className="bg-[#070b13] text-white">Komunikasi & Media</option>
+                          </select>
+                        </div>
+
+                        {/* Target Timeline */}
+                        <div>
+                          <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">
+                            Target Pelaksanaan (Timeline) *
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Contoh: Triwulan I, Agustus 2026, Bulanan"
+                            value={programTimeline}
+                            onChange={(e) => setProgramTimeline(e.target.value)}
+                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm"
+                            required
+                          />
+                        </div>
+
+                        {/* Status */}
+                        <div>
+                          <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">
+                            Status Pelaksanaan *
+                          </label>
+                          <select
+                            value={programStatus}
+                            onChange={(e) => setProgramStatus(e.target.value as Program["status"])}
+                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm cursor-pointer"
+                          >
+                            <option value="Terencana" className="bg-[#070b13] text-white">Terencana</option>
+                            <option value="Berjalan" className="bg-[#070b13] text-white">Berjalan</option>
+                            <option value="Selesai" className="bg-[#070b13] text-white">Selesai</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">
+                          Deskripsi Ringkas Program *
+                        </label>
+                        <textarea
+                          placeholder="Jelaskan secara ringkas mengenai tujuan dan bentuk program kerja ini..."
+                          value={programDescription}
+                          onChange={(e) => setProgramDescription(e.target.value)}
+                          rows={6}
+                          className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm leading-relaxed resize-y"
+                          required
+                        />
+                      </div>
+
+                      {/* Submit & Cancel Buttons */}
+                      <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            resetProgramForm();
+                            setShowProgramForm(false);
+                          }}
+                          className="px-6 py-3.5 rounded-xl border border-white/10 text-gray-300 text-xs font-bold uppercase tracking-wider hover:bg-white/5 hover:text-white transition-all cursor-pointer"
+                        >
+                          Batal
+                        </button>
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          type="submit"
+                          disabled={submitting}
+                          className="px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-[0_6px_20px_rgba(128,0,32,0.4)]"
+                        >
+                          {submitting ? (
+                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          ) : (
+                            <>
+                              <Plus size={15} />
+                              <span>{isEditProgramMode ? "Simpan Perubahan" : "Terbitkan Sekarang"}</span>
+                            </>
+                          )}
+                        </motion.button>
+                      </div>
+                    </form>
+                  </motion.div>
+                </div>
+              )}
+            </AnimatePresence>
           </div>
         )}
 

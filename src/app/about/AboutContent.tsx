@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Eye, Target, BookOpen, Sparkles, ChevronRight, Hand } from "lucide-react";
+import { Eye, Target, BookOpen, Sparkles, ChevronRight, Users, ShieldCheck, HeartHandshake, Trophy, Megaphone, Layers } from "lucide-react";
 import Image from "next/image";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -25,19 +25,6 @@ const FADE_UP = {
   }),
 };
 
-// Sandbox seed elements
-const SANDBOX_ITEMS = [
-  { id: 1, label: "ðŸ‘‘ Presiden BEM", color: "bg-amber-100 text-amber-800 border-amber-300" },
-  { id: 2, label: "âœ¨ Wakil Presiden BEM", color: "bg-indigo-100 text-indigo-800 border-indigo-300" },
-  { id: 3, label: "ðŸ“ Birokrasi & Administrasi", color: "bg-purple-100 text-purple-800 border-purple-300" },
-  { id: 4, label: "ðŸ“š Kajian Keagamaan & Syariah", color: "bg-orange-100 text-orange-800 border-orange-300" },
-  { id: 5, label: "ðŸ¤ Pengabdian Masyarakat", color: "bg-rose-100 text-rose-800 border-rose-300" },
-  { id: 6, label: "ðŸ† Minat & Bakat (Olahraga)", color: "bg-blue-100 text-blue-800 border-blue-300" },
-  { id: 7, label: "ðŸ“¢ Komunikasi & Media Publikasi", color: "bg-emerald-100 text-emerald-800 border-emerald-300" },
-  { id: 8, label: "ðŸš€ Visi Progresif & Islami", color: "bg-teal-100 text-teal-800 border-teal-300" },
-  { id: 9, label: "ðŸ’¼ Sinergi Alumni", color: "bg-cyan-100 text-cyan-800 border-cyan-300" },
-];
-
 export default function AboutContent() {
   const [content, setContent] = useState<ContentMap>({
     visi: "",
@@ -46,7 +33,6 @@ export default function AboutContent() {
     filosofi_logo: "",
   });
   const [loading, setLoading] = useState(true);
-  const sandboxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     db.getSiteContent()
@@ -263,45 +249,148 @@ export default function AboutContent() {
             </div>
           </section>
 
-          {/* Interactive Sandbox Area */}
+          {/* Pilar & Departemen Kepengurusan */}
           <section className="py-20 bg-transparent border-t border-white/10">
-            <div className="max-w-5xl mx-auto px-6">
-              <div className="text-center mb-10">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="text-center mb-14">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center justify-center gap-1.5 mb-2 font-mono">
-                  <Hand size={10} />
-                  Eksplorasi Interaktif
+                  <Layers size={10} />
+                  Struktur &amp; Pilar Organisasi
                 </span>
-                <h2 className="font-display font-bold text-2xl md:text-3xl text-white">
-                  Kabinet Sandbox
+                <h2 className="font-display font-bold text-3xl md:text-4xl text-white">
+                  Kementerian &amp; <span className="text-amber-400 font-extrabold">Divisi BEM FAI</span>
                 </h2>
-                <p className="text-slate-300 font-sans text-xs md:text-sm mt-2 leading-relaxed">
-                  Tekan dan geser kartu-kartu struktur BEM FAI UNWAHA di bawah ini untuk membuat visualisasi susunan organisasi Anda!
+                <p className="text-slate-300 font-sans text-xs md:text-sm mt-3 max-w-2xl mx-auto leading-relaxed">
+                  Mengenal 5 bidang kementerian dan pilar kerja utama yang menggerakkan roda organisasi BEM FAI UNWAHA secara progresif dan islami.
                 </p>
               </div>
 
-              <div 
-                ref={sandboxRef}
-                className="relative w-full h-[400px] overflow-hidden bg-[#26040A]/85 backdrop-blur-md border border-dashed border-white/20 rounded-3xl p-4 flex flex-wrap gap-3 items-center justify-center select-none shadow-xl"
-              >
-                {SANDBOX_ITEMS.map((item, idx) => (
-                  <motion.div
-                    key={item.id}
-                    drag
-                    dragConstraints={sandboxRef}
-                    whileDrag={{ scale: 1.08, zIndex: 50, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.4)" }}
-                    className={`px-4 py-2.5 rounded-xl border text-xs md:text-sm font-semibold tracking-wide cursor-grab active:cursor-grabbing shadow-md flex items-center gap-2 ${item.color}`}
-                    style={{ position: "relative" }}
-                    initial={{
-                      x: Math.round(Math.sin(idx) * 20),
-                      y: Math.round(Math.cos(idx) * 20),
-                    }}
-                  >
-                    {item.label}
-                  </motion.div>
-                ))}
-                <div className="absolute bottom-4 right-4 text-[9px] font-mono text-slate-400 pointer-events-none flex items-center gap-1">
-                  <span>Drag area sandbox</span>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Divisi 1 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="bg-[#26040A]/85 backdrop-blur-md p-7 rounded-3xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 shadow-xl group flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      <Users size={22} className="text-amber-400" />
+                    </div>
+                    <h3 className="font-display font-bold text-lg text-white mb-2 group-hover:text-amber-400 transition-colors">
+                      Kaderisasi &amp; PSDM
+                    </h3>
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+                      Pengembangan Sumber Daya Mahasiswa melatih jiwa kepemimpinan (LKMM), kaderisasi mahasiswa baru, dan potensi intelektual FAI.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#Kepemimpinan</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#LKMM</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#PSDM</span>
+                  </div>
+                </motion.div>
+
+                {/* Divisi 2 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="bg-[#26040A]/85 backdrop-blur-md p-7 rounded-3xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 shadow-xl group flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      <ShieldCheck size={22} className="text-amber-400" />
+                    </div>
+                    <h3 className="font-display font-bold text-lg text-white mb-2 group-hover:text-amber-400 transition-colors">
+                      Kajian Keagamaan &amp; Syariah
+                    </h3>
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+                      Penyelenggara kajian rutin keislaman, diskusi isu syariah kontemporer, serta penguat nilai keagamaan civitas akademika.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#KajianSyariah</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#SyiarIslam</span>
+                  </div>
+                </motion.div>
+
+                {/* Divisi 3 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="bg-[#26040A]/85 backdrop-blur-md p-7 rounded-3xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 shadow-xl group flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      <HeartHandshake size={22} className="text-amber-400" />
+                    </div>
+                    <h3 className="font-display font-bold text-lg text-white mb-2 group-hover:text-amber-400 transition-colors">
+                      Pengabdian Masyarakat (Pengmas)
+                    </h3>
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+                      Pelaksana bakti sosial kemanusiaan, program desa binaan, serta aksi peduli masyarakat di wilayah Jombang dan sekitarnya.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#BaktiSosial</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#DesaBinaan</span>
+                  </div>
+                </motion.div>
+
+                {/* Divisi 4 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="bg-[#26040A]/85 backdrop-blur-md p-7 rounded-3xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 shadow-xl group flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      <Trophy size={22} className="text-amber-400" />
+                    </div>
+                    <h3 className="font-display font-bold text-lg text-white mb-2 group-hover:text-amber-400 transition-colors">
+                      Minat, Bakat &amp; Seni Olahraga
+                    </h3>
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+                      Wadah apresiasi bakti seni, kejuaraan kompetisi olahraga antar prodi, dan ruang ekspresi minat mahasiswa FAI.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#PekanOlahraga</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#SeniKreatif</span>
+                  </div>
+                </motion.div>
+
+                {/* Divisi 5 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="bg-[#26040A]/85 backdrop-blur-md p-7 rounded-3xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 shadow-xl group flex flex-col justify-between md:col-span-2 lg:col-span-1"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                      <Megaphone size={22} className="text-amber-400" />
+                    </div>
+                    <h3 className="font-display font-bold text-lg text-white mb-2 group-hover:text-amber-400 transition-colors">
+                      Komunikasi &amp; Media Publikasi
+                    </h3>
+                    <p className="text-xs text-slate-300 font-sans leading-relaxed mb-4">
+                      Pengelolaan informasi publikasi digital, branding visual organisasi, jurnalisme kampus, dan layanan humas BEM FAI.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/10">
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#MediaDigital</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-[9px] font-semibold text-amber-300 bg-amber-400/10 border border-amber-400/20">#PublikasiFAI</span>
+                  </div>
+                </motion.div>
               </div>
             </div>
           </section>
