@@ -81,12 +81,12 @@ export default function AdminDashboard() {
   const [isAddingCategory, setIsAddingCategory] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
 
-  // â”€â”€ Site Content (About Page) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Site Content (About Page) ──────────────────────────────────────────────────────────────────────────────────
   const [aboutContent, setAboutContent] = useState({ visi: "", misi: "", deskripsi: "", filosofi_logo: "" });
   const [loadingAbout, setLoadingAbout] = useState(true);
   const [savingAbout, setSavingAbout] = useState(false);
 
-  // â”€â”€ Sponsors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Sponsors ────────────────────────────────────────────────────────────────────────────────────────────────────
   const [sponsors, setSponsors] = useState<Sponsor[]>([]);
   const [loadingSponsors, setLoadingSponsors] = useState(true);
   const [sponsorName, setSponsorName] = useState("");
@@ -94,8 +94,9 @@ export default function AdminDashboard() {
   const [sponsorWebsite, setSponsorWebsite] = useState("");
   const [sponsorSortOrder, setSponsorSortOrder] = useState(0);
   const [editingSponsor, setEditingSponsor] = useState<Sponsor | null>(null);
+  const [showSponsorForm, setShowSponsorForm] = useState(false);
 
-  // â”€â”€ Kemenbirsan Members â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Kemenbirsan Members ──────────────────────────────────────────────────────────────────────────────────────────
   const [members, setMembers] = useState<KemenbirsanMember[]>([]);
   const [loadingMembers, setLoadingMembers] = useState(true);
   const [memberName, setMemberName] = useState("");
@@ -104,6 +105,7 @@ export default function AdminDashboard() {
   const [memberDesc, setMemberDesc] = useState("");
   const [memberSortOrder, setMemberSortOrder] = useState(0);
   const [editingMember, setEditingMember] = useState<KemenbirsanMember | null>(null);
+  const [showMemberForm, setShowMemberForm] = useState(false);
 
   // Scan database articles for any custom categories and add them to selector
   useEffect(() => {
@@ -253,7 +255,7 @@ export default function AdminDashboard() {
   };
 
   // â”€â”€ Sponsor Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  const resetSponsorForm = () => { setSponsorName(""); setSponsorLogo(""); setSponsorWebsite(""); setSponsorSortOrder(0); setEditingSponsor(null); };
+  const resetSponsorForm = () => { setSponsorName(""); setSponsorLogo(""); setSponsorWebsite(""); setSponsorSortOrder(0); setEditingSponsor(null); setShowSponsorForm(false); };
 
   const handleSponsorSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -282,7 +284,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleEditSponsor = (s: Sponsor) => { setEditingSponsor(s); setSponsorName(s.name); setSponsorLogo(s.logo_url || ""); setSponsorWebsite(s.website_url || ""); setSponsorSortOrder(s.sort_order); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const handleEditSponsor = (s: Sponsor) => { setEditingSponsor(s); setSponsorName(s.name); setSponsorLogo(s.logo_url || ""); setSponsorWebsite(s.website_url || ""); setSponsorSortOrder(s.sort_order); setFormError(null); setShowSponsorForm(true); };
 
   const handleDeleteSponsor = async (id: string) => {
     if (!confirm("Hapus sponsor ini?")) return;
@@ -291,7 +293,7 @@ export default function AdminDashboard() {
   };
 
   // â”€â”€ Kemenbirsan Member Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  const resetMemberForm = () => { setMemberName(""); setMemberRole("Presiden BEM"); setMemberPhoto(""); setMemberDesc(""); setMemberSortOrder(0); setEditingMember(null); };
+  const resetMemberForm = () => { setMemberName(""); setMemberRole("Presiden BEM"); setMemberPhoto(""); setMemberDesc(""); setMemberSortOrder(0); setEditingMember(null); setShowMemberForm(false); };
 
   const handleMemberSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -316,7 +318,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleEditMember = (m: KemenbirsanMember) => { setEditingMember(m); setMemberName(m.name); setMemberRole(m.role); setMemberPhoto(m.photo_url || ""); setMemberDesc(m.description || ""); setMemberSortOrder(m.sort_order); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const handleEditMember = (m: KemenbirsanMember) => { setEditingMember(m); setMemberName(m.name); setMemberRole(m.role); setMemberPhoto(m.photo_url || ""); setMemberDesc(m.description || ""); setMemberSortOrder(m.sort_order); setFormError(null); setShowMemberForm(true); };
 
   const handleDeleteMember = async (id: string) => {
     if (!confirm("Hapus data anggota ini?")) return;
@@ -1631,123 +1633,224 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* â”€â”€ TAB: Kemenbirsan â”€â”€ */}
+        {/* ── TAB: Kemenbirsan ── */}
         {activeTab === "kemenbirsan" && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {/* List */}
-            <section className="lg:col-span-2 flex flex-col gap-4">
+          <div className="flex flex-col gap-6">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <h3 className="font-display font-semibold text-lg text-white">Daftar Pimpinan BEM</h3>
-                <p className="text-xs text-gray-500 mt-1">Presiden, Wakil Presiden, dan pengurus inti Kemenbirsan</p>
+                <p className="text-xs text-gray-500">Presiden, Wakil Presiden, dan pengurus inti Kemenbirsan</p>
               </div>
-              <div className="glass rounded-2xl border border-white/5 overflow-hidden">
-                {loadingMembers ? (
-                  <div className="py-12 text-center"><span className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin inline-block" /></div>
-                ) : members.length === 0 ? (
-                  <div className="py-12 text-center text-gray-500 text-sm">Belum ada data. Tambahkan via form.</div>
-                ) : (
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => { resetMemberForm(); setShowMemberForm(true); }}
+                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-primary/30 transition-all shrink-0 border border-gold/20"
+              >
+                <Plus size={15} />
+                <span className="hidden sm:inline">Tambah Anggota Baru</span>
+                <span className="sm:hidden">Tambah</span>
+              </motion.button>
+            </div>
+
+            {/* Table Card */}
+            <div className="glass rounded-2xl border border-white/5 overflow-hidden bg-[#100105]/40 backdrop-blur-md">
+              {loadingMembers ? (
+                <div className="py-24 flex flex-col items-center gap-4 text-center">
+                  <span className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+                  <p className="text-xs text-gray-500 font-sans uppercase tracking-widest">Memuat Data...</p>
+                </div>
+              ) : members.length === 0 ? (
+                <div className="py-24 text-center flex flex-col items-center gap-4">
+                  <Settings size={44} className="text-gray-700" />
+                  <h4 className="font-display font-semibold text-sm text-gray-400">Belum Ada Anggota</h4>
+                  <p className="text-xs text-gray-500 font-sans">Klik tombol 'Tambah Anggota Baru' untuk memulai.</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto w-full">
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="border-b border-white/5 bg-[#180208]/40 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
-                        <th className="py-4 px-6">Nama & Jabatan</th>
+                        <th className="py-4 px-6">Nama &amp; Jabatan</th>
                         <th className="py-4 px-6">Urutan</th>
                         <th className="py-4 px-6 text-center">Aksi</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5 text-xs font-sans text-gray-300">
                       {members.map((m) => (
-                        <tr key={m.id} className="hover:bg-white/[0.02] transition-colors">
+                        <tr key={m.id} className="hover:bg-white/[0.02] transition-colors duration-200 group">
                           <td className="py-4 px-6">
-                            <p className="font-semibold text-white text-sm">{m.name}</p>
+                            <p className="font-semibold text-white group-hover:text-primary transition-colors">{m.name}</p>
                             <p className="text-primary text-[10px] uppercase tracking-wider mt-0.5">{m.role}</p>
                             {m.description && <p className="text-gray-500 text-[10px] mt-1 max-w-xs line-clamp-1">{m.description}</p>}
                           </td>
                           <td className="py-4 px-6 text-gray-400">{m.sort_order}</td>
                           <td className="py-4 px-6">
                             <div className="flex items-center justify-center gap-2">
-                              <button onClick={() => handleEditMember(m)} className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"><Edit size={13} /></button>
-                              <button onClick={() => handleDeleteMember(m.id)} className="p-1.5 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"><Trash2 size={13} /></button>
+                              <button
+                                onClick={() => handleEditMember(m)}
+                                title="Edit anggota"
+                                className="px-2.5 py-1.5 rounded-lg text-gold hover:text-white hover:bg-gold/25 border border-gold/20 bg-gold/5 transition-all cursor-pointer flex items-center gap-1.5 text-[11px] font-semibold"
+                              >
+                                <Edit size={12} />
+                                <span>Edit</span>
+                              </button>
+                              <button
+                                onClick={() => handleDeleteMember(m.id)}
+                                title="Hapus anggota"
+                                className="p-2 rounded-lg text-red-400 hover:text-white hover:bg-red-500/25 border border-red-500/20 bg-red-500/5 transition-all cursor-pointer"
+                              >
+                                <Trash2 size={12} />
+                              </button>
                             </div>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                )}
-              </div>
-            </section>
-            {/* Form */}
-            <section className="flex flex-col gap-4">
-              <div className="glass p-6 rounded-2xl border border-primary/10 space-y-4">
-                <h4 className="font-display font-semibold text-base text-white">{editingMember ? "Edit Anggota" : "Tambah Anggota Baru"}</h4>
-                <form onSubmit={handleMemberSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Nama Lengkap</label>
-                    <input value={memberName} onChange={(e) => setMemberName(e.target.value)} placeholder="e.g. Muhammad Fauzan" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-primary/40 transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Jabatan</label>
-                    <select value={memberRole} onChange={(e) => setMemberRole(e.target.value)} className="w-full bg-[#180208] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary/40 transition-all">
-                      <option>Presiden BEM</option>
-                      <option>Wakil Presiden BEM</option>
-                      <option>Sekretaris Umum</option>
-                      <option>Bendahara Umum</option>
-                      <option>Ketua Divisi</option>
-                      <option value={memberRole}>{memberRole}</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Foto Anggota</label>
-                    <div className="space-y-3">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleMemberPhotoChange}
-                        className="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
-                      />
-                      {memberPhoto && (
-                        <div className="relative w-24 h-28 rounded-xl overflow-hidden border border-white/10 bg-[#070b13]/60">
-                          <Image src={memberPhoto} alt="Foto preview" fill className="object-cover" />
+                </div>
+              )}
+            </div>
+
+            {/* Member Form Modal */}
+            <AnimatePresence>
+              {showMemberForm && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+                  <div className="fixed inset-0" onClick={resetMemberForm} />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.93, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.93, y: 20 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                    className={`glass max-w-lg w-full p-6 sm:p-8 rounded-3xl border transition-all duration-300 backdrop-blur-xl relative my-auto shadow-2xl ${
+                      editingMember
+                        ? "border-amber-500/40 bg-[#18030c]/95 shadow-[0_0_60px_rgba(245,158,11,0.25)]"
+                        : "border-primary/40 bg-[#160209]/95 shadow-[0_0_60px_rgba(128,0,32,0.3)]"
+                    }`}
+                  >
+                    {/* Modal Header */}
+                    <div className="mb-6 pb-4 border-b border-white/10 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2.5 rounded-xl border ${editingMember ? "bg-amber-500/10 border-amber-500/30 text-amber-400" : "bg-primary/10 border-primary/30 text-primary"}`}>
+                          <Sparkles size={20} className="animate-pulse" />
                         </div>
-                      )}
+                        <div>
+                          <h3 className="font-display font-bold text-lg text-white">
+                            {editingMember ? "Edit Anggota Kemenbirsan" : "Tambah Anggota Baru"}
+                          </h3>
+                          <p className="text-xs text-gray-400">
+                            {editingMember ? `Mengubah data: "${memberName || "Anggota"}"` : "Isi formulir untuk menambahkan pimpinan BEM"}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={resetMemberForm}
+                        className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all cursor-pointer border border-white/10"
+                        title="Tutup Form"
+                      >
+                        <X size={18} />
+                      </button>
                     </div>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Deskripsi Singkat</label>
-                    <textarea rows={3} value={memberDesc} onChange={(e) => setMemberDesc(e.target.value)} placeholder="Prodi, angkatan, minat..." className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-primary/40 transition-all resize-none" />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Urutan Tampil</label>
-                    <input type="number" value={memberSortOrder} onChange={(e) => setMemberSortOrder(parseInt(e.target.value) || 0)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary/40 transition-all" />
-                  </div>
-                  <div className="flex gap-2">
-                    <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(128,0,32,0.25)]">
-                      {submitting ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Plus size={12} />}
-                      {editingMember ? "Simpan" : "Tambah"}
-                    </button>
-                    {editingMember && <button type="button" onClick={resetMemberForm} className="px-4 py-3 rounded-xl border border-white/10 text-gray-400 text-xs font-bold uppercase tracking-wider hover:text-white transition-all cursor-pointer">Batal</button>}
-                  </div>
-                </form>
-              </div>
-            </section>
+
+                    {formError && (
+                      <div className="mb-5 p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-xs text-red-300 font-sans flex items-start gap-2.5">
+                        <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                        <span>{formError}</span>
+                      </div>
+                    )}
+
+                    <form onSubmit={handleMemberSubmit} className="space-y-5 text-xs font-sans">
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Nama Lengkap *</label>
+                        <input value={memberName} onChange={(e) => setMemberName(e.target.value)} placeholder="e.g. Muhammad Fauzan" className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm focus:ring-1 focus:ring-primary/20 placeholder-gray-600" required />
+                      </div>
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Jabatan *</label>
+                        <select value={memberRole} onChange={(e) => setMemberRole(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm">
+                          <option>Presiden BEM</option>
+                          <option>Wakil Presiden BEM</option>
+                          <option>Sekretaris Umum</option>
+                          <option>Bendahara Umum</option>
+                          <option>Ketua Divisi</option>
+                          <option value={memberRole}>{memberRole}</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Foto Anggota</label>
+                        <div className="space-y-3">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleMemberPhotoChange}
+                            className="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
+                          />
+                          {memberPhoto && (
+                            <div className="relative w-24 h-28 rounded-xl overflow-hidden border border-white/10 bg-[#070b13]/60">
+                              <Image src={memberPhoto} alt="Foto preview" fill className="object-cover" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Deskripsi Singkat</label>
+                        <textarea rows={3} value={memberDesc} onChange={(e) => setMemberDesc(e.target.value)} placeholder="Prodi, angkatan, minat..." className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm resize-none placeholder-gray-600" />
+                      </div>
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Urutan Tampil</label>
+                        <input type="number" value={memberSortOrder} onChange={(e) => setMemberSortOrder(parseInt(e.target.value) || 0)} className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm" />
+                      </div>
+                      <div className="flex gap-3 pt-2">
+                        <button type="button" onClick={resetMemberForm} className="px-5 py-3 rounded-xl border border-white/10 text-gray-400 text-xs font-bold uppercase tracking-wider hover:text-white transition-all cursor-pointer">Batal</button>
+                        <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(128,0,32,0.25)]">
+                          {submitting ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Plus size={12} />}
+                          {editingMember ? "Simpan Perubahan" : "Tambah Anggota"}
+                        </button>
+                      </div>
+                    </form>
+                  </motion.div>
+                </div>
+              )}
+            </AnimatePresence>
           </div>
         )}
 
         {/* ── TAB: Sponsor ── */}
         {activeTab === "sponsors" && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {/* List */}
-            <section className="lg:col-span-2 flex flex-col gap-4">
+          <div className="flex flex-col gap-6">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h3 className="font-display font-semibold text-lg text-white">Daftar Sponsor & Mitra</h3>
-                <p className="text-xs text-gray-500 mt-1">Ditampilkan di bagian bawah halaman Beranda</p>
+                <h3 className="font-display font-semibold text-lg text-white">Daftar Sponsor &amp; Mitra</h3>
+                <p className="text-xs text-gray-500">Ditampilkan di bagian bawah halaman Beranda</p>
               </div>
-              <div className="glass rounded-2xl border border-white/5 overflow-hidden">
-                {loadingSponsors ? (
-                  <div className="py-12 text-center"><span className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin inline-block" /></div>
-                ) : sponsors.length === 0 ? (
-                  <div className="py-12 text-center text-gray-500 text-sm">Belum ada sponsor. Tambahkan via form.</div>
-                ) : (
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => { resetSponsorForm(); setShowSponsorForm(true); }}
+                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-primary/30 transition-all shrink-0 border border-gold/20"
+              >
+                <Plus size={15} />
+                <span className="hidden sm:inline">Tambah Sponsor Baru</span>
+                <span className="sm:hidden">Tambah</span>
+              </motion.button>
+            </div>
+
+            {/* Table Card */}
+            <div className="glass rounded-2xl border border-white/5 overflow-hidden bg-[#100105]/40 backdrop-blur-md">
+              {loadingSponsors ? (
+                <div className="py-24 flex flex-col items-center gap-4 text-center">
+                  <span className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin" />
+                  <p className="text-xs text-gray-500 font-sans uppercase tracking-widest">Memuat Data...</p>
+                </div>
+              ) : sponsors.length === 0 ? (
+                <div className="py-24 text-center flex flex-col items-center gap-4">
+                  <Database size={44} className="text-gray-700" />
+                  <h4 className="font-display font-semibold text-sm text-gray-400">Belum Ada Sponsor</h4>
+                  <p className="text-xs text-gray-500 font-sans">Klik tombol 'Tambah Sponsor Baru' untuk memulai.</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto w-full">
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="border-b border-white/5 bg-[#180208]/40 text-[10px] uppercase font-bold text-gray-400 tracking-wider">
@@ -1759,69 +1862,128 @@ export default function AdminDashboard() {
                     </thead>
                     <tbody className="divide-y divide-white/5 text-xs font-sans text-gray-300">
                       {sponsors.map((s) => (
-                        <tr key={s.id} className="hover:bg-white/[0.02] transition-colors">
+                        <tr key={s.id} className="hover:bg-white/[0.02] transition-colors duration-200 group">
                           <td className="py-4 px-6">
-                            <p className="font-semibold text-white">{s.name}</p>
+                            <p className="font-semibold text-white group-hover:text-primary transition-colors">{s.name}</p>
                             {s.logo_url && <p className="text-gray-500 text-[10px] mt-0.5 truncate max-w-[200px]">{s.logo_url}</p>}
                           </td>
                           <td className="py-4 px-6 text-gray-400">{s.website_url || "—"}</td>
                           <td className="py-4 px-6 text-gray-400">{s.sort_order}</td>
                           <td className="py-4 px-6">
                             <div className="flex items-center justify-center gap-2">
-                              <button onClick={() => handleEditSponsor(s)} className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"><Edit size={13} /></button>
-                              <button onClick={() => handleDeleteSponsor(s.id)} className="p-1.5 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"><Trash2 size={13} /></button>
+                              <button
+                                onClick={() => handleEditSponsor(s)}
+                                title="Edit sponsor"
+                                className="px-2.5 py-1.5 rounded-lg text-gold hover:text-white hover:bg-gold/25 border border-gold/20 bg-gold/5 transition-all cursor-pointer flex items-center gap-1.5 text-[11px] font-semibold"
+                              >
+                                <Edit size={12} />
+                                <span>Edit</span>
+                              </button>
+                              <button
+                                onClick={() => handleDeleteSponsor(s.id)}
+                                title="Hapus sponsor"
+                                className="p-2 rounded-lg text-red-400 hover:text-white hover:bg-red-500/25 border border-red-500/20 bg-red-500/5 transition-all cursor-pointer"
+                              >
+                                <Trash2 size={12} />
+                              </button>
                             </div>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                )}
-              </div>
-            </section>
-            {/* Form */}
-            <section className="flex flex-col gap-4">
-              <div className="glass p-6 rounded-2xl border border-primary/10 space-y-4">
-                <h4 className="font-display font-semibold text-base text-white">{editingSponsor ? "Edit Sponsor" : "Tambah Sponsor Baru"}</h4>
-                <form onSubmit={handleSponsorSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Nama Sponsor</label>
-                    <input value={sponsorName} onChange={(e) => setSponsorName(e.target.value)} placeholder="e.g. UNWAHA Jombang" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-primary/40 transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Logo Sponsor</label>
-                    <div className="space-y-3">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleSponsorLogoChange}
-                        className="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
-                      />
-                      {sponsorLogo && (
-                        <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 bg-[#070b13]/60 flex items-center justify-center p-1">
-                          <Image src={sponsorLogo} alt="Logo preview" fill className="object-contain p-1" />
+                </div>
+              )}
+            </div>
+
+            {/* Sponsor Form Modal */}
+            <AnimatePresence>
+              {showSponsorForm && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+                  <div className="fixed inset-0" onClick={resetSponsorForm} />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.93, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.93, y: 20 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                    className={`glass max-w-lg w-full p-6 sm:p-8 rounded-3xl border transition-all duration-300 backdrop-blur-xl relative my-auto shadow-2xl ${
+                      editingSponsor
+                        ? "border-amber-500/40 bg-[#18030c]/95 shadow-[0_0_60px_rgba(245,158,11,0.25)]"
+                        : "border-primary/40 bg-[#160209]/95 shadow-[0_0_60px_rgba(128,0,32,0.3)]"
+                    }`}
+                  >
+                    {/* Modal Header */}
+                    <div className="mb-6 pb-4 border-b border-white/10 flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2.5 rounded-xl border ${editingSponsor ? "bg-amber-500/10 border-amber-500/30 text-amber-400" : "bg-primary/10 border-primary/30 text-primary"}`}>
+                          <Sparkles size={20} className="animate-pulse" />
                         </div>
-                      )}
+                        <div>
+                          <h3 className="font-display font-bold text-lg text-white">
+                            {editingSponsor ? "Edit Sponsor" : "Tambah Sponsor Baru"}
+                          </h3>
+                          <p className="text-xs text-gray-400">
+                            {editingSponsor ? `Mengubah sponsor: "${sponsorName || "Sponsor"}"` : "Isi formulir untuk menambahkan sponsor atau mitra baru"}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={resetSponsorForm}
+                        className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all cursor-pointer border border-white/10"
+                        title="Tutup Form"
+                      >
+                        <X size={18} />
+                      </button>
                     </div>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Website (opsional)</label>
-                    <input value={sponsorWebsite} onChange={(e) => setSponsorWebsite(e.target.value)} placeholder="https://..." className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-primary/40 transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">Urutan Tampil</label>
-                    <input type="number" value={sponsorSortOrder} onChange={(e) => setSponsorSortOrder(parseInt(e.target.value) || 0)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-primary/40 transition-all" />
-                  </div>
-                  <div className="flex gap-2">
-                    <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(128,0,32,0.25)]">
-                      {submitting ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Plus size={12} />}
-                      {editingSponsor ? "Simpan" : "Tambah"}
-                    </button>
-                    {editingSponsor && <button type="button" onClick={resetSponsorForm} className="px-4 py-3 rounded-xl border border-white/10 text-gray-400 text-xs font-bold uppercase tracking-wider hover:text-white transition-all cursor-pointer">Batal</button>}
-                  </div>
-                </form>
-              </div>
-            </section>
+
+                    {formError && (
+                      <div className="mb-5 p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-xs text-red-300 font-sans flex items-start gap-2.5">
+                        <AlertCircle size={16} className="shrink-0 mt-0.5" />
+                        <span>{formError}</span>
+                      </div>
+                    )}
+
+                    <form onSubmit={handleSponsorSubmit} className="space-y-5 text-xs font-sans">
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Nama Sponsor *</label>
+                        <input value={sponsorName} onChange={(e) => setSponsorName(e.target.value)} placeholder="e.g. UNWAHA Jombang" className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm focus:ring-1 focus:ring-primary/20 placeholder-gray-600" required />
+                      </div>
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Logo Sponsor</label>
+                        <div className="space-y-3">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleSponsorLogoChange}
+                            className="block w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
+                          />
+                          {sponsorLogo && (
+                            <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 bg-[#070b13]/60 flex items-center justify-center p-1">
+                              <Image src={sponsorLogo} alt="Logo preview" fill className="object-contain p-1" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Website (opsional)</label>
+                        <input value={sponsorWebsite} onChange={(e) => setSponsorWebsite(e.target.value)} placeholder="https://..." className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm placeholder-gray-600" />
+                      </div>
+                      <div>
+                        <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Urutan Tampil</label>
+                        <input type="number" value={sponsorSortOrder} onChange={(e) => setSponsorSortOrder(parseInt(e.target.value) || 0)} className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm" />
+                      </div>
+                      <div className="flex gap-3 pt-2">
+                        <button type="button" onClick={resetSponsorForm} className="px-5 py-3 rounded-xl border border-white/10 text-gray-400 text-xs font-bold uppercase tracking-wider hover:text-white transition-all cursor-pointer">Batal</button>
+                        <button type="submit" disabled={submitting} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#800020] via-[#A0203F] to-[#600018] hover:from-[#600018] hover:via-[#800020] hover:to-[#A0203F] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(128,0,32,0.25)]">
+                          {submitting ? <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Plus size={12} />}
+                          {editingSponsor ? "Simpan Perubahan" : "Tambah Sponsor"}
+                        </button>
+                      </div>
+                    </form>
+                  </motion.div>
+                </div>
+              )}
+            </AnimatePresence>
           </div>
         )}
       </main>
