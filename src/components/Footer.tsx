@@ -109,6 +109,7 @@ export default function Footer() {
             <li><Link href="/" className="hover:text-amber-400 transition-colors">Beranda</Link></li>
             <li><Link href="/about" className="hover:text-amber-400 transition-colors">Tentang Kami</Link></li>
             <li><Link href="/kemenbirsan" className="hover:text-amber-400 transition-colors">Kemenbirsan</Link></li>
+            <li><Link href="/pbak" className="hover:text-amber-400 transition-colors">PBAK 2026</Link></li>
             <li><Link href="/news" className="hover:text-amber-400 transition-colors">Berita & Artikel</Link></li>
             <li className="pt-2 border-t border-white/10">
               <Link href="/admin/dashboard" className="text-slate-200 hover:text-amber-400 transition-colors flex items-center gap-1.5">

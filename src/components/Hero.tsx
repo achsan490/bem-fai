@@ -124,16 +124,27 @@ export default function Hero() {
         </div>
 
         {/* CTA Actions */}
-        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto pt-6 justify-center">
-          <Link href="#proker" className="w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto pt-6 justify-center flex-wrap">
+          <Link href="/pbak" className="w-full sm:w-auto">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-white bg-gradient-to-r from-[#A81B30] via-[#FF5533] to-[#7F0E1E] hover:from-[#7F0E1E] hover:to-[#FF5533] transition-all duration-300 shadow-[0_6px_25px_rgba(255,85,51,0.4)] border border-amber-400/40 cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-white bg-gradient-to-r from-[#A81B30] via-[#FF5533] to-[#7F0E1E] hover:from-[#7F0E1E] hover:to-[#FF5533] transition-all duration-300 shadow-[0_6px_25px_rgba(255,85,51,0.4)] border border-amber-400/40 cursor-pointer"
             >
-              <Sparkles size={14} />
-              <span>Program Kerja</span>
+              <Sparkles size={14} className="text-amber-300" />
+              <span>Info PBAK 2026</span>
               <ArrowRight size={14} />
+            </motion.button>
+          </Link>
+
+          <Link href="#proker" className="w-full sm:w-auto">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-slate-200 border border-white/20 bg-white/10 hover:bg-white/20 transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer"
+            >
+              <Sparkles size={14} className="text-amber-400" />
+              <span>Program Kerja</span>
             </motion.button>
           </Link>
 
@@ -141,7 +152,7 @@ export default function Hero() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-white border border-white/20 bg-white/10 hover:bg-white/20 transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-slate-200 border border-white/20 bg-white/10 hover:bg-white/20 transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer"
             >
               <BookOpen size={14} />
               <span>Artikel Terbaru</span>

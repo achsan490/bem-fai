@@ -11,6 +11,7 @@ const navLinks = [
   { name: "Beranda", href: "/" },
   { name: "Tentang", href: "/about" },
   { name: "Kemenbirsan", href: "/kemenbirsan" },
+  { name: "PBAK", href: "/pbak" },
   { name: "Berita", href: "/news" },
 ];
 
