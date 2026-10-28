@@ -132,7 +132,7 @@ function ParallaxCard({
             fill
             className="object-contain object-bottom hover:scale-105 transition-transform duration-700"
             sizes="(max-width: 768px) 100vw, 50vw"
-            priority
+            loading="lazy"
           />
         </motion.div>
 
@@ -152,6 +152,7 @@ function ParallaxCard({
               <button
                 onClick={() => setActiveHotspot(activeHotspot === spot.id ? null : spot.id)}
                 onMouseEnter={() => setActiveHotspot(spot.id)}
+                aria-label={spot.title}
                 className="relative w-7 h-7 flex items-center justify-center rounded-full bg-primary/20 border border-primary text-white cursor-pointer hover:bg-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.5)] group"
               >
                 {/* Hotspot Pulse effect */}
@@ -236,7 +237,7 @@ export default function CampusSection() {
             transition={{ duration: 0.8 }}
           >
             <ParallaxCard
-              imageSrc="/assets/gedung1.png"
+              imageSrc="/assets/gedung1.webp"
               alt="Gedung FAI Utama"
               subtitle="Zona Akademik & Administrasi"
               title="Gedung FAI Terpadu (A)"
@@ -252,7 +253,7 @@ export default function CampusSection() {
             transition={{ duration: 0.8 }}
           >
             <ParallaxCard
-              imageSrc="/assets/gedung2.png"
+              imageSrc="/assets/gedung2.webp"
               alt="Auditorium & Plaza Mahasiswa"
               subtitle="Zona Kegiatan & Riset Sosial"
               title="Pusat Kegiatan Kemahasiswaan (B)"

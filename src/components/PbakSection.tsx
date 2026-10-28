@@ -128,27 +128,21 @@ export default function PbakSection() {
               transition={{ delay: 0.3 }}
               className="pt-4 flex flex-wrap gap-4 items-center"
             >
-              <Link href="/pbak">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-white bg-gradient-to-r from-[#A81B30] via-[#FF5533] to-[#7F0E1E] hover:from-[#7F0E1E] hover:to-[#FF5533] transition-all duration-300 shadow-[0_6px_25px_rgba(255,85,51,0.4)] border border-amber-400/40 cursor-pointer"
-                >
-                  <Sparkles size={14} className="text-amber-300" />
-                  <span>Buka Portal Lengkap PBAK</span>
-                  <ArrowRight size={14} />
-                </motion.button>
+              <Link
+                href="/pbak"
+                className="flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-white bg-gradient-to-r from-[#A81B30] via-[#FF5533] to-[#7F0E1E] hover:from-[#7F0E1E] hover:to-[#FF5533] transition-all duration-300 shadow-[0_6px_25px_rgba(255,85,51,0.4)] border border-amber-400/40 cursor-pointer active:scale-98"
+              >
+                <Sparkles size={14} className="text-amber-300" />
+                <span>Buka Portal Lengkap PBAK</span>
+                <ArrowRight size={14} />
               </Link>
 
-              <Link href="/pbak#panduan">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-slate-200 border border-white/20 bg-black/40 hover:bg-white/10 hover:text-white transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer"
-                >
-                  <Download size={14} className="text-amber-400" />
-                  <span>Unduh Panduan Maba</span>
-                </motion.button>
+              <Link
+                href="/pbak#panduan"
+                className="flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-extrabold tracking-wider uppercase text-slate-200 border border-white/20 bg-black/40 hover:bg-white/10 hover:text-white transition-all duration-300 shadow-md backdrop-blur-md cursor-pointer active:scale-98"
+              >
+                <Download size={14} className="text-amber-400" />
+                <span>Unduh Panduan Maba</span>
               </Link>
             </motion.div>
           </div>

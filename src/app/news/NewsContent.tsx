@@ -1,245 +1,173 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Tag, ArrowUpRight, BookOpen, Search, ChevronRight, AlertCircle } from "lucide-react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Link from "next/link";
+import { BookOpen, Calendar, Tag, Search, ArrowUpRight } from "lucide-react";
 import { db } from "../../lib/supabase";
 import { Article } from "../../types/database.types";
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" });
-
-const getSnippet = (text: string, maxLen = 160) => {
-  const plain = text.replace(/[#*`_[\]]/g, "");
-  return plain.length <= maxLen ? plain : plain.substring(0, maxLen) + "â€¦";
-};
+import SponsorsSection from "../../components/SponsorsSection";
 
 export default function NewsContent() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("Semua");
 
   useEffect(() => {
-    db.getArticles()
-      .then(setArticles)
-      .catch(() => setError("Gagal memuat artikel."))
-      .finally(() => setLoading(false));
+    async function loadData() {
+      try {
+        const data = await db.getArticles();
+        setArticles(data);
+        setFilteredArticles(data);
+      } catch (e) {
+        console.error("Gagal memuat artikel:", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
   }, []);
 
-  // Derive unique categories
   const categories = ["Semua", ...Array.from(new Set(articles.map((a) => a.category)))];
 
-  const filtered = articles.filter((a) => {
-    const matchCat = activeCategory === "Semua" || a.category === activeCategory;
-    const q = searchQuery.toLowerCase();
-    const matchSearch = !q || a.title.toLowerCase().includes(q) || a.content.toLowerCase().includes(q);
-    return matchCat && matchSearch;
-  });
+  useEffect(() => {
+    let result = articles;
+    if (selectedCategory !== "Semua") {
+      result = result.filter((a) => a.category === selectedCategory);
+    }
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (a) => a.title.toLowerCase().includes(q) || a.content.toLowerCase().includes(q)
+      );
+    }
+    setFilteredArticles(result);
+  }, [search, selectedCategory, articles]);
+
+  const formatDate = (isoString: string) => {
+    const date = new Date(isoString);
+    return date.toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-transparent">
-      <Navbar />
+    <div className="py-20">
+      <section className="relative py-16 px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-amber-300 border border-amber-400/30 bg-amber-400/10 mb-4 font-mono">
+          <BookOpen size={12} className="text-amber-400" />
+          Kabar &amp; Publikasi
+        </span>
+        <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight leading-tight">
+          Berita &amp; <span className="text-amber-400">Kajian Mahasiswa</span>
+        </h1>
+        <p className="mt-4 text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed font-light">
+          Kumpulan rilis resmi, opini ilmiah, artikel dakwah, dan informasi seputar kegiatan civitas akademika FAI UNWAHA.
+        </p>
 
-      <main className="flex-grow">
-        {/* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
-        <section className="pt-32 pb-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
-          <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-primary/4 rounded-full blur-[140px] pointer-events-none" />
+        <div className="mt-8 max-w-md mx-auto relative">
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Cari judul atau topik artikel..."
+            className="w-full bg-[#26030A]/90 border border-white/20 rounded-2xl pl-11 pr-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-[#A81B30] focus:ring-1 focus:ring-[#A81B30] shadow-xl backdrop-blur-md"
+          />
+        </div>
 
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-[10px] uppercase font-bold tracking-widest text-amber-400 flex items-center gap-1.5 mb-3 font-mono"
+        <div className="flex flex-wrap justify-center gap-2 mt-5">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition ${
+                selectedCategory === cat
+                  ? "bg-gradient-to-r from-[#A81B30] to-[#7F0E1E] text-white border border-white/20 shadow"
+                  : "bg-white/5 text-white/70 hover:text-white border border-white/10"
+              }`}
             >
-              <ChevronRight size={10} />
-              Publikasi &amp; Kajian
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="font-display font-bold text-4xl md:text-6xl text-white leading-tight max-w-3xl"
-            >
-              Berita &amp; <span className="text-amber-400 font-extrabold">Artikel</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-slate-300 font-sans text-base md:text-lg mt-4 max-w-2xl leading-relaxed"
-            >
-              Kumpulan tulisan, kajian akademik, dan berita terkini seputar kegiatan BEM FAI UNWAHA dan wawasan keislaman.
-            </motion.p>
+              {cat}
+            </button>
+          ))}
+        </div>
+      </section>
 
-            {/* Search Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mt-8 max-w-lg relative"
-            >
-              <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
-              <input
-                type="text"
-                placeholder="Cari artikel..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#26040A]/85 border border-white/15 rounded-xl pl-10 pr-10 py-3 text-sm text-white placeholder-slate-400 shadow-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50 transition-all duration-200 font-sans backdrop-blur-md"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
-                  aria-label="Hapus pencarian"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                </button>
-              )}
-            </motion.div>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="bg-[#26030A]/60 border border-white/10 rounded-3xl p-6 h-80 animate-pulse" />
+            ))}
           </div>
-        </section>
-
-        {/* ────────────────────────────────────────────────────────── */}
-        <section className="py-10 pb-24 border-t border-white/10">
-          <div className="max-w-7xl mx-auto px-6">
-            {/* Category Filter Pills */}
-            {!loading && articles.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-10">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
-                      activeCategory === cat
-                        ? "bg-amber-400 text-black border border-amber-400"
-                        : "text-slate-300 border border-white/20 bg-white/5 hover:border-amber-400/40 hover:text-amber-400"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* States */}
-            {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-[#26040A]/85 border border-white/10 rounded-2xl overflow-hidden animate-pulse shadow-xl">
-                    <div className="h-48 bg-white/10 animate-pulse" />
-                    <div className="p-6 space-y-3">
-                      <div className="h-3 bg-white/10 rounded w-1/3 animate-pulse" />
-                      <div className="h-5 bg-white/10 rounded w-3/4 animate-pulse" />
-                      <div className="h-4 bg-white/10 rounded animate-pulse" />
-                      <div className="h-4 bg-white/10 rounded w-5/6 animate-pulse" />
+        ) : filteredArticles.length === 0 ? (
+          <div className="text-center py-20 bg-[#26030A]/50 rounded-3xl border border-white/10 max-w-xl mx-auto text-white/60 text-sm">
+            Tidak ada artikel yang cocok dengan pencarian Anda.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredArticles.map((article) => (
+              <article
+                key={article.id}
+                className="bg-[#26030A]/85 rounded-3xl border border-white/15 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-xl hover:border-amber-500/30 group backdrop-blur-sm"
+              >
+                <div className="relative w-full h-52 overflow-hidden bg-black/40">
+                  {article.image_url ? (
+                    <Image
+                      src={article.image_url}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-white/5 text-amber-400/60">
+                      <BookOpen size={36} />
                     </div>
+                  )}
+                </div>
+
+                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-amber-300 border border-amber-400/30 bg-amber-400/10 font-mono">
+                        <Tag size={10} />
+                        {article.category}
+                      </span>
+                      <span className="text-[11px] text-white/50 flex items-center gap-1 font-mono">
+                        <Calendar size={11} />
+                        {formatDate(article.created_at)}
+                      </span>
+                    </div>
+
+                    <h2 className="font-display font-bold text-base sm:text-lg text-white group-hover:text-amber-400 transition-colors line-clamp-2 leading-snug">
+                      {article.title}
+                    </h2>
+                    <p className="text-xs text-white/70 mt-2.5 line-clamp-3 leading-relaxed font-light">
+                      {article.content}
+                    </p>
                   </div>
-                ))}
-              </div>
-            ) : error ? (
-              <div className="text-center py-24">
-                <AlertCircle size={48} className="text-red-400 mx-auto mb-4" />
-                <p className="text-slate-500 font-sans">{error}</p>
-              </div>
-            ) : filtered.length === 0 ? (
-              <div className="text-center py-24">
-                <BookOpen size={56} className="text-amber-400/40 mx-auto mb-4 animate-pulse" />
-                <h3 className="font-display font-bold text-xl text-white mb-2">
-                  {searchQuery || activeCategory !== "Semua" ? "Tidak ada artikel yang cocok" : "Belum Ada Artikel"}
-                </h3>
-                <p className="text-sm text-slate-300">
-                  {searchQuery ? `Coba kata kunci lain.` : "Artikel akan ditampilkan di sini setelah diterbitkan."}
-                </p>
-              </div>
-            ) : (
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeCategory + searchQuery}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                >
-                  {filtered.map((article, i) => (
-                    <motion.article
-                      key={article.id}
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: i * 0.06 }}
-                      className="bg-[#26040A]/85 backdrop-blur-md rounded-2xl border border-white/15 hover:border-amber-400/40 transition-all duration-300 group overflow-hidden flex flex-col shadow-xl"
+
+                  <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                    <Link
+                      href={`/article/${article.id}`}
+                      className="text-xs font-bold tracking-wider uppercase text-amber-300 hover:text-white flex items-center gap-1 transition"
                     >
-                      {/* Cover image */}
-                      <div className="relative h-48 bg-black/40 overflow-hidden">
-                        {article.image_url ? (
-                          <Image
-                            src={article.image_url}
-                            alt={article.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-700"
-                            sizes="(max-width: 768px) 100vw, 33vw"
-                          />
-                        ) : (
-                          <div className="flex items-center justify-center h-full text-amber-400/60">
-                            <BookOpen size={40} />
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6 flex flex-col flex-grow">
-                        {/* Meta row */}
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-amber-300 border border-amber-400/30 bg-amber-400/10">
-                            <Tag size={9} />
-                            {article.category}
-                          </span>
-                          <span className="flex items-center gap-1 text-[10px] text-slate-200 font-sans">
-                            <Calendar size={10} />
-                            {formatDate(article.created_at)}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-                        <h2 className="font-display font-bold text-white text-base leading-tight mb-3 group-hover:text-amber-400 transition-colors duration-300 line-clamp-2">
-                          {article.title}
-                        </h2>
-
-                        {/* Snippet */}
-                        <p className="text-xs text-slate-300 font-sans leading-relaxed flex-grow line-clamp-3">
-                          {getSnippet(article.content)}
-                        </p>
-
-                        {/* CTA */}
-                        <div className="mt-4 pt-4 border-t border-white/10">
-                          <Link
-                            href={`/article/${article.id}`}
-                            className="text-xs font-semibold tracking-wider uppercase text-slate-300 hover:text-amber-400 flex items-center gap-1 transition-all duration-200 group/link"
-                          >
-                            Baca Selengkapnya
-                            <ArrowUpRight size={12} className="text-amber-400 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                          </Link>
-                        </div>
-                      </div>
-                    </motion.article>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
-            )}
+                      <span>Baca Lengkap</span>
+                      <ArrowUpRight size={14} className="text-amber-400" />
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
-        </section>
-      </main>
+        )}
+      </section>
 
-      <Footer />
+      <SponsorsSection />
     </div>
   );
 }
-

@@ -26,11 +26,11 @@ create policy "articles_admin_delete" on articles for delete using (auth.role() 
 
 -- Seed dynamic articles only if empty
 insert into articles (title, category, content, image_url) 
-select 'Integrasi AI dalam Hukum Islam: Peluang dan Tantangan Kontemporer', 'Teknologi & Syariah', 'Perkembangan kecerdasan buatan (Artificial Intelligence) telah merambah ke berbagai aspek kehidupan. Di dunia akademik keislaman, integrasi AI menawarkan kemudahan dalam analisis teks fiqh klasik secara digital.', '/assets/gedung1.png'
+select 'Integrasi AI dalam Hukum Islam: Peluang dan Tantangan Kontemporer', 'Teknologi & Syariah', 'Perkembangan kecerdasan buatan (Artificial Intelligence) telah merambah ke berbagai aspek kehidupan. Di dunia akademik keislaman, integrasi AI menawarkan kemudahan dalam analisis teks fiqh klasik secara digital.', '/assets/gedung1.webp'
 where not exists (select 1 from articles limit 1);
 
 insert into articles (title, category, content, image_url) 
-select 'Transformasi Digital Dakwah Kampus Era Metaverse', 'Kajian Digital', 'Dakwah di era digital tidak lagi sebatas memposting teks atau poster di media sosial. Konsep Metaverse membuka dimensi baru bagi interaksi keagamaan mahasiswa.', '/assets/gedung2.png'
+select 'Transformasi Digital Dakwah Kampus Era Metaverse', 'Kajian Digital', 'Dakwah di era digital tidak lagi sebatas memposting teks atau poster di media sosial. Konsep Metaverse membuka dimensi baru bagi interaksi keagamaan mahasiswa.', '/assets/gedung2.webp'
 where not exists (select 1 from articles offset 1 limit 1);
 
 

@@ -1,4 +1,4 @@
-﻿import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
 import {
   Article, DbArticleInsert, DbArticleUpdate,
   Program, DbProgramInsert, DbProgramUpdate,
@@ -17,12 +17,12 @@ export const supabase = isSupabaseConfigured
   : null;
 
 // â”€â”€â”€ LocalStorage Keys â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-const LOCAL_STORAGE_KEY    = "bem_fai_articles";
-const PROGRAM_STORAGE_KEY  = "bem_fai_programs";
-const CONTENT_STORAGE_KEY  = "bem_fai_site_content";
-const SPONSOR_STORAGE_KEY  = "bem_fai_sponsors";
-const MEMBER_STORAGE_KEY   = "bem_fai_kemenbirsan";
-const AUTH_SESSION_KEY     = "bem_fai_session";
+const LOCAL_STORAGE_KEY = "bem_fai_articles";
+const PROGRAM_STORAGE_KEY = "bem_fai_programs";
+const CONTENT_STORAGE_KEY = "bem_fai_site_content";
+const SPONSOR_STORAGE_KEY = "bem_fai_sponsors";
+const MEMBER_STORAGE_KEY = "bem_fai_kemenbirsan";
+const AUTH_SESSION_KEY = "bem_fai_session";
 
 // â”€â”€â”€ Default / Seed Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DEFAULT_ARTICLES: Article[] = [
@@ -31,7 +31,7 @@ const DEFAULT_ARTICLES: Article[] = [
     title: "Integrasi AI dalam Hukum Islam: Peluang dan Tantangan di UNWAHA",
     category: "Teknologi & Syariah",
     content: "Perkembangan kecerdasan buatan (Artificial Intelligence) telah merambah ke berbagai aspek kehidupan. Di dunia akademik keislaman FAI UNWAHA, integrasi AI menawarkan kemudahan dalam analisis teks fiqh klasik secara digital. Namun, bagaimana hukum Islam memandang fatwa yang dianalisis oleh algoritma? Artikel ini membahas batas-batas metodologis penalaran hukum (ijtihad) dan peran kecerdasan buatan sebagai instrumen pembantu bagi para ulama kontemporer.",
-    image_url: "/assets/gedung1.png",
+    image_url: "/assets/gedung1.webp",
     created_at: new Date("2026-07-10T10:00:00Z").toISOString(),
   },
   {
@@ -39,7 +39,7 @@ const DEFAULT_ARTICLES: Article[] = [
     title: "Transformasi Digital Dakwah Kampus Era Metaverse",
     category: "Kajian Digital",
     content: "Dakwah di era digital tidak lagi sebatas memposting teks atau poster di media sosial. Konsep Metaverse membuka dimensi baru bagi interaksi keagamaan mahasiswa UNWAHA. Melalui ruang virtual 3D, pengajian, mentoring, dan diskusi keagamaan dapat dilangsungkan secara imersif. BEM FAI memelopori adaptasi teknologi ini untuk merangkul generasi milenial dan gen Z dalam pembelajaran agama yang interaktif.",
-    image_url: "/assets/gedung2.png",
+    image_url: "/assets/gedung2.webp",
     created_at: new Date("2026-07-12T14:30:00Z").toISOString(),
   },
   {
@@ -47,7 +47,7 @@ const DEFAULT_ARTICLES: Article[] = [
     title: "Peluncuran Portal Utama BEM FAI UNWAHA: Satu Data untuk Semua Layanan",
     category: "Kegiatan BEM",
     content: "BEM FAI UNWAHA resmi merilis platform digital terpadu untuk memudahkan pelayanan mahasiswa. Portal ini mengintegrasikan pengajuan surat menyurat, pendaftaran beasiswa internal, dan repositori karya ilmiah mahasiswa. Rilisnya platform ini adalah perwujudan visi \"Islamic Tech Campus\" yang mengedepankan efisiensi birokrasi berlandaskan etika profesionalisme.",
-    image_url: "/assets/logo.png",
+    image_url: "/assets/logo.webp",
     created_at: new Date("2026-07-14T09:15:00Z").toISOString(),
   },
   {
@@ -55,7 +55,7 @@ const DEFAULT_ARTICLES: Article[] = [
     title: "Etika Fintech Syariah: Menavigasi Kripto dan Web3",
     category: "Opini Mahasiswa",
     content: "Web3 dan teknologi blockchain membawa disrupsi besar di dunia finansial global. Bagi umat Islam, menelaah keabsahan transaksi digital ini merupakan prioritas penting. Melalui tulisan ini, mahasiswa FAI UNWAHA membedah konsep kepemilikan aset digital (NFT/Tokens) berdasarkan maqashid syariah (tujuan hukum Islam) untuk menjaga maslahat ekonomi umat.",
-    image_url: "/assets/gedung1.png",
+    image_url: "/assets/gedung1.webp",
     created_at: new Date("2026-07-16T16:45:00Z").toISOString(),
   },
 ];
@@ -135,7 +135,7 @@ const DEFAULT_SPONSORS: Sponsor[] = [
   {
     id: "s1",
     name: "UNWAHA Jombang",
-    logo_url: "/assets/logo.png",
+    logo_url: "/assets/unwaha_logo.webp",
     website_url: "https://unwaha.ac.id",
     sort_order: 1,
     created_at: new Date().toISOString(),

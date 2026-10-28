@@ -22,7 +22,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -47,7 +47,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group min-w-0 shrink">
           <div className="relative w-9 h-9 sm:w-10 sm:h-10 overflow-hidden rounded-xl border border-white/20 bg-gradient-to-br from-[#6A0D18] to-[#3B0611] flex items-center justify-center p-1.5 shadow-md transition-transform group-hover:scale-105 shrink-0">
             <Image
-              src="/assets/logo.png"
+              src="/assets/logo.webp"
               alt="BEM FAI UNWAHA Logo HD"
               width={36}
               height={36}
