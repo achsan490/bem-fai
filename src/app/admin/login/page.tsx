@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+
 import Link from "next/link";
-import { Lock, Mail, ArrowLeft, ShieldCheck } from "lucide-react";
+import { Lock, Mail, ArrowLeft } from "lucide-react";
 import { db } from "../../../lib/supabase";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("admin@fai.unwaha.ac.id");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,20 +41,14 @@ export default function AdminLoginPage() {
 
       <div className="w-full max-w-md bg-[#240309]/90 border border-white/15 rounded-3xl p-8 backdrop-blur-2xl shadow-2xl relative z-10">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-gradient-to-br from-[#6A0D18] to-[#3B0611] border border-white/20 mb-4 shadow-xl">
-            <Image
-              src="/assets/logo.webp"
-              alt="Logo BEM FAI"
-              width={56}
-              height={56}
-              className="drop-shadow filter drop-shadow(0 0 5px rgba(255,255,255,0.4))"
-            />
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#6A0D18] to-[#3B0611] border border-white/20 mb-4 shadow-xl">
+            <Lock size={24} className="text-amber-400" />
           </div>
-          <h1 className="font-display text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-1.5">
-            BEM <span className="text-amber-400 font-extrabold">FAI UNWAHA</span>
+          <h1 className="font-display text-2xl font-bold tracking-tight text-white">
+            Admin Panel
           </h1>
           <p className="text-xs text-white/60 mt-1 uppercase tracking-widest font-semibold">
-            Portal Administrasi
+            Masuk untuk melanjutkan
           </p>
         </div>
 
@@ -76,7 +70,7 @@ export default function AdminLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@fai.unwaha.ac.id"
+                placeholder="email@example.com"
                 required
                 className="w-full bg-[#180206] border border-white/15 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#A81B30] focus:ring-1 focus:ring-[#A81B30] transition-all"
               />
@@ -100,14 +94,8 @@ export default function AdminLoginPage() {
             </div>
           </div>
 
-          <div className="bg-[#3B0611]/80 border border-amber-500/30 rounded-xl p-3 text-xs text-amber-300/90 leading-relaxed">
-            <div className="flex items-center gap-1.5 font-bold mb-1 text-amber-300">
-              <ShieldCheck size={14} />
-              <span>Kredensial Default (Sandbox):</span>
-            </div>
-            Email: <code className="text-amber-200 bg-black/40 px-1 py-0.5 rounded font-mono">admin@fai.unwaha.ac.id</code><br />
-            Sandi: <code className="text-amber-200 bg-black/40 px-1 py-0.5 rounded font-mono">admin123</code>
-          </div>
+
+
 
           <button
             type="submit"

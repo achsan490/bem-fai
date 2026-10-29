@@ -49,7 +49,7 @@ export type DbSponsorUpdate = Partial<DbSponsorInsert>;
 export interface KemenbirsanMember {
   id: string;
   name: string;
-  role: string;        // e.g. 'Presiden BEM', 'Wakil Presiden BEM'
+  role: string;        // e.g. 'Gubernur', 'Wakil Gubernur', 'Sekretaris Kabinet'
   photo_url: string | null;
   description: string | null;
   sort_order: number;

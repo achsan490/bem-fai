@@ -60,7 +60,7 @@ export default function AdminDashboard() {
   // Program Form states
   const [programName, setProgramName] = useState("");
   const [programDescription, setProgramDescription] = useState("");
-  const [programDivision, setProgramDivision] = useState("Kaderisasi & PSDM");
+  const [programDivision, setProgramDivision] = useState("Menkom");
   const [programTimeline, setProgramTimeline] = useState("");
   const [programStatus, setProgramStatus] = useState<Program["status"]>("Terencana");
   const [isEditProgramMode, setIsEditProgramMode] = useState(false);
@@ -100,7 +100,7 @@ export default function AdminDashboard() {
   const [members, setMembers] = useState<KemenbirsanMember[]>([]);
   const [loadingMembers, setLoadingMembers] = useState(true);
   const [memberName, setMemberName] = useState("");
-  const [memberRole, setMemberRole] = useState("Gubernur BEM");
+  const [memberRole, setMemberRole] = useState("Gubernur");
   const [memberPhoto, setMemberPhoto] = useState("");
   const [memberDesc, setMemberDesc] = useState("");
   const [memberSortOrder, setMemberSortOrder] = useState(0);
@@ -293,7 +293,7 @@ export default function AdminDashboard() {
   };
 
   // â”€â”€ Kemenbirsan Member Handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  const resetMemberForm = () => { setMemberName(""); setMemberRole("Gubernur BEM"); setMemberPhoto(""); setMemberDesc(""); setMemberSortOrder(0); setEditingMember(null); setShowMemberForm(false); };
+  const resetMemberForm = () => { setMemberName(""); setMemberRole("Gubernur"); setMemberPhoto(""); setMemberDesc(""); setMemberSortOrder(0); setEditingMember(null); setShowMemberForm(false); };
 
   const handleMemberSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -318,7 +318,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleEditMember = (m: KemenbirsanMember) => { setEditingMember(m); setMemberName(m.name); const r = m.role === "Presiden BEM" ? "Gubernur BEM" : m.role === "Wakil Presiden BEM" ? "Wakil Gubernur BEM" : m.role; setMemberRole(r); setMemberPhoto(m.photo_url || ""); setMemberDesc(m.description || ""); setMemberSortOrder(m.sort_order); setFormError(null); setShowMemberForm(true); };
+  const handleEditMember = (m: KemenbirsanMember) => { setEditingMember(m); setMemberName(m.name); setMemberRole(m.role); setMemberPhoto(m.photo_url || ""); setMemberDesc(m.description || ""); setMemberSortOrder(m.sort_order); setFormError(null); setShowMemberForm(true); };
 
   const handleDeleteMember = async (id: string) => {
     if (!confirm("Hapus data anggota ini?")) return;
@@ -570,7 +570,7 @@ export default function AdminDashboard() {
   const resetProgramForm = () => {
     setProgramName("");
     setProgramDescription("");
-    setProgramDivision("Kaderisasi & PSDM");
+    setProgramDivision("Menkom");
     setProgramTimeline("");
     setProgramStatus("Terencana");
     setIsEditProgramMode(false);
@@ -1501,11 +1501,11 @@ export default function AdminDashboard() {
                             onChange={(e) => setProgramDivision(e.target.value)}
                             className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm cursor-pointer"
                           >
-                            <option value="Kaderisasi & PSDM" className="bg-[#070b13] text-white">Kaderisasi & PSDM</option>
-                            <option value="Kajian Keagamaan" className="bg-[#070b13] text-white">Kajian Keagamaan</option>
-                            <option value="Pengabdian Masyarakat" className="bg-[#070b13] text-white">Pengabdian Masyarakat</option>
-                            <option value="Minat & Bakat (Olahraga)" className="bg-[#070b13] text-white">Minat & Bakat (Olahraga)</option>
-                            <option value="Komunikasi & Media" className="bg-[#070b13] text-white">Komunikasi & Media</option>
+                            <option value="Menkom" className="bg-[#070b13] text-white">Menkom</option>
+                            <option value="PSDM" className="bg-[#070b13] text-white">PSDM</option>
+                            <option value="Ekraf" className="bg-[#070b13] text-white">Ekraf</option>
+                            <option value="Keagamaan" className="bg-[#070b13] text-white">Keagamaan</option>
+                            <option value="Pendidikan" className="bg-[#070b13] text-white">Pendidikan</option>
                           </select>
                         </div>
 
@@ -1768,14 +1768,17 @@ export default function AdminDashboard() {
                       <div>
                         <label className="block font-bold text-gray-300 uppercase tracking-wider mb-2">Jabatan *</label>
                         <select value={memberRole} onChange={(e) => setMemberRole(e.target.value)} className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#070b13]/80 focus:bg-[#070b13] focus:border-primary/60 focus:outline-none transition-all font-sans text-white text-sm">
-                          <option>Gubernur BEM</option>
-                          <option>Wakil Gubernur BEM</option>
-                          <option>Presiden BEM</option>
-                          <option>Wakil Presiden BEM</option>
-                          <option>Sekretaris Umum</option>
-                          <option>Bendahara Umum</option>
-                          <option>Ketua Divisi</option>
-                          <option value={memberRole}>{memberRole}</option>
+                          <option>Gubernur</option>
+                          <option>Wakil Gubernur</option>
+                          <option>Sekretaris Kabinet</option>
+                          <option>Wakil Sekretaris Kabinet</option>
+                          <option>Bendahara Kabinet</option>
+                          <option>Wakil Bendahara Kabinet</option>
+                          <option>Menkom</option>
+                          <option>PSDM</option>
+                          <option>Ekraf</option>
+                          <option>Keagamaan</option>
+                          <option>Pendidikan</option>
                         </select>
                       </div>
                       <div>

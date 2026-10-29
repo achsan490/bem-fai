@@ -24,20 +24,20 @@ interface Props {
 
 const getDivisionIcon = (division: string) => {
   const divLower = division.toLowerCase();
-  if (divLower.includes("kaderisasi") || divLower.includes("psdm")) {
+  if (divLower.includes("menkom") || divLower.includes("komunikasi") || divLower.includes("media")) {
+    return <Megaphone className="text-emerald-600" size={20} />;
+  }
+  if (divLower.includes("psdm") || divLower.includes("kaderisasi")) {
     return <Users className="text-primary" size={20} />;
+  }
+  if (divLower.includes("ekraf") || divLower.includes("kreatif")) {
+    return <Trophy className="text-blue-500" size={20} />;
   }
   if (divLower.includes("keagamaan") || divLower.includes("syariah") || divLower.includes("kajian")) {
     return <Compass className="text-amber-600" size={20} />;
   }
-  if (divLower.includes("pengabdian") || divLower.includes("masyarakat") || divLower.includes("sosial")) {
+  if (divLower.includes("pendidikan")) {
     return <Heart className="text-rose-500" size={20} />;
-  }
-  if (divLower.includes("minat") || divLower.includes("bakat") || divLower.includes("olahraga") || divLower.includes("seni")) {
-    return <Trophy className="text-blue-500" size={20} />;
-  }
-  if (divLower.includes("komunikasi") || divLower.includes("media") || divLower.includes("publikasi")) {
-    return <Megaphone className="text-emerald-600" size={20} />;
   }
   return <Activity className="text-slate-400" size={20} />;
 };
