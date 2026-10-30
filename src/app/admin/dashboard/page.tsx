@@ -1640,7 +1640,7 @@ export default function AdminDashboard() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <h3 className="font-display font-semibold text-lg text-white">Daftar Pimpinan BEM</h3>
-                <p className="text-xs text-gray-500">Gubernur, Wakil Gubernur, dan pengurus inti Kemenbirsan</p>
+                <p className="text-xs text-gray-500">Gubernur, Wakil Gubernur, Sekretariat, Bendahara, dan Kepala Divisi (Kadiv)</p>
               </div>
               <motion.button
                 whileHover={{ scale: 1.03 }}
@@ -1774,6 +1774,11 @@ export default function AdminDashboard() {
                           <option>Wakil Sekretaris Kabinet</option>
                           <option>Bendahara Kabinet</option>
                           <option>Wakil Bendahara Kabinet</option>
+                          <option>Kadiv Menkom</option>
+                          <option>Kadiv Keagamaan</option>
+                          <option>Kadiv PSDM</option>
+                          <option>Kadiv Ekraf</option>
+                          <option>Kadiv Pendidikan</option>
                           <option>Menkom</option>
                           <option>PSDM</option>
                           <option>Ekraf</option>

@@ -39,7 +39,7 @@ export default function KemenbirsanContent() {
             Pimpinan <span className="text-white font-extrabold">BEM FAI UNWAHA</span>
           </h1>
           <p className="text-slate-300 font-sans text-base md:text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
-            Mengenal sosok Gubernur dan Wakil Gubernur BEM FAI UNWAHA yang memimpin organisasi kemahasiswaan dengan visi islami dan progresif.
+            Mengenal jajaran pimpinan dan pengurus BEM FAI UNWAHA yang memimpin organisasi kemahasiswaan dengan visi islami dan progresif.
           </p>
         </div>
       </section>
